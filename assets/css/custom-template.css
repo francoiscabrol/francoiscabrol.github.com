@@ -79,3 +79,40 @@ div.project p.description {
     display: inline-block;
     color: #999;
 }
+
+img.thumbnail {
+	width: 300px;
+}
+
+/* Lightbox - personal impelementation */
+div.lightbox {
+	position: fixed;
+	display:none;
+	transition: all 2s;
+	-webkit-transition: all 2s;
+	top:0;
+	left:0;
+	right: 0;
+	bottom: 0;
+	z-index: 1060;
+}
+
+div.lightbox .background {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	opacity: 0.5;
+	background-color: grey;
+}
+
+div.lightbox .content {
+	position: absolute;
+	margin: auto;
+	top: 15%;
+	left: 50%;
+	background-color: white;
+}
+
+.lightbox .content img {
+	width: 50em;
+}
