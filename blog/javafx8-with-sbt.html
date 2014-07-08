@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta content="IE=edge,chrome=1">
-        <title>Coffee, Java & Music - Gensession</title>
+        <title>Coffee, Java & Music - Build a JavaFX8 app with sbt</title>
         <meta name="viewport" content="width=device-width">
         <!-- Basic Bootstrap CSS -->
         <link href="/assets/css/bootstrap_journal.min.css" rel="stylesheet">
@@ -27,7 +27,7 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="dropdown active ">
+            <li class="dropdown">
               <a data-toggle="dropdown" href="#" class="dropdown-toggle">Projects<b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <!-- <li class="dropdown-header">Music</li> -->
@@ -111,66 +111,58 @@
       </div>
     </div>
     <div class="container theme-showcase wrap" role="main">
-          <div class="project">
-    <h1>Gensession <small>- A flexible zoomable interface for melody generation</small>
-        </h1>
+            <header class="entry-header">
+    <h1 class="entry-title">Build a JavaFX8 app with sbt</h1>
+    <p class="entry-meta">
+    Posté le <a class="entry-date" href="date.html">08 Jul 2014</a> | Par <a class="entry-author" href="/about/">François Cabrol</a> | Tags
     
-    <p class="lead">
-        GenSession is a pioneer interface that propose an original way to interact with random music generator.
+    <a class="label label-danger" href="">javafx</a>
+    
+    <a class="label label-danger" href="">java</a>
+    
+    <a class="label label-danger" href="">sbt</a>
+    
     </p>
-    
-    
-    <ul class="list-inline">
-        
-        <li><a href="http://hifiv.ca/~francoiscabrol/GenSession/" class="btn btn-info btn-sm" role="button">Gensession web page</a></li>
-        
-        
-        
-    </ul>
-    
-    
-    <!-- <span class="label label-info ng-scope">visu</span> -->
-    
-    <!-- <span class="label label-info ng-scope">interface</span> -->
-    
-    <!-- <span class="label label-info ng-scope">music</span> -->
-    
-    <!-- <span class="label label-info ng-scope">generation</span> -->
-    
-    <!-- <span class="label label-info ng-scope">java</span> -->
-    
-   <div class="post">
-    <h2 id="whats-gensession">What’s GenSession?</h2>
-<p>The system allow the user to generate melodies, organize them, manage generation parameters and construct a midi music sequence without music knowledge. </p>
+  </header>
 
-<p>You can try it! No inspiration is required ;)
-And luckily there is a <a href="http://hifiv.ca/~francoiscabrol/GenSession/">web page</a> that explains all about it!</p>
+<div class="post">
+<p><a href="http://www.scala-sbt.org">Sbt is a simple build tool</a> from the scala community. It is a great tool to build java and scala project.</p>
 
-<p>The projet was done for my master thesis in the lab of <a href="http://profs.etsmtl.ca/mmcguffin/">Michael McGuffin</a>. The video that follow show how it works.</p>
+<p>The basic configuration of a sbt project is written in the build.sbt.</p>
 
-<p>You can also download my master thesis (written in French) at <a href="http://espace.etsmtl.ca/1278/">http://espace.etsmtl.ca/1278/</a>.</p>
+<p>With the version 8 of Java and JavaFX, an important fact is that the jfxrt.jar (javafx library) moved to “$JAVA_HOME/jre/lib/ext/jfxrt.jar” with Java8 (from “$JAVA_HOME/jre/lib/jfxrt.jar” with Java7). With sbt, you have to define the path of this jar file.</p>
 
-<hr />
+<p>Example of build.sbt file for a simple Java8 and Javafx8 project:</p>
 
-<div class="video-container"><iframe class="vimeo-iframe" width="520" height="320" src="http://player.vimeo.com/video/68455966 " frameborder="0">   </iframe></div>
+<pre><code>organization := "Francois Cabrol"
 
-<hr />
+name := "My app"
 
-<h2 id="examples-of-sessions">Examples of sessions</h2>
+version := "0.0.1"
 
-<p>And here an example contruct from melody generated with GenSession:</p>
+autoScalaLibrary := false
 
-<iframe class="soundcloud-iframe" width="70%" height="100" scrolling="no" frameborder="no" src="http://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F149600423&amp;"></iframe>
+//Define the java version to use
+javacOptions ++= Seq("-source", "1.8", "-target", "1.8")
 
-<h2 id="screenshots">Screenshots</h2>
+//Add Javafx8 library
+unmanagedJars in Compile += Attributed.blank(file(System.getenv("JAVA_HOME") + "/jre/lib/ext/jfxrt.jar"))
 
-<div class="thumbnail picture">
-            <img class="img-rounded" src="/assets/images/gensession_1.png" />
-	    <div class="caption"> </div>
-        </div>
+// Define all libraries to get from maven repository
+// JUnit Interface 0.10
+libraryDependencies ++= Seq(
+   "com.novocode" % "junit-interface" % "0.10" % "test"
+)
+</code></pre>
 
+<p>Note that the same following line should be needed in any ScalaFx8 project:</p>
 
-   </div>
+<pre><code>//Add Javafx8 library
+unmanagedJars in Compile += Attributed.blank(file(System.getenv("JAVA_HOME") + "/jre/lib/ext/jfxrt.jar"))
+</code></pre>
+
+<p>Hope this will be useful!		</p>
+
 </div>
 
     </div>
