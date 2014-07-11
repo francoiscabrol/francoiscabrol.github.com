@@ -1,0 +1,102 @@
+[
+  
+    {
+  "title"    : "Build a JavaFX8 app with sbt",
+  "category" : "blog",
+  "tags"     : ["javafx","java","sbt", null],
+  "description": "JavaFx8 is a graphic library that come with java8. How to configure sbt to build a JavaFx8 application.",
+  "href"     : "/blog/javafx8-with-sbt.html",
+  "date"     : {
+    "day"   : "08",
+    "month" : "July",
+    "year"  : "2014"
+  }
+}
+,
+  
+    {
+  "title"    : "Start with Sublime",
+  "category" : "blog",
+  "tags"     : ["sublime","editor", null],
+  "description": "Sublime is a text editor for developers. See the list of plugins that I use.",
+  "href"     : "/blog/start-with-sublime.html",
+  "date"     : {
+    "day"   : "18",
+    "month" : "June",
+    "year"  : "2014"
+  }
+}
+,
+  
+    {
+  "title"    : "GenInLive",
+  "category" : "project",
+  "tags"     : ["music","generator","java","interface", null],
+  "description": "You can generate melody and modulate generation parameters in real time",
+  "href"     : "/project/GenInLive.html",
+  "date"     : {
+    "day"   : "12",
+    "month" : "June",
+    "year"  : "2014"
+  }
+}
+,
+  
+    {
+  "title"    : "Libjamu",
+  "category" : "project",
+  "tags"     : ["open","music","java", null],
+  "description": "A simple music theory and midi library in java",
+  "href"     : "/project/libjamu.html",
+  "date"     : {
+    "day"   : "10",
+    "month" : "March",
+    "year"  : "2014"
+  }
+}
+,
+  
+    {
+  "title"    : "LoCALISM",
+  "category" : "project",
+  "tags"     : ["open","leap","java", null],
+  "description": "A java library for leap motion calibration",
+  "href"     : "/project/localism.html",
+  "date"     : {
+    "day"   : "09",
+    "month" : "March",
+    "year"  : "2014"
+  }
+}
+,
+  
+    {
+  "title"    : "Mural",
+  "category" : "project",
+  "tags"     : ["open","music","generation","scala", null],
+  "description": "Mural for MUsic Rule ALgorithm is a rule-based algorithm for melody generation.",
+  "href"     : "/project/mural.html",
+  "date"     : {
+    "day"   : "09",
+    "month" : "March",
+    "year"  : "2014"
+  }
+}
+,
+  
+    {
+  "title"    : "Gensession",
+  "category" : "project",
+  "tags"     : ["visu","interface","music","generation","java", null],
+  "description": "GenSession is a pioneer interface that propose an original way to interact with random music generator.",
+  "href"     : "/project/gensession.html",
+  "date"     : {
+    "day"   : "24",
+    "month" : "February",
+    "year"  : "2014"
+  }
+}
+,
+  
+  null
+]
