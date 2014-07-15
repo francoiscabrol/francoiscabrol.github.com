@@ -1,6 +1,20 @@
 [
   
     {
+  "title"    : "Harmony helper",
+  "category" : "project",
+  "tags"     : ["interface","music","generation","web","play","java", null],
+  "description": "Harmony helper is a little web app that allows to get all scales and modes that fit a chord progression",
+  "href"     : "/project/harmonyhelper.html",
+  "date"     : {
+    "day"   : "15",
+    "month" : "July",
+    "year"  : "2014"
+  }
+}
+,
+  
+    {
   "title"    : "Build a JavaFX8 app with sbt",
   "category" : "blog",
   "tags"     : ["javafx","java","sbt", null],
