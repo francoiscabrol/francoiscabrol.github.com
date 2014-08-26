@@ -57,6 +57,20 @@
 ,
   
     {
+  "title"    : "aToMiG",
+  "category" : "",
+  "tags"     : ["open", null],
+  "description": "A touchless and real time melody generation system",
+  "href"     : "/2014-03-10-atomig.html",
+  "date"     : {
+    "day"   : "14",
+    "month" : "May",
+    "year"  : "2014"
+  }
+}
+,
+  
+    {
   "title"    : "Libjamu",
   "category" : "project",
   "tags"     : ["open","music","java", null],
@@ -76,6 +90,20 @@
   "tags"     : ["open","leap","java", null],
   "description": "A java library for leap motion calibration",
   "href"     : "/project/localism.html",
+  "date"     : {
+    "day"   : "09",
+    "month" : "March",
+    "year"  : "2014"
+  }
+}
+,
+  
+    {
+  "title"    : "Melvi",
+  "category" : "",
+  "tags"     : ["open","visu", null],
+  "description": "",
+  "href"     : "/2014-03-09-melvi.html",
   "date"     : {
     "day"   : "09",
     "month" : "March",
