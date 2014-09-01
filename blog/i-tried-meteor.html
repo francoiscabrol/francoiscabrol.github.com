@@ -3,9 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta content="IE=edge,chrome=1">
-        <title>JAMUZ - Build a JavaFX 8 app with sbt</title>
+        <title>JAMUZ - Meteor, a fast way to make reactive web apps</title>
         <meta name="viewport" content="width=device-width">
-        <meta name="description" content="JavaFx 8 is a graphic library that come with java8. How to configure sbt to build a JavaFx 8 application.">
+        <meta name="description" content="Meteor is an innovative Node.js framework to build reactive and full javascript web app.">
         <!-- Basic Bootstrap CSS -->
         <link href="/assets/css/bootstrap_journal.min.css" rel="stylesheet">
         <link href="/assets/css/bootstrap-social.css" rel="stylesheet">
@@ -83,65 +83,82 @@
     </div>
     <div class="container theme-showcase wrap" role="main">
           <header class="entry-header">
-  <h1 class="entry-title">Build a JavaFX 8 app with sbt</h1>
+  <h1 class="entry-title">Meteor, a fast way to make reactive web apps</h1>
   <p>
         <!-- Date/Time -->
-        <span class="glyphicon glyphicon-time"></span> Posted on 08 Jul 2014
+        <span class="glyphicon glyphicon-time"></span> Posted on 30 Aug 2014
   </p>
   <div class="bs-callout">
       
-      <a class="label label-primary" href="/search/?tag=javafx&categories=blog">javafx</a>
+      <a class="label label-primary" href="/search/?tag=javascript&categories=blog">javascript</a>
       
-      <a class="label label-primary" href="/search/?tag=java&categories=blog">java</a>
+      <a class="label label-primary" href="/search/?tag=meteor&categories=blog">meteor</a>
       
-      <a class="label label-primary" href="/search/?tag=sbt&categories=blog">sbt</a>
+      <a class="label label-primary" href="/search/?tag=node.js&categories=blog">node.js</a>
       
   </div>
 
   <hr>
 
-  <p class="lead"> JavaFx 8 is a graphic library that come with java8. How to configure sbt to build a JavaFx 8 application. </p>
+  <p class="lead"> Meteor is an innovative Node.js framework to build reactive and full javascript web app. </p>
 
   <hr>
 </header>
 
 <div class="post">
-<p><a href="http://www.scala-sbt.org">Sbt is a simple build tool</a> from the scala community. It is a great tool to build java and scala project.</p>
+<p>Meteor is very impressive. It is the first web framework that I’ve seen that is both a <strong>client-side and server-side</strong> technology. The first goal of meteor is to provide a solution for <strong>developing reactive (also called real-time) web app</strong>. The version 1.0 is comming so it is the right time to pay attention to it.</p>
 
-<p>The basic configuration of a sbt project is written in the build.sbt.</p>
+<p>So Meteor is based on Node.js. If you don’t know what Node.js is, you have to understand that Node is a Javascript interpreter running on the OS (Windows/MACOS/Linux,…) and providing a native powerfull <a href="http://nodejs.org/api/">low level API</a>. This API allows to read/write files, create a server, and do a lot of basic stuff. You can create server application in Javascript only with that. But since the most of web server applications need pretty much the same architecture and functions, as in every language, using a web framework allows to make apps really faster and with less pain. Meteor is a web framework to make reactive applications.</p>
 
-<p>With the version 8 of Java and JavaFX, an important fact is that the jfxrt.jar (javafx library) moved to “$JAVA_HOME/jre/lib/ext/jfxrt.jar” with Java8 (from “$JAVA_HOME/jre/lib/jfxrt.jar” with Java7). With sbt, you have to define the path of this jar file.</p>
+<blockquote>
+  <p>If there is changes from any client, data changements are immediately send to everyone’s.</p>
+</blockquote>
 
-<p>Example of build.sbt file for a simple Java8 and Javafx8 project:</p>
+<p>What means reactivity? That’s means if there is changes from any client, data changements are immediately send to everyone’s.</p>
 
-<pre><code>organization := "Francois Cabrol"
+<blockquote>
+  <p>Atmospherejs packages provide code for the client-side or the server-side as well as for both</p>
+</blockquote>
 
-name := "My app"
+<p>Since the v0.9 of meteor you can use any <strong>atmospherejs</strong> packages without meteorite and that simplify your life. <a href="http://atmospherejs.com">Atmospherejs.com</a> reference all meteor packages developed by the community. The best thing is that packages provide code for the client-side as well as for the server-side since meteor is a both-side framework.</p>
 
-version := "0.0.1"
+<blockquote>
+  <p>A good occassion to discovered no sql databases (if you don’t know)</p>
+</blockquote>
 
-autoScalaLibrary := false
+<p>For instance, you have to use mongodb with meteor. There is no other choice. This will change maybe but for now that is the biggest restriction. And the reason is that meteor provide an higher level api for using the mongodb api on the server-side… and on the client-side as well! This implementation allows to preserve the reactivity without much code to write. The client-side api is minimongo and I invite you to learn more about this that contribute to make meteor so powerful. </p>
 
-//Define the java version to use
-javacOptions ++= Seq("-source", "1.8", "-target", "1.8")
+<blockquote>
+  <p>Yes, Meteor is secure (well, if you do what needed)</p>
+</blockquote>
 
-//Add Javafx8 library
-unmanagedJars in Compile += Attributed.blank(file(System.getenv("JAVA_HOME") + "/jre/lib/ext/jfxrt.jar"))
+<p>When I started to learn meteor, persons said me ‘Be carreful! meteor is not secure!’. Ok, don’t listen this rumor, it is wrong.</p>
 
-// Define all libraries to get from maven repository
-// JUnit Interface 0.10
-libraryDependencies ++= Seq(
-   "com.novocode" % "junit-interface" % "0.10" % "test"
-)
+<p>The principal reason for why this rumor exists is well explain on this article </p>
+
+<blockquote>
+  <p>Try it yourself!</p>
+</blockquote>
+
+<p>The quickest way to try meteor is to install some <a href="https://www.meteor.com/examples/leaderboard">meteor examples</a>. Just few command lines are enought.</p>
+
+<ul>
+  <li>
+    <p>If you want to install meteor:</p>
+
+    <pre><code>  $ curl https://install.meteor.com | sh	
 </code></pre>
+  </li>
+  <li>
+    <p>Download and launch the Leaderboard example:</p>
 
-<p>Note that the same following line should be needed in any ScalaFx8 project:</p>
-
-<pre><code>//Add Javafx8 library
-unmanagedJars in Compile += Attributed.blank(file(System.getenv("JAVA_HOME") + "/jre/lib/ext/jfxrt.jar"))
+    <pre><code>  $ meteor create --example leaderboard
+  $ cd leaderboard
+  $ meteor
 </code></pre>
+  </li>
+</ul>
 
-<p>Hope this will be useful!</p>
 
 <!-- by <a class="entry-author" href="/about/">François Cabrol</a> -->
 </div>

@@ -1,6 +1,20 @@
 [
   
     {
+  "title"    : "Meteor, a fast way to make reactive web apps",
+  "category" : "blog",
+  "tags"     : ["javascript","meteor","node.js", null],
+  "description": "Meteor is an innovative Node.js framework to build reactive and full javascript web app.",
+  "href"     : "/blog/i-tried-meteor.html",
+  "date"     : {
+    "day"   : "30",
+    "month" : "August",
+    "year"  : "2014"
+  }
+}
+,
+  
+    {
   "title"    : "Harmony helper",
   "category" : "project",
   "tags"     : ["interface","music","generation","web","play","java", null],
@@ -15,10 +29,10 @@
 ,
   
     {
-  "title"    : "Build a JavaFX8 app with sbt",
+  "title"    : "Build a JavaFX 8 app with sbt",
   "category" : "blog",
   "tags"     : ["javafx","java","sbt", null],
-  "description": "JavaFx8 is a graphic library that come with java8. How to configure sbt to build a JavaFx8 application.",
+  "description": "JavaFx 8 is a graphic library that come with java8. How to configure sbt to build a JavaFx 8 application.",
   "href"     : "/blog/javafx8-with-sbt.html",
   "date"     : {
     "day"   : "08",
