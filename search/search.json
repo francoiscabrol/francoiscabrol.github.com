@@ -88,7 +88,7 @@
   "title"    : "Melvi",
   "category" : "project",
   "tags"     : ["open","visu","interface","music","scala", null],
-  "description": "MelVi is a little tool that I created to visualize contour of midi melodies during the development of melody generators.",
+  "description": "MelVi is a little tool that I created to visualize the melodic contour of midi melodies during the development of generators.",
   "href"     : "/project/melvi.html",
   "date"     : {
     "day"   : "09",
