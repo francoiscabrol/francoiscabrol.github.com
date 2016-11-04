@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Bene and Francois' travel</title>
+  </head>
+  <body>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyA5dPXp8bp2GgjbhPXnumvSYXLkHtIRDlM"></script>
+    <!-- Include Scala.js compiled code -->
+    <script type="text/javascript" src="./mapStyle.js"></script>
+    <script type="text/javascript" src="./bower_components/papaparse/papaparse.min.js"></script>
+    <script type="text/javascript" src="./scala-js-tutorial-opt.js"></script>
+    <script type="text/javascript" src="./scala-js-tutorial-jsdeps.min.js"></script>
+    <!-- Run tutorial.webapp.TutorialApp -->
+    <div id="map-canvas" style="width:1400px; height:800px"></div>
+    <script type="text/javascript">
+			// Parse local CSV file
+			Papa.parse("./points.csv", {
+header: true,
+				complete: function(results) {
+					console.log("Finished:", results);
+				}
+			});
+
+      example.ScalaJSExample().main();
+    </script>
+  </body>
+</html>
