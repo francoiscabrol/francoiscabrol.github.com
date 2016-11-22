@@ -3,26 +3,17 @@
   <head>
     <meta charset="UTF-8">
     <title>Bene and Francois' travel</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.27.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.27.0/mapbox-gl.css' rel='stylesheet' />
+    <!-- Include Scala.js compiled code -->
+    <script type="text/javascript" src="./scala-js-mapbox-opt.js"></script>
+    <script type="text/javascript" src="./scala-js-mapbox-jsdeps.min.js"></script>
+    <!-- Run tutorial.webapp.TutorialApp -->
+    <script type="text/javascript">
+      francoiscabrol.travelmap.Application().main();
+    </script>
   </head>
   <body>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyA5dPXp8bp2GgjbhPXnumvSYXLkHtIRDlM"></script>
-    <!-- Include Scala.js compiled code -->
-    <script type="text/javascript" src="./mapStyle.js"></script>
-    <script type="text/javascript" src="./bower_components/papaparse/papaparse.min.js"></script>
-    <script type="text/javascript" src="./scala-js-tutorial-opt.js"></script>
-    <script type="text/javascript" src="./scala-js-tutorial-jsdeps.min.js"></script>
-    <!-- Run tutorial.webapp.TutorialApp -->
-    <div id="map-canvas" style="width:1400px; height:800px"></div>
-    <script type="text/javascript">
-			// Parse local CSV file
-			Papa.parse("./points.csv", {
-header: true,
-				complete: function(results) {
-					console.log("Finished:", results);
-				}
-			});
-
-      example.ScalaJSExample().main();
-    </script>
   </body>
 </html>
