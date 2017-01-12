@@ -3899,6 +3899,9 @@ $c_Lfrancoiscabrol_travelmap_Application$$anonfun$init$1$$anonfun$3$$anon$2.prot
 function $c_Lfrancoiscabrol_travelmap_components_MyTravelMap() {
   $c_O.call(this);
   this.francoiscabrol$travelmap$components$MyTravelMap$$places$f = null;
+  this.zoomLevel$1 = 0;
+  this.bearing$1 = 0;
+  this.pitch$1 = 0;
   this.francoiscabrol$travelmap$components$MyTravelMap$$activePlace$1 = null;
   this.features$1 = null;
   this.canvas$1 = null;
@@ -3913,15 +3916,24 @@ function $h_Lfrancoiscabrol_travelmap_components_MyTravelMap() {
 }
 $h_Lfrancoiscabrol_travelmap_components_MyTravelMap.prototype = $c_Lfrancoiscabrol_travelmap_components_MyTravelMap.prototype;
 $c_Lfrancoiscabrol_travelmap_components_MyTravelMap.prototype.francoiscabrol$travelmap$components$MyTravelMap$$setActivePlace__Lfrancoiscabrol_travelmap_Place__V = (function(place) {
+  var x = ("Set place: " + place);
+  var this$2 = $m_s_Console$();
+  var this$3 = $as_Ljava_io_PrintStream(this$2.outVar$2.v$1);
+  this$3.java$lang$JSConsoleBasedPrintStream$$printString__T__V((x + "\n"));
   $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().getElementById(place.name$1);
   var x$2 = this.francoiscabrol$travelmap$components$MyTravelMap$$activePlace$1;
   if ((!((place === null) ? (x$2 === null) : place.equals__O__Z(x$2)))) {
-    this.map$1.flyTo({
-      "bearing": 0,
-      "center": place.latLng__sjs_js_Array(),
-      "zoom": 12,
+    var jsx$2 = this.map$1;
+    var value = this.bearing$1;
+    var jsx$1 = place.latLng__sjs_js_Array();
+    var value$1 = this.zoomLevel$1;
+    var value$2 = this.pitch$1;
+    jsx$2.flyTo({
+      "bearing": value,
+      "center": jsx$1,
+      "zoom": value$1,
       "speed": 0.7,
-      "pitch": 0
+      "pitch": value$2
     });
     $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().getElementById(place.name$1).classList.add($m_Lfrancoiscabrol_travelmap_components_Style$().active$3.htmlClass$1);
     $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().getElementById(this.francoiscabrol$travelmap$components$MyTravelMap$$activePlace$1.name$1).classList.remove($m_Lfrancoiscabrol_travelmap_components_Style$().active$3.htmlClass$1);
@@ -3929,18 +3941,23 @@ $c_Lfrancoiscabrol_travelmap_components_MyTravelMap.prototype.francoiscabrol$tra
   }
 });
 $c_Lfrancoiscabrol_travelmap_components_MyTravelMap.prototype.francoiscabrol$travelmap$components$MyTravelMap$$initActivePlace__Lfrancoiscabrol_travelmap_Place__V = (function(place) {
-  $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().getElementById(this.francoiscabrol$travelmap$components$MyTravelMap$$activePlace$1.name$1).classList.add($m_Lfrancoiscabrol_travelmap_components_Style$().active$3.htmlClass$1)
+  var elem = $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().getElementById(place.name$1);
+  elem.classList.add($m_Lfrancoiscabrol_travelmap_components_Style$().active$3.htmlClass$1);
+  elem.scrollIntoView()
 });
 $c_Lfrancoiscabrol_travelmap_components_MyTravelMap.prototype.francoiscabrol$travelmap$components$MyTravelMap$$isPlaceOnScreen__Lfrancoiscabrol_travelmap_Place__Z = (function(place) {
   var elem = $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().getElementById(place.name$1);
   var bounds = elem.getBoundingClientRect();
-  return (($uD(bounds.top) < $uD($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().innerHeight)) && ($uD(bounds.bottom) > 0))
+  return (($uD(bounds.top) < $uI(this.features$1.scrollHeight)) && (((-25.0) + $uD(bounds.bottom)) > 0))
 });
 $c_Lfrancoiscabrol_travelmap_components_MyTravelMap.prototype.init___sci_List = (function(places) {
   this.francoiscabrol$travelmap$components$MyTravelMap$$places$f = places;
   $m_s_Predef$().require__Z__V(($s_sc_LinearSeqOptimized$class__length__sc_LinearSeqOptimized__I(places) > 0));
-  $g.mapboxgl.accessToken = "pk.eyJ1IjoiZnJhY2EiLCJhIjoiY2l2ZzB3ajJyMDEyMTJvbGJkbHIyZWs2eiJ9.OoZYAClt06Ua20EnlhqKkQ";
-  this.francoiscabrol$travelmap$components$MyTravelMap$$activePlace$1 = $as_Lfrancoiscabrol_travelmap_Place($s_sc_LinearSeqOptimized$class__apply__sc_LinearSeqOptimized__I__O(places, 0));
+  this.zoomLevel$1 = 6;
+  this.bearing$1 = 0;
+  this.pitch$1 = 0;
+  $g.mapboxgl.accessToken = "pk.eyJ1IjoiZnJhY2EiLCJhIjoiY2l2dTF1NzJvMDdiejJvcXZhdjkzeTNhciJ9.LhsRNjlzDyt0i_SxkaoaoA";
+  this.francoiscabrol$travelmap$components$MyTravelMap$$activePlace$1 = $as_Lfrancoiscabrol_travelmap_Place($s_sc_LinearSeqOptimized$class__last__sc_LinearSeqOptimized__O(places));
   var jsx$1 = $m_Lscalacss_defaults_PlatformExports$StyleSheetInlineJsOps$();
   var s = $m_Lfrancoiscabrol_travelmap_components_Style$();
   $m_Lscalacss_defaults_DefaultSettings$Dev$();
@@ -4005,24 +4022,32 @@ $c_Lfrancoiscabrol_travelmap_components_MyTravelMap.prototype.init___sci_List = 
   if ((!assumption)) {
     throw new $c_jl_AssertionError().init___O(("assumption failed: " + new $c_s_StringContext().init___sc_Seq(new $c_sjs_js_WrappedArray().init___sjs_js_Array(["The features div does not exists"])).s__sc_Seq__T($m_sci_Nil$())))
   };
+  var height = $uD($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().innerHeight);
+  var lastElemId = (((-1) + $uI(this.features$1.children.length)) | 0);
+  var elem = this.features$1.children.item(lastElemId);
+  elem.setAttribute("style", (new $c_s_StringContext().init___sc_Seq(new $c_sjs_js_WrappedArray().init___sjs_js_Array(["margin-bottom: ", ""])).s__sc_Seq__T(new $c_sjs_js_WrappedArray().init___sjs_js_Array([height])) + "px"));
   var jsx$13 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag());
   var jsx$12 = $m_Lscalatags_JsDom$all$().id__Lscalatags_generic_Attr().$$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("map", $m_Lscalatags_JsDom$all$().stringAttr$1);
   var this$18 = $m_Lscalacss_ScalatagsCss$();
   var s$4 = $m_Lfrancoiscabrol_travelmap_components_Style$().map$3;
   this.canvas$1 = jsx$13.apply__sc_Seq__Lscalatags_JsDom$TypedTag(new $c_sjs_js_WrappedArray().init___sjs_js_Array([jsx$12, new $c_Lscalacss_ScalatagsJsDomImplicits$$anon$1().init___Lscalacss_ScalatagsJsDomImplicits__Lscalacss_internal_StyleA(this$18, s$4)])).render__Lorg_scalajs_dom_raw_Element();
   $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().body.appendChild(this.canvas$1);
-  var jsx$15 = $g.mapboxgl.Map;
+  var jsx$16 = $g.mapboxgl.Map;
   var s$5 = $as_T(this.canvas$1.id);
-  var jsx$14 = new jsx$15({
+  var jsx$15 = this.francoiscabrol$travelmap$components$MyTravelMap$$activePlace$1.latLng__sjs_js_Array();
+  var value = this.zoomLevel$1;
+  var value$1 = this.bearing$1;
+  var value$2 = this.pitch$1;
+  var jsx$14 = new jsx$16({
     "container": s$5,
     "style": "mapbox://styles/mapbox/streets-v9",
-    "center": this.francoiscabrol$travelmap$components$MyTravelMap$$activePlace$1.latLng__sjs_js_Array(),
-    "zoom": 15.5,
-    "bearing": 27,
-    "pitch": 45
+    "center": jsx$15,
+    "zoom": value,
+    "bearing": value$1,
+    "pitch": value$2
   });
   this.map$1 = jsx$14;
-  $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().onscroll = (function(f$1) {
+  this.features$1.onscroll = (function(f$1) {
     return (function(arg1$3) {
       return f$1.apply__O__O(arg1$3)
     })
@@ -4034,34 +4059,6 @@ $c_Lfrancoiscabrol_travelmap_components_MyTravelMap.prototype.init___sci_List = 
   })(new $c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$1().init___Lfrancoiscabrol_travelmap_components_MyTravelMap(this));
   this.map$1.on("load", this.cb$1);
   return this
-});
-$c_Lfrancoiscabrol_travelmap_components_MyTravelMap.prototype.francoiscabrol$travelmap$components$MyTravelMap$$addLine__T__sjs_js_Array__sjs_js_Array__V = (function(id, origin, destination) {
-  var route = {
-    "type": "FeatureCollection",
-    "features": [{
-      "type": "Feature",
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [origin, destination]
-      }
-    }]
-  };
-  this.map$1.addSource(("route" + id), {
-    "type": "geojson",
-    "data": route
-  });
-  var jsx$1 = this.map$1;
-  var s = ("route" + id);
-  var s$1 = ("route" + id);
-  jsx$1.addLayer({
-    "id": s,
-    "source": s$1,
-    "type": "line",
-    "paint": {
-      "line-width": 2,
-      "line-color": "red"
-    }
-  })
 });
 var $d_Lfrancoiscabrol_travelmap_components_MyTravelMap = new $TypeData().initClass({
   Lfrancoiscabrol_travelmap_components_MyTravelMap: 0
@@ -5749,6 +5746,13 @@ $h_Lorg_scalajs_dom_package$.prototype = $c_Lorg_scalajs_dom_package$.prototype;
 $c_Lorg_scalajs_dom_package$.prototype.init___ = (function() {
   return this
 });
+$c_Lorg_scalajs_dom_package$.prototype.console$lzycompute__p1__Lorg_scalajs_dom_raw_Console = (function() {
+  if (((536870912 & this.bitmap$0$1) === 0)) {
+    this.console$1 = this.window__Lorg_scalajs_dom_raw_Window().console;
+    this.bitmap$0$1 = (536870912 | this.bitmap$0$1)
+  };
+  return this.console$1
+});
 $c_Lorg_scalajs_dom_package$.prototype.document__Lorg_scalajs_dom_raw_HTMLDocument = (function() {
   return (((268435456 & this.bitmap$0$1) === 0) ? this.document$lzycompute__p1__Lorg_scalajs_dom_raw_HTMLDocument() : this.document$1)
 });
@@ -5768,6 +5772,9 @@ $c_Lorg_scalajs_dom_package$.prototype.document$lzycompute__p1__Lorg_scalajs_dom
     this.bitmap$0$1 = (268435456 | this.bitmap$0$1)
   };
   return this.document$1
+});
+$c_Lorg_scalajs_dom_package$.prototype.console__Lorg_scalajs_dom_raw_Console = (function() {
+  return (((536870912 & this.bitmap$0$1) === 0) ? this.console$lzycompute__p1__Lorg_scalajs_dom_raw_Console() : this.console$1)
 });
 var $d_Lorg_scalajs_dom_package$ = new $TypeData().initClass({
   Lorg_scalajs_dom_package$: 0
@@ -16821,15 +16828,17 @@ $c_Lfrancoiscabrol_travelmap_Application$.prototype.getCoordonates__Lfrancoiscab
 $c_Lfrancoiscabrol_travelmap_Application$.prototype.$$js$exported$prop$init__O = (function() {
   this.init__V()
 });
+$c_Lfrancoiscabrol_travelmap_Application$.prototype.francoiscabrol$travelmap$Application$$error__T__Lorg_scalajs_dom_raw_Node = (function(msg) {
+  $m_Lorg_scalajs_dom_package$().console__Lorg_scalajs_dom_raw_Console().error(msg);
+  var div = $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().createElement("div");
+  div.textContent = msg;
+  return $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().body.appendChild(div)
+});
 $c_Lfrancoiscabrol_travelmap_Application$.prototype.getAddress__p1__T__s_concurrent_Future = (function(address) {
   var storageAddress = new $c_s_StringContext().init___sc_Seq(new $c_sjs_js_WrappedArray().init___sjs_js_Array(["http://nominatim.openstreetmap.org/search/?q=", "&format=json"])).s__sc_Seq__T(new $c_sjs_js_WrappedArray().init___sjs_js_Array([address]));
-  var x = ("storageAddress" + storageAddress);
-  var this$2 = $m_s_Console$();
-  var this$3 = $as_Ljava_io_PrintStream(this$2.outVar$2.v$1);
-  this$3.java$lang$JSConsoleBasedPrintStream$$printString__T__V((x + "\n"));
-  var this$6 = $m_Lorg_scalajs_dom_ext_Ajax$();
+  var this$3 = $m_Lorg_scalajs_dom_ext_Ajax$();
   var headers = $m_sci_Map$EmptyMap$();
-  return this$6.apply__T__T__Lorg_scalajs_dom_ext_Ajax$InputData__I__sci_Map__Z__T__s_concurrent_Future("GET", storageAddress, null, 0, headers, false, "")
+  return this$3.apply__T__T__Lorg_scalajs_dom_ext_Ajax$InputData__I__sci_Map__Z__T__s_concurrent_Future("GET", storageAddress, null, 0, headers, false, "")
 });
 $c_Lfrancoiscabrol_travelmap_Application$.prototype.$$js$exported$meth$main__O = (function() {
   this.init__V()
@@ -24517,7 +24526,7 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
   var this$16 = $m_Lscalacss_internal_Attrs$width$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var $$this = 50;
+  var $$this = 60;
   var f$1 = new $c_Lscalacss_internal_Percentage().init___O($$this);
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
@@ -24850,7 +24859,7 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
   var this$108 = $m_Lscalacss_internal_Attrs$width$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var $$this$6 = 50;
+  var $$this$6 = 40;
   var f$15 = new $c_Lscalacss_internal_Percentage().init___O($$this$6);
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
@@ -24897,7 +24906,7 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
   var this$126 = $m_Lscalacss_internal_Attrs$marginLeft$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var $$this$8 = 50;
+  var $$this$8 = 60;
   var f$19 = new $c_Lscalacss_internal_Percentage().init___O($$this$8);
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
@@ -30132,9 +30141,9 @@ $c_Lfrancoiscabrol_travelmap_Application$$anonfun$init$1.prototype.init___ = (fu
   return this
 });
 $c_Lfrancoiscabrol_travelmap_Application$$anonfun$init$1.prototype.apply__O__O = (function(v1) {
-  this.apply__s_util_Try__V($as_s_util_Try(v1))
+  return this.apply__s_util_Try__O($as_s_util_Try(v1))
 });
-$c_Lfrancoiscabrol_travelmap_Application$$anonfun$init$1.prototype.apply__s_util_Try__V = (function(x0$1) {
+$c_Lfrancoiscabrol_travelmap_Application$$anonfun$init$1.prototype.apply__s_util_Try__O = (function(x0$1) {
   if ($is_s_util_Success(x0$1)) {
     var x2 = $as_s_util_Success(x0$1);
     var s = x2.value$2;
@@ -30153,12 +30162,10 @@ $c_Lfrancoiscabrol_travelmap_Application$$anonfun$init$1.prototype.apply__s_util
     var futures = $as_sci_List(places.map__F1__scg_CanBuildFrom__O(jsx$1, this$5.ReusableCBFInstance$2));
     var jsx$2 = $m_s_concurrent_Future$();
     var this$6 = $m_sci_List$();
-    jsx$2.sequence__sc_TraversableOnce__scg_CanBuildFrom__s_concurrent_ExecutionContext__s_concurrent_Future(futures, this$6.ReusableCBFInstance$2, $m_sjs_concurrent_JSExecutionContext$Implicits$().runNow$1).onComplete__F1__s_concurrent_ExecutionContext__V(new $c_Lfrancoiscabrol_travelmap_Application$$anonfun$init$1$$anonfun$apply$6().init___Lfrancoiscabrol_travelmap_Application$$anonfun$init$1__sci_List(this, places), $m_sjs_concurrent_JSExecutionContext$Implicits$().runNow$1)
+    jsx$2.sequence__sc_TraversableOnce__scg_CanBuildFrom__s_concurrent_ExecutionContext__s_concurrent_Future(futures, this$6.ReusableCBFInstance$2, $m_sjs_concurrent_JSExecutionContext$Implicits$().runNow$1).onComplete__F1__s_concurrent_ExecutionContext__V(new $c_Lfrancoiscabrol_travelmap_Application$$anonfun$init$1$$anonfun$apply$6().init___Lfrancoiscabrol_travelmap_Application$$anonfun$init$1__sci_List(this, places), $m_sjs_concurrent_JSExecutionContext$Implicits$().runNow$1);
+    return (void 0)
   } else if ($is_s_util_Failure(x0$1)) {
-    var x = new $c_s_StringContext().init___sc_Seq(new $c_sjs_js_WrappedArray().init___sjs_js_Array(["Impossible to get the data from ", ""])).s__sc_Seq__T(new $c_sjs_js_WrappedArray().init___sjs_js_Array([$m_Lfrancoiscabrol_travelmap_Application$().jsonFileUrl$1]));
-    var this$8 = $m_s_Console$();
-    var this$9 = $as_Ljava_io_PrintStream(this$8.outVar$2.v$1);
-    this$9.java$lang$JSConsoleBasedPrintStream$$printString__T__V((x + "\n"))
+    return $m_Lfrancoiscabrol_travelmap_Application$().francoiscabrol$travelmap$Application$$error__T__Lorg_scalajs_dom_raw_Node(new $c_s_StringContext().init___sc_Seq(new $c_sjs_js_WrappedArray().init___sjs_js_Array(["Impossible to get the data from ", ""])).s__sc_Seq__T(new $c_sjs_js_WrappedArray().init___sjs_js_Array([$m_Lfrancoiscabrol_travelmap_Application$().jsonFileUrl$1])))
   } else {
     throw new $c_s_MatchError().init___O(x0$1)
   }
@@ -30364,13 +30371,13 @@ function $h_Lfrancoiscabrol_travelmap_Application$$anonfun$init$1$$anonfun$apply
 }
 $h_Lfrancoiscabrol_travelmap_Application$$anonfun$init$1$$anonfun$apply$6.prototype = $c_Lfrancoiscabrol_travelmap_Application$$anonfun$init$1$$anonfun$apply$6.prototype;
 $c_Lfrancoiscabrol_travelmap_Application$$anonfun$init$1$$anonfun$apply$6.prototype.apply__O__O = (function(v1) {
-  this.apply__s_util_Try__V($as_s_util_Try(v1))
+  return this.apply__s_util_Try__O($as_s_util_Try(v1))
 });
 $c_Lfrancoiscabrol_travelmap_Application$$anonfun$init$1$$anonfun$apply$6.prototype.init___Lfrancoiscabrol_travelmap_Application$$anonfun$init$1__sci_List = (function($$outer, places$1) {
   this.places$1$2 = places$1;
   return this
 });
-$c_Lfrancoiscabrol_travelmap_Application$$anonfun$init$1$$anonfun$apply$6.prototype.apply__s_util_Try__V = (function(x0$2) {
+$c_Lfrancoiscabrol_travelmap_Application$$anonfun$init$1$$anonfun$apply$6.prototype.apply__s_util_Try__O = (function(x0$2) {
   if ($is_s_util_Success(x0$2)) {
     new $c_Lfrancoiscabrol_travelmap_components_MyTravelMap().init___sci_List(this.places$1$2);
     var x = ("content:" + this.places$1$2);
@@ -30414,14 +30421,12 @@ $c_Lfrancoiscabrol_travelmap_Application$$anonfun$init$1$$anonfun$apply$6.protot
       var this$12 = $m_s_Console$();
       var this$13 = $as_Ljava_io_PrintStream(this$12.outVar$2.v$1);
       this$13.java$lang$JSConsoleBasedPrintStream$$printString__T__V((x$1 + "\n"))
-    }
+    };
+    return (void 0)
   } else if ($is_s_util_Failure(x0$2)) {
     var x4$2 = $as_s_util_Failure(x0$2);
     var err$2 = x4$2.exception$2;
-    var x$3 = ("Impossible to get all the locations coordinates " + err$2);
-    var this$15 = $m_s_Console$();
-    var this$16 = $as_Ljava_io_PrintStream(this$15.outVar$2.v$1);
-    this$16.java$lang$JSConsoleBasedPrintStream$$printString__T__V((x$3 + "\n"))
+    return $m_Lfrancoiscabrol_travelmap_Application$().francoiscabrol$travelmap$Application$$error__T__Lorg_scalajs_dom_raw_Node(("Impossible to get all the locations coordinates " + err$2))
   } else {
     throw new $c_s_MatchError().init___O(x0$2)
   }
@@ -41981,16 +41986,19 @@ $c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$1.prototype.apply$m
   while ((!these.isEmpty__Z())) {
     var v1 = these.head__O();
     var place = $as_Lfrancoiscabrol_travelmap_Place(v1);
-    var this$3 = $as_s_Option(elem$1);
-    if ((!this$3.isEmpty__Z())) {
-      var arg1 = this$3.get__O();
-      var old = $as_Lfrancoiscabrol_travelmap_Place(arg1);
-      this.$$outer$3.francoiscabrol$travelmap$components$MyTravelMap$$addLine__T__sjs_js_Array__sjs_js_Array__V(place.name$1, old.latLng__sjs_js_Array(), place.latLng__sjs_js_Array())
-    };
     var jsx$1 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag());
-    var this$4 = $m_Lscalacss_ScalatagsCss$();
+    var this$3 = $m_Lscalacss_ScalatagsCss$();
     var s = $m_Lfrancoiscabrol_travelmap_components_Style$().marker$3;
-    var el = jsx$1.apply__sc_Seq__Lscalatags_JsDom$TypedTag(new $c_sjs_js_WrappedArray().init___sjs_js_Array([new $c_Lscalacss_ScalatagsJsDomImplicits$$anon$1().init___Lscalacss_ScalatagsJsDomImplicits__Lscalacss_internal_StyleA(this$4, s)])).render__Lorg_scalajs_dom_raw_Element();
+    var el = jsx$1.apply__sc_Seq__Lscalatags_JsDom$TypedTag(new $c_sjs_js_WrappedArray().init___sjs_js_Array([new $c_Lscalacss_ScalatagsJsDomImplicits$$anon$1().init___Lscalacss_ScalatagsJsDomImplicits__Lscalacss_internal_StyleA(this$3, s)])).render__Lorg_scalajs_dom_raw_Element();
+    el.onmouseover = (function(place$1) {
+      return (function(e$2) {
+        var elem$2 = $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().getElementById(place$1.name$1);
+        var this$5 = $m_s_Console$();
+        var this$6 = $as_Ljava_io_PrintStream(this$5.outVar$2.v$1);
+        this$6.java$lang$JSConsoleBasedPrintStream$$printString__T__V((elem$2 + "\n"));
+        elem$2.scrollIntoView()
+      })
+    })(place);
     new $g.mapboxgl.Marker(el).setLngLat(place.latLng__sjs_js_Array()).addTo(this.$$outer$3.map$1);
     elem$1 = new $c_s_Some().init___O(place);
     these = $as_sci_List(these.tail__O())
