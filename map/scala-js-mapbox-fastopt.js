@@ -3891,10 +3891,23 @@ $c_Lfrancoiscabrol_travelmap_DataLayer$.prototype.getCoordinates__p1__T__s_concu
 });
 $c_Lfrancoiscabrol_travelmap_DataLayer$.prototype.francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache__Lfrancoiscabrol_travelmap_Place__s_concurrent_Future = (function(place) {
   var value = $as_T($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().localStorage.getItem(place.name$1));
+  var x = ("value => " + value);
+  var this$2 = $m_s_Console$();
+  var this$3 = $as_Ljava_io_PrintStream(this$2.outVar$2.v$1);
+  this$3.java$lang$JSConsoleBasedPrintStream$$printString__T__V((x + "\n"));
   if ((value === null)) {
-    throw new $c_jl_NullPointerException().init___()
+    var jsx$1 = true
+  } else {
+    if ((value === null)) {
+      throw new $c_jl_NullPointerException().init___()
+    };
+    var jsx$1 = (value === "")
   };
-  if ((value === "")) {
+  if (jsx$1) {
+    var x$1 = ("isEmpty => " + place);
+    var this$6 = $m_s_Console$();
+    var this$7 = $as_Ljava_io_PrintStream(this$6.outVar$2.v$1);
+    this$7.java$lang$JSConsoleBasedPrintStream$$printString__T__V((x$1 + "\n"));
     var future = this.getCoordinates__p1__T__s_concurrent_Future(place.address$1);
     var pf = new $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$1().init___Lfrancoiscabrol_travelmap_Place(place);
     var executor = $m_sjs_concurrent_JSExecutionContext$Implicits$().runNow$1;
@@ -37632,7 +37645,16 @@ $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$1.prototype.init___ = (
   return this
 });
 $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$1.prototype.applyOrElse__s_util_Try__F1__O = (function(x3, $default) {
-  return ($is_s_util_Failure(x3) ? $m_Lfrancoiscabrol_travelmap_Debug$().error__T__Lorg_scalajs_dom_raw_Node(new $c_s_StringContext().init___sc_Seq(new $c_sjs_js_WrappedArray().init___sjs_js_Array(["Impossible to get the data from ", ""])).s__sc_Seq__T(new $c_sjs_js_WrappedArray().init___sjs_js_Array([$m_Lfrancoiscabrol_travelmap_DataLayer$().jsonFileUrl$1]))) : $default.apply__O__O(x3))
+  if ($is_s_util_Failure(x3)) {
+    var x2 = $as_s_util_Failure(x3);
+    var err = x2.exception$2;
+    var this$2 = $m_s_Console$();
+    var this$3 = $as_Ljava_io_PrintStream(this$2.outVar$2.v$1);
+    this$3.java$lang$JSConsoleBasedPrintStream$$printString__T__V((err + "\n"));
+    return $m_Lfrancoiscabrol_travelmap_Debug$().error__T__Lorg_scalajs_dom_raw_Node(new $c_s_StringContext().init___sc_Seq(new $c_sjs_js_WrappedArray().init___sjs_js_Array(["Impossible to get the data from ", ""])).s__sc_Seq__T(new $c_sjs_js_WrappedArray().init___sjs_js_Array([$m_Lfrancoiscabrol_travelmap_DataLayer$().jsonFileUrl$1])))
+  } else {
+    return $default.apply__O__O(x3)
+  }
 });
 $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$1.prototype.isDefinedAt__O__Z = (function(x) {
   return this.isDefinedAt__s_util_Try__Z($as_s_util_Try(x))
