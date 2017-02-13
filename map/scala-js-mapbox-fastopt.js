@@ -3845,162 +3845,6 @@ function $s_scm_ResizableArray$class__$$init$__scm_ResizableArray__V($$this) {
   $$this.size0$6 = 0
 }
 /** @constructor */
-function $c_Lfrancoiscabrol_travelmap_DataLayer$() {
-  $c_O.call(this);
-  this.jsonFileUrl$1 = null
-}
-$c_Lfrancoiscabrol_travelmap_DataLayer$.prototype = new $h_O();
-$c_Lfrancoiscabrol_travelmap_DataLayer$.prototype.constructor = $c_Lfrancoiscabrol_travelmap_DataLayer$;
-/** @constructor */
-function $h_Lfrancoiscabrol_travelmap_DataLayer$() {
-  /*<skip>*/
-}
-$h_Lfrancoiscabrol_travelmap_DataLayer$.prototype = $c_Lfrancoiscabrol_travelmap_DataLayer$.prototype;
-$c_Lfrancoiscabrol_travelmap_DataLayer$.prototype.init___ = (function() {
-  this.jsonFileUrl$1 = "https://dl.dropboxusercontent.com/u/66604788/places.json";
-  return this
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$.prototype.loadData__s_concurrent_Future = (function() {
-  var this$3 = $m_Lorg_scalajs_dom_ext_Ajax$();
-  var url = this.jsonFileUrl$1;
-  var headers = $m_sci_Map$EmptyMap$();
-  var this$4 = this$3.apply__T__T__Lorg_scalajs_dom_ext_Ajax$InputData__I__sci_Map__Z__T__s_concurrent_Future("GET", url, null, 0, headers, false, "");
-  var f = new $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2().init___();
-  var executor = $m_sjs_concurrent_JSExecutionContext$Implicits$().runNow$1;
-  var this$5 = $s_s_concurrent_Future$class__flatMap__s_concurrent_Future__F1__s_concurrent_ExecutionContext__s_concurrent_Future(this$4, f, executor);
-  var pf = new $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$1().init___();
-  var executor$1 = $m_sjs_concurrent_JSExecutionContext$Implicits$().runNow$1;
-  return $s_s_concurrent_Future$class__andThen__s_concurrent_Future__s_PartialFunction__s_concurrent_ExecutionContext__s_concurrent_Future(this$5, pf, executor$1)
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$.prototype.addCoordinatesTo__sci_List__s_concurrent_Future = (function(places) {
-  var jsx$1 = new $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3().init___();
-  var this$1 = $m_sci_List$();
-  var futures = $as_sci_List(places.map__F1__scg_CanBuildFrom__O(jsx$1, this$1.ReusableCBFInstance$2));
-  var jsx$2 = $m_s_concurrent_Future$();
-  var this$2 = $m_sci_List$();
-  return jsx$2.sequence__sc_TraversableOnce__scg_CanBuildFrom__s_concurrent_ExecutionContext__s_concurrent_Future(futures, this$2.ReusableCBFInstance$2, $m_sjs_concurrent_JSExecutionContext$Implicits$().runNow$1)
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$.prototype.getCoordinates__p1__T__s_concurrent_Future = (function(address) {
-  var storageAddress = new $c_s_StringContext().init___sc_Seq(new $c_sjs_js_WrappedArray().init___sjs_js_Array(["http://nominatim.openstreetmap.org/search/?q=", "&format=json"])).s__sc_Seq__T(new $c_sjs_js_WrappedArray().init___sjs_js_Array([address]));
-  var this$3 = $m_Lorg_scalajs_dom_ext_Ajax$();
-  var headers = $m_sci_Map$EmptyMap$();
-  var this$4 = this$3.apply__T__T__Lorg_scalajs_dom_ext_Ajax$InputData__I__sci_Map__Z__T__s_concurrent_Future("GET", storageAddress, null, 0, headers, false, "");
-  var f = new $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1().init___();
-  var executor = $m_sjs_concurrent_JSExecutionContext$Implicits$().runNow$1;
-  return $s_s_concurrent_Future$class__map__s_concurrent_Future__F1__s_concurrent_ExecutionContext__s_concurrent_Future(this$4, f, executor)
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$.prototype.francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache__Lfrancoiscabrol_travelmap_Place__s_concurrent_Future = (function(place) {
-  var value = $as_T($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().localStorage.getItem(place.name$1));
-  var x = ("value => " + value);
-  var this$2 = $m_s_Console$();
-  var this$3 = $as_Ljava_io_PrintStream(this$2.outVar$2.v$1);
-  this$3.java$lang$JSConsoleBasedPrintStream$$printString__T__V((x + "\n"));
-  if ((value === null)) {
-    var jsx$1 = true
-  } else {
-    if ((value === null)) {
-      throw new $c_jl_NullPointerException().init___()
-    };
-    var jsx$1 = (value === "")
-  };
-  if (jsx$1) {
-    var x$1 = ("isEmpty => " + place);
-    var this$6 = $m_s_Console$();
-    var this$7 = $as_Ljava_io_PrintStream(this$6.outVar$2.v$1);
-    this$7.java$lang$JSConsoleBasedPrintStream$$printString__T__V((x$1 + "\n"));
-    var future = this.getCoordinates__p1__T__s_concurrent_Future(place.address$1);
-    var pf = new $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$1().init___Lfrancoiscabrol_travelmap_Place(place);
-    var executor = $m_sjs_concurrent_JSExecutionContext$Implicits$().runNow$1;
-    $s_s_concurrent_Future$class__onSuccess__s_concurrent_Future__s_PartialFunction__s_concurrent_ExecutionContext__V(future, pf, executor);
-    return future
-  } else {
-    $m_s_concurrent_Future$();
-    var body = new $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$2().init___T(value);
-    var executor$1 = $m_sjs_concurrent_JSExecutionContext$Implicits$().runNow$1;
-    return $m_s_concurrent_impl_Future$().apply__F0__s_concurrent_ExecutionContext__s_concurrent_Future(body, executor$1)
-  }
-});
-var $d_Lfrancoiscabrol_travelmap_DataLayer$ = new $TypeData().initClass({
-  Lfrancoiscabrol_travelmap_DataLayer$: 0
-}, false, "francoiscabrol.travelmap.DataLayer$", {
-  Lfrancoiscabrol_travelmap_DataLayer$: 1,
-  O: 1
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$.prototype.$classData = $d_Lfrancoiscabrol_travelmap_DataLayer$;
-var $n_Lfrancoiscabrol_travelmap_DataLayer$ = (void 0);
-function $m_Lfrancoiscabrol_travelmap_DataLayer$() {
-  if ((!$n_Lfrancoiscabrol_travelmap_DataLayer$)) {
-    $n_Lfrancoiscabrol_travelmap_DataLayer$ = new $c_Lfrancoiscabrol_travelmap_DataLayer$().init___()
-  };
-  return $n_Lfrancoiscabrol_travelmap_DataLayer$
-}
-/** @constructor */
-function $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1() {
-  $c_O.call(this);
-  this.derive$macro$1$1 = null;
-  this.bitmap$0$1 = false
-}
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1.prototype = new $h_O();
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1.prototype.constructor = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1;
-/** @constructor */
-function $h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1() {
-  /*<skip>*/
-}
-$h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1.prototype = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1.prototype;
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1.prototype.init___Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1 = (function($$outer) {
-  return this
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1.prototype.derive$macro$1$lzycompute__p1__Lupickle_Types$Reader = (function() {
-  if ((!this.bitmap$0$1)) {
-    this.derive$macro$1$1 = new $c_Lupickle_Types$Knot$Reader().init___Lupickle_Types$Knot$__F0($m_Lupickle_default$().Knot__Lupickle_Types$Knot$(), new $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1().init___Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1(this));
-    this.bitmap$0$1 = true
-  };
-  return this.derive$macro$1$1
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1.prototype.derive$macro$1__Lupickle_Types$Reader = (function() {
-  return ((!this.bitmap$0$1) ? this.derive$macro$1$lzycompute__p1__Lupickle_Types$Reader() : this.derive$macro$1$1)
-});
-var $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1 = new $TypeData().initClass({
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1: 0
-}, false, "francoiscabrol.travelmap.DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1", {
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1: 1,
-  O: 1
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1.prototype.$classData = $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1;
-/** @constructor */
-function $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2() {
-  $c_O.call(this);
-  this.derive$macro$10$1 = null;
-  this.bitmap$0$1 = false
-}
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2.prototype = new $h_O();
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2.prototype.constructor = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2;
-/** @constructor */
-function $h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2() {
-  /*<skip>*/
-}
-$h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2.prototype = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2.prototype;
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2.prototype.init___Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4 = (function($$outer) {
-  return this
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2.prototype.derive$macro$10$lzycompute__p1__Lupickle_Types$Reader = (function() {
-  if ((!this.bitmap$0$1)) {
-    this.derive$macro$10$1 = new $c_Lupickle_Types$Knot$Reader().init___Lupickle_Types$Knot$__F0($m_Lupickle_default$().Knot__Lupickle_Types$Knot$(), new $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1().init___Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2(this));
-    this.bitmap$0$1 = true
-  };
-  return this.derive$macro$10$1
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2.prototype.derive$macro$10__Lupickle_Types$Reader = (function() {
-  return ((!this.bitmap$0$1) ? this.derive$macro$10$lzycompute__p1__Lupickle_Types$Reader() : this.derive$macro$10$1)
-});
-var $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2 = new $TypeData().initClass({
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2: 0
-}, false, "francoiscabrol.travelmap.DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2", {
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2: 1,
-  O: 1
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2.prototype.$classData = $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2;
-/** @constructor */
 function $c_Lfrancoiscabrol_travelmap_Debug$() {
   $c_O.call(this)
 }
@@ -4035,18 +3879,85 @@ function $m_Lfrancoiscabrol_travelmap_Debug$() {
   return $n_Lfrancoiscabrol_travelmap_Debug$
 }
 /** @constructor */
+function $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1() {
+  $c_O.call(this);
+  this.derive$macro$1$1 = null;
+  this.$$outer$1 = null;
+  this.bitmap$0$1 = false
+}
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1.prototype = new $h_O();
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1.prototype.constructor = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1;
+/** @constructor */
+function $h_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1() {
+  /*<skip>*/
+}
+$h_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1.prototype = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1.prototype;
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1.prototype.init___Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1 = (function($$outer) {
+  if (($$outer === null)) {
+    throw $m_sjsr_package$().unwrapJavaScriptException__jl_Throwable__O(null)
+  } else {
+    this.$$outer$1 = $$outer
+  };
+  return this
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1.prototype.derive$macro$1$lzycompute__p1__Lupickle_Types$Reader = (function() {
+  if ((!this.bitmap$0$1)) {
+    this.derive$macro$1$1 = new $c_Lupickle_Types$Knot$Reader().init___Lupickle_Types$Knot$__F0($m_Lupickle_default$().Knot__Lupickle_Types$Knot$(), new $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1().init___Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1(this));
+    this.bitmap$0$1 = true
+  };
+  return this.derive$macro$1$1
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1.prototype.derive$macro$1__Lupickle_Types$Reader = (function() {
+  return ((!this.bitmap$0$1) ? this.derive$macro$1$lzycompute__p1__Lupickle_Types$Reader() : this.derive$macro$1$1)
+});
+var $d_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1 = new $TypeData().initClass({
+  Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1: 0
+}, false, "francoiscabrol.travelmap.StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1", {
+  Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1: 1,
+  O: 1
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1.prototype.$classData = $d_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1;
+/** @constructor */
+function $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2() {
+  $c_O.call(this);
+  this.derive$macro$10$1 = null;
+  this.bitmap$0$1 = false
+}
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2.prototype = new $h_O();
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2.prototype.constructor = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2;
+/** @constructor */
+function $h_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2() {
+  /*<skip>*/
+}
+$h_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2.prototype = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2.prototype;
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2.prototype.derive$macro$10$lzycompute__p1__Lupickle_Types$Reader = (function() {
+  if ((!this.bitmap$0$1)) {
+    this.derive$macro$10$1 = new $c_Lupickle_Types$Knot$Reader().init___Lupickle_Types$Knot$__F0($m_Lupickle_default$().Knot__Lupickle_Types$Knot$(), new $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1().init___Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2(this));
+    this.bitmap$0$1 = true
+  };
+  return this.derive$macro$10$1
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2.prototype.init___Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3 = (function($$outer) {
+  return this
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2.prototype.derive$macro$10__Lupickle_Types$Reader = (function() {
+  return ((!this.bitmap$0$1) ? this.derive$macro$10$lzycompute__p1__Lupickle_Types$Reader() : this.derive$macro$10$1)
+});
+var $d_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2 = new $TypeData().initClass({
+  Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2: 0
+}, false, "francoiscabrol.travelmap.StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2", {
+  Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2: 1,
+  O: 1
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2.prototype.$classData = $d_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2;
+/** @constructor */
 function $c_Lfrancoiscabrol_travelmap_components_MyTravelMap() {
   $c_O.call(this);
   this.francoiscabrol$travelmap$components$MyTravelMap$$places$f = null;
   this.zoomLevel$1 = 0;
   this.bearing$1 = 0;
   this.pitch$1 = 0;
-  this.francoiscabrol$travelmap$components$MyTravelMap$$activePlace$1 = null;
-  this.features$1 = null;
-  this.canvas$1 = null;
-  this.myTravelMap$1 = null;
-  this.map$1 = null;
-  this.cb$1 = null
+  this.francoiscabrol$travelmap$components$MyTravelMap$$activePlace$1 = null
 }
 $c_Lfrancoiscabrol_travelmap_components_MyTravelMap.prototype = new $h_O();
 $c_Lfrancoiscabrol_travelmap_components_MyTravelMap.prototype.constructor = $c_Lfrancoiscabrol_travelmap_components_MyTravelMap;
@@ -4055,44 +3966,164 @@ function $h_Lfrancoiscabrol_travelmap_components_MyTravelMap() {
   /*<skip>*/
 }
 $h_Lfrancoiscabrol_travelmap_components_MyTravelMap.prototype = $c_Lfrancoiscabrol_travelmap_components_MyTravelMap.prototype;
-$c_Lfrancoiscabrol_travelmap_components_MyTravelMap.prototype.francoiscabrol$travelmap$components$MyTravelMap$$setActivePlace__Lfrancoiscabrol_travelmap_Place__V = (function(place) {
-  var x = ("Set place: " + place);
-  var this$2 = $m_s_Console$();
-  var this$3 = $as_Ljava_io_PrintStream(this$2.outVar$2.v$1);
-  this$3.java$lang$JSConsoleBasedPrintStream$$printString__T__V((x + "\n"));
-  $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().getElementById(place.name$1);
+$c_Lfrancoiscabrol_travelmap_components_MyTravelMap.prototype.initialize__V = (function() {
+  var jsx$12 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag());
+  var jsx$11 = $m_Lscalatags_JsDom$all$().id__Lscalatags_generic_Attr().$$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("features", $m_Lscalatags_JsDom$all$().stringAttr$1);
+  var this$1 = $m_Lscalacss_ScalatagsCss$();
+  var s = $m_Lfrancoiscabrol_travelmap_components_Style$().features$3;
+  var jsx$10 = new $c_Lscalacss_ScalatagsJsDomImplicits$$anon$1().init___Lscalacss_ScalatagsJsDomImplicits__Lscalacss_internal_StyleA(this$1, s);
+  var this$8 = $m_Lscalatags_JsDom$all$();
+  var this$7 = this.francoiscabrol$travelmap$components$MyTravelMap$$places$f;
+  var f = (function(place$2) {
+    var place = $as_Lfrancoiscabrol_travelmap_Place(place$2);
+    var jsx$8 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag());
+    var jsx$7 = $m_Lscalatags_JsDom$all$().id__Lscalatags_generic_Attr().$$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair(place.id$1, $m_Lscalatags_JsDom$all$().stringAttr$1);
+    var this$2 = $m_Lscalacss_ScalatagsCss$();
+    var s$1 = $m_Lfrancoiscabrol_travelmap_components_Style$().section$3;
+    var jsx$6 = new $c_Lscalacss_ScalatagsJsDomImplicits$$anon$1().init___Lscalacss_ScalatagsJsDomImplicits__Lscalacss_internal_StyleA(this$2, s$1);
+    var jsx$5 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().h3__Lscalatags_generic_TypedTag());
+    $m_Lscalatags_JsDom$all$();
+    var v = place.name$1;
+    var jsx$4 = jsx$5.apply__sc_Seq__Lscalatags_JsDom$TypedTag(new $c_sjs_js_WrappedArray().init___sjs_js_Array([new $c_Lscalatags_JsDom$StringFrag().init___T(v)]));
+    var jsx$3 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag());
+    $m_Lscalatags_JsDom$all$();
+    var v$1 = place.description$1;
+    var jsx$2 = jsx$3.apply__sc_Seq__Lscalatags_JsDom$TypedTag(new $c_sjs_js_WrappedArray().init___sjs_js_Array([new $c_Lscalatags_JsDom$StringFrag().init___T(v$1)]));
+    var jsx$1 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().small__Lscalatags_generic_TypedTag());
+    $m_Lscalatags_JsDom$all$();
+    var v$2 = (place.duration$1 + " days");
+    return jsx$8.apply__sc_Seq__Lscalatags_JsDom$TypedTag(new $c_sjs_js_WrappedArray().init___sjs_js_Array([jsx$7, jsx$6, jsx$4, jsx$2, jsx$1.apply__sc_Seq__Lscalatags_JsDom$TypedTag(new $c_sjs_js_WrappedArray().init___sjs_js_Array([new $c_Lscalatags_JsDom$StringFrag().init___T(v$2)]))]))
+  });
+  var this$6 = $m_sci_List$();
+  var bf = this$6.ReusableCBFInstance$2;
+  if ((bf === $m_sci_List$().ReusableCBFInstance$2)) {
+    if ((this$7 === $m_sci_Nil$())) {
+      var jsx$9 = $m_sci_Nil$()
+    } else {
+      var arg1 = this$7.head__O();
+      var h = new $c_sci_$colon$colon().init___O__sci_List(f(arg1), $m_sci_Nil$());
+      var t = h;
+      var rest = $as_sci_List(this$7.tail__O());
+      while ((rest !== $m_sci_Nil$())) {
+        var arg1$1 = rest.head__O();
+        var nx = new $c_sci_$colon$colon().init___O__sci_List(f(arg1$1), $m_sci_Nil$());
+        t.tl$5 = nx;
+        t = nx;
+        rest = $as_sci_List(rest.tail__O())
+      };
+      var jsx$9 = h
+    }
+  } else {
+    var b = $s_sc_TraversableLike$class__builder$1__p0__sc_TraversableLike__scg_CanBuildFrom__scm_Builder(this$7, bf);
+    var these = this$7;
+    while ((!these.isEmpty__Z())) {
+      var arg1$2 = these.head__O();
+      b.$$plus$eq__O__scm_Builder(f(arg1$2));
+      these = $as_sci_List(these.tail__O())
+    };
+    var jsx$9 = b.result__O()
+  };
+  var xs = $as_sc_Seq(jsx$9);
+  var ev = $m_s_Predef$().singleton$und$less$colon$less$2;
+  var features = jsx$12.apply__sc_Seq__Lscalatags_JsDom$TypedTag(new $c_sjs_js_WrappedArray().init___sjs_js_Array([jsx$11, jsx$10, new $c_Lscalatags_JsDom$Cap$SeqFrag().init___Lscalatags_JsDom$Cap__sc_Seq__F1(this$8, xs, ev)])).render__Lorg_scalajs_dom_raw_Element();
+  var assumption = $uZ((features instanceof $g.HTMLDivElement));
+  if ((!assumption)) {
+    throw new $c_jl_AssertionError().init___O(("assumption failed: " + new $c_s_StringContext().init___sc_Seq(new $c_sjs_js_WrappedArray().init___sjs_js_Array(["The features div does not exists"])).s__sc_Seq__T($m_sci_Nil$())))
+  };
+  var jsx$14 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag());
+  var jsx$13 = $m_Lscalatags_JsDom$all$().id__Lscalatags_generic_Attr().$$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("map", $m_Lscalatags_JsDom$all$().stringAttr$1);
+  var this$10 = $m_Lscalacss_ScalatagsCss$();
+  var s$2 = $m_Lfrancoiscabrol_travelmap_components_Style$().map$3;
+  var canvas = jsx$14.apply__sc_Seq__Lscalatags_JsDom$TypedTag(new $c_sjs_js_WrappedArray().init___sjs_js_Array([jsx$13, new $c_Lscalacss_ScalatagsJsDomImplicits$$anon$1().init___Lscalacss_ScalatagsJsDomImplicits__Lscalacss_internal_StyleA(this$10, s$2)])).render__Lorg_scalajs_dom_raw_Element();
+  var jsx$17 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag());
+  var this$19 = $m_Lfrancoiscabrol_travelmap_components_Style$();
+  $m_Lscalacss_defaults_DefaultSettings$Dev$();
+  var s$3 = $m_Lscalacss_internal_StringRenderer$().defaultPretty__Lscalacss_internal_Renderer();
+  var r = new $c_Lscalacss_ScalatagsJsDomRenderer().init___Lscalacss_internal_Renderer(s$3);
+  $m_Lscalacss_defaults_DefaultSettings$Dev$();
+  var env = $m_Lscalacss_internal_Env$().empty$1;
+  var jsx$16 = $as_Lscalatags_generic_Modifier(this$19.cssRegister$2.render__Lscalacss_internal_Renderer__Lscalacss_internal_Env__O(r, env));
+  var this$20 = $m_Lscalatags_JsDom$all$();
+  var jsx$15 = new $c_Lscalatags_LowPriorityImplicits$bindNode().init___Lscalatags_LowPriorityImplicits__Lorg_scalajs_dom_raw_Node(this$20, features);
+  var this$21 = $m_Lscalatags_JsDom$all$();
+  var myTravelMap = jsx$17.apply__sc_Seq__Lscalatags_JsDom$TypedTag(new $c_sjs_js_WrappedArray().init___sjs_js_Array([jsx$16, jsx$15, new $c_Lscalatags_LowPriorityImplicits$bindNode().init___Lscalatags_LowPriorityImplicits__Lorg_scalajs_dom_raw_Node(this$21, canvas)]));
+  $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().body.appendChild(myTravelMap.render__Lorg_scalajs_dom_raw_Element());
+  var height = $uD($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().innerHeight);
+  var lastElemId = (((-1) + $uI(features.children.length)) | 0);
+  var elem = features.children.item(lastElemId);
+  elem.setAttribute("style", (new $c_s_StringContext().init___sc_Seq(new $c_sjs_js_WrappedArray().init___sjs_js_Array(["margin-bottom: ", ""])).s__sc_Seq__T(new $c_sjs_js_WrappedArray().init___sjs_js_Array([height])) + "px"));
+  var jsx$19 = $g.mapboxgl.Map;
+  var s$4 = $as_T(canvas.id);
+  var jsx$18 = this.francoiscabrol$travelmap$components$MyTravelMap$$activePlace$1.latLng__sjs_js_Array();
+  var value = this.zoomLevel$1;
+  var value$1 = this.bearing$1;
+  var value$2 = this.pitch$1;
+  var map = new jsx$19({
+    "container": s$4,
+    "style": "mapbox://styles/mapbox/streets-v9",
+    "center": jsx$18,
+    "zoom": value,
+    "bearing": value$1,
+    "pitch": value$2,
+    "maxBounds": [[(-180), (-85)], [180, 85]]
+  });
+  map.on("load", this.mapOnLoad__p1__Lfrancoiscabrol_mapboxgl$Map__Lorg_scalajs_dom_raw_HTMLDivElement__sjs_js_Function(map, features));
+  features.onscroll = (function(f$1) {
+    return (function(arg1$3) {
+      return f$1.apply__O__O(arg1$3)
+    })
+  })(new $c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$initialize$2().init___Lfrancoiscabrol_travelmap_components_MyTravelMap__Lorg_scalajs_dom_raw_HTMLDivElement__Lfrancoiscabrol_mapboxgl$Map(this, features, map))
+});
+$c_Lfrancoiscabrol_travelmap_components_MyTravelMap.prototype.francoiscabrol$travelmap$components$MyTravelMap$$isPlaceOnScreen__Lfrancoiscabrol_travelmap_Place__Lorg_scalajs_dom_raw_HTMLDivElement__Z = (function(place, features) {
+  var elem = $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().getElementById(place.id$1);
+  var bounds = elem.getBoundingClientRect();
+  $uD(bounds.top);
+  $uD(features.offsetTop);
+  return ($uD(bounds.top) >= 0)
+});
+$c_Lfrancoiscabrol_travelmap_components_MyTravelMap.prototype.mapOnLoad__p1__Lfrancoiscabrol_mapboxgl$Map__Lorg_scalajs_dom_raw_HTMLDivElement__sjs_js_Function = (function(map, features) {
+  return (function(f) {
+    return (function() {
+      return f.apply__O()
+    })
+  })(new $c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1().init___Lfrancoiscabrol_travelmap_components_MyTravelMap__Lfrancoiscabrol_mapboxgl$Map(this, map))
+});
+$c_Lfrancoiscabrol_travelmap_components_MyTravelMap.prototype.francoiscabrol$travelmap$components$MyTravelMap$$setActivePlace__Lfrancoiscabrol_travelmap_Place__Lfrancoiscabrol_mapboxgl$Map__V = (function(place, map) {
+  $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().getElementById(place.id$1);
   var x$2 = this.francoiscabrol$travelmap$components$MyTravelMap$$activePlace$1;
   if ((!((place === null) ? (x$2 === null) : place.equals__O__Z(x$2)))) {
-    var jsx$2 = this.map$1;
     var value = this.bearing$1;
     var jsx$1 = place.latLng__sjs_js_Array();
     var value$1 = this.zoomLevel$1;
     var value$2 = this.pitch$1;
-    jsx$2.flyTo({
+    var options = {
       "bearing": value,
       "center": jsx$1,
       "zoom": value$1,
       "speed": 0.7,
       "pitch": value$2
-    });
-    $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().getElementById(place.pointId__T()).classList.add($m_Lfrancoiscabrol_travelmap_components_Style$().activePoint$3.htmlClass$1);
-    $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().getElementById(this.francoiscabrol$travelmap$components$MyTravelMap$$activePlace$1.pointId__T()).classList.remove($m_Lfrancoiscabrol_travelmap_components_Style$().activePoint$3.htmlClass$1);
-    $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().getElementById(place.name$1).classList.add($m_Lfrancoiscabrol_travelmap_components_Style$().active$3.htmlClass$1);
-    $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().getElementById(this.francoiscabrol$travelmap$components$MyTravelMap$$activePlace$1.name$1).classList.remove($m_Lfrancoiscabrol_travelmap_components_Style$().active$3.htmlClass$1);
+    };
+    if ((((place.lat$1 > 0) && (this.francoiscabrol$travelmap$components$MyTravelMap$$activePlace$1.lat$1 < 0)) || ((place.lat$1 < 0) && (this.francoiscabrol$travelmap$components$MyTravelMap$$activePlace$1.lat$1 > 0)))) {
+      map.jumpTo(options)
+    } else {
+      map.flyTo(options)
+    };
+    this.setActivePlaceInTheList__p1__Lfrancoiscabrol_travelmap_Place__V(place);
     this.francoiscabrol$travelmap$components$MyTravelMap$$activePlace$1 = place
   }
 });
 $c_Lfrancoiscabrol_travelmap_components_MyTravelMap.prototype.francoiscabrol$travelmap$components$MyTravelMap$$initActivePlace__Lfrancoiscabrol_travelmap_Place__V = (function(place) {
   var point = $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().getElementById(place.pointId__T());
   point.classList.add($m_Lfrancoiscabrol_travelmap_components_Style$().activePoint$3.htmlClass$1);
-  var elem = $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().getElementById(place.name$1);
+  var elem = $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().getElementById(place.id$1);
   elem.classList.add($m_Lfrancoiscabrol_travelmap_components_Style$().active$3.htmlClass$1);
   elem.scrollIntoView()
 });
-$c_Lfrancoiscabrol_travelmap_components_MyTravelMap.prototype.francoiscabrol$travelmap$components$MyTravelMap$$isPlaceOnScreen__Lfrancoiscabrol_travelmap_Place__Z = (function(place) {
-  var elem = $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().getElementById(place.name$1);
-  var bounds = elem.getBoundingClientRect();
-  return (($uD(bounds.top) < $uI(this.features$1.scrollHeight)) && (((-25.0) + $uD(bounds.bottom)) > 0))
+$c_Lfrancoiscabrol_travelmap_components_MyTravelMap.prototype.setActivePlaceInTheList__p1__Lfrancoiscabrol_travelmap_Place__V = (function(place) {
+  $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().getElementById(place.pointId__T()).classList.add($m_Lfrancoiscabrol_travelmap_components_Style$().activePoint$3.htmlClass$1);
+  $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().getElementById(this.francoiscabrol$travelmap$components$MyTravelMap$$activePlace$1.pointId__T()).classList.remove($m_Lfrancoiscabrol_travelmap_components_Style$().activePoint$3.htmlClass$1);
+  $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().getElementById(place.id$1).classList.add($m_Lfrancoiscabrol_travelmap_components_Style$().active$3.htmlClass$1);
+  $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().getElementById(this.francoiscabrol$travelmap$components$MyTravelMap$$activePlace$1.id$1).classList.remove($m_Lfrancoiscabrol_travelmap_components_Style$().active$3.htmlClass$1)
 });
 $c_Lfrancoiscabrol_travelmap_components_MyTravelMap.prototype.init___sci_List = (function(places) {
   this.francoiscabrol$travelmap$components$MyTravelMap$$places$f = places;
@@ -4102,114 +4133,6 @@ $c_Lfrancoiscabrol_travelmap_components_MyTravelMap.prototype.init___sci_List = 
   this.pitch$1 = 0;
   $g.mapboxgl.accessToken = "pk.eyJ1IjoiZnJhY2EiLCJhIjoiY2l2dTF1NzJvMDdiejJvcXZhdjkzeTNhciJ9.LhsRNjlzDyt0i_SxkaoaoA";
   this.francoiscabrol$travelmap$components$MyTravelMap$$activePlace$1 = $as_Lfrancoiscabrol_travelmap_Place($s_sc_LinearSeqOptimized$class__last__sc_LinearSeqOptimized__O(places));
-  var jsx$10 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag());
-  var jsx$9 = $m_Lscalatags_JsDom$all$().id__Lscalatags_generic_Attr().$$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("features", $m_Lscalatags_JsDom$all$().stringAttr$1);
-  var this$2 = $m_Lscalacss_ScalatagsCss$();
-  var s = $m_Lfrancoiscabrol_travelmap_components_Style$().features$3;
-  var jsx$8 = new $c_Lscalacss_ScalatagsJsDomImplicits$$anon$1().init___Lscalacss_ScalatagsJsDomImplicits__Lscalacss_internal_StyleA(this$2, s);
-  var this$7 = $m_Lscalatags_JsDom$all$();
-  var f = (function(place$2) {
-    var place = $as_Lfrancoiscabrol_travelmap_Place(place$2);
-    var jsx$6 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag());
-    var jsx$5 = $m_Lscalatags_JsDom$all$().id__Lscalatags_generic_Attr().$$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair(place.name$1, $m_Lscalatags_JsDom$all$().stringAttr$1);
-    var this$3 = $m_Lscalacss_ScalatagsCss$();
-    var s$1 = $m_Lfrancoiscabrol_travelmap_components_Style$().section$3;
-    var jsx$4 = new $c_Lscalacss_ScalatagsJsDomImplicits$$anon$1().init___Lscalacss_ScalatagsJsDomImplicits__Lscalacss_internal_StyleA(this$3, s$1);
-    var jsx$3 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().h3__Lscalatags_generic_TypedTag());
-    $m_Lscalatags_JsDom$all$();
-    var v = place.name$1;
-    var jsx$2 = jsx$3.apply__sc_Seq__Lscalatags_JsDom$TypedTag(new $c_sjs_js_WrappedArray().init___sjs_js_Array([new $c_Lscalatags_JsDom$StringFrag().init___T(v)]));
-    var jsx$1 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag());
-    $m_Lscalatags_JsDom$all$();
-    var v$1 = place.description$1;
-    return jsx$6.apply__sc_Seq__Lscalatags_JsDom$TypedTag(new $c_sjs_js_WrappedArray().init___sjs_js_Array([jsx$5, jsx$4, jsx$2, jsx$1.apply__sc_Seq__Lscalatags_JsDom$TypedTag(new $c_sjs_js_WrappedArray().init___sjs_js_Array([new $c_Lscalatags_JsDom$StringFrag().init___T(v$1)]))]))
-  });
-  var this$6 = $m_sci_List$();
-  var bf = this$6.ReusableCBFInstance$2;
-  if ((bf === $m_sci_List$().ReusableCBFInstance$2)) {
-    if ((places === $m_sci_Nil$())) {
-      var jsx$7 = $m_sci_Nil$()
-    } else {
-      var arg1 = places.head__O();
-      var h = new $c_sci_$colon$colon().init___O__sci_List(f(arg1), $m_sci_Nil$());
-      var t = h;
-      var rest = $as_sci_List(places.tail__O());
-      while ((rest !== $m_sci_Nil$())) {
-        var arg1$1 = rest.head__O();
-        var nx = new $c_sci_$colon$colon().init___O__sci_List(f(arg1$1), $m_sci_Nil$());
-        t.tl$5 = nx;
-        t = nx;
-        rest = $as_sci_List(rest.tail__O())
-      };
-      var jsx$7 = h
-    }
-  } else {
-    var b = $s_sc_TraversableLike$class__builder$1__p0__sc_TraversableLike__scg_CanBuildFrom__scm_Builder(places, bf);
-    var these = places;
-    while ((!these.isEmpty__Z())) {
-      var arg1$2 = these.head__O();
-      b.$$plus$eq__O__scm_Builder(f(arg1$2));
-      these = $as_sci_List(these.tail__O())
-    };
-    var jsx$7 = b.result__O()
-  };
-  var xs = $as_sc_Seq(jsx$7);
-  var ev = $m_s_Predef$().singleton$und$less$colon$less$2;
-  this.features$1 = jsx$10.apply__sc_Seq__Lscalatags_JsDom$TypedTag(new $c_sjs_js_WrappedArray().init___sjs_js_Array([jsx$9, jsx$8, new $c_Lscalatags_JsDom$Cap$SeqFrag().init___Lscalatags_JsDom$Cap__sc_Seq__F1(this$7, xs, ev)])).render__Lorg_scalajs_dom_raw_Element();
-  var assumption = $uZ((this.features$1 instanceof $g.HTMLDivElement));
-  if ((!assumption)) {
-    throw new $c_jl_AssertionError().init___O(("assumption failed: " + new $c_s_StringContext().init___sc_Seq(new $c_sjs_js_WrappedArray().init___sjs_js_Array(["The features div does not exists"])).s__sc_Seq__T($m_sci_Nil$())))
-  };
-  var jsx$12 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag());
-  var jsx$11 = $m_Lscalatags_JsDom$all$().id__Lscalatags_generic_Attr().$$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("map", $m_Lscalatags_JsDom$all$().stringAttr$1);
-  var this$9 = $m_Lscalacss_ScalatagsCss$();
-  var s$2 = $m_Lfrancoiscabrol_travelmap_components_Style$().map$3;
-  this.canvas$1 = jsx$12.apply__sc_Seq__Lscalatags_JsDom$TypedTag(new $c_sjs_js_WrappedArray().init___sjs_js_Array([jsx$11, new $c_Lscalacss_ScalatagsJsDomImplicits$$anon$1().init___Lscalacss_ScalatagsJsDomImplicits__Lscalacss_internal_StyleA(this$9, s$2)])).render__Lorg_scalajs_dom_raw_Element();
-  var jsx$15 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag());
-  var this$18 = $m_Lfrancoiscabrol_travelmap_components_Style$();
-  $m_Lscalacss_defaults_DefaultSettings$Dev$();
-  var s$3 = $m_Lscalacss_internal_StringRenderer$().defaultPretty__Lscalacss_internal_Renderer();
-  var r = new $c_Lscalacss_ScalatagsJsDomRenderer().init___Lscalacss_internal_Renderer(s$3);
-  $m_Lscalacss_defaults_DefaultSettings$Dev$();
-  var env = $m_Lscalacss_internal_Env$().empty$1;
-  var jsx$14 = $as_Lscalatags_generic_Modifier(this$18.cssRegister$2.render__Lscalacss_internal_Renderer__Lscalacss_internal_Env__O(r, env));
-  var this$19 = $m_Lscalatags_JsDom$all$();
-  var e = this.features$1;
-  var jsx$13 = new $c_Lscalatags_LowPriorityImplicits$bindNode().init___Lscalatags_LowPriorityImplicits__Lorg_scalajs_dom_raw_Node(this$19, e);
-  var this$20 = $m_Lscalatags_JsDom$all$();
-  var e$1 = this.canvas$1;
-  this.myTravelMap$1 = jsx$15.apply__sc_Seq__Lscalatags_JsDom$TypedTag(new $c_sjs_js_WrappedArray().init___sjs_js_Array([jsx$14, jsx$13, new $c_Lscalatags_LowPriorityImplicits$bindNode().init___Lscalatags_LowPriorityImplicits__Lorg_scalajs_dom_raw_Node(this$20, e$1)]));
-  $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().body.appendChild(this.myTravelMap$1.render__Lorg_scalajs_dom_raw_Element());
-  var height = $uD($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().innerHeight);
-  var lastElemId = (((-1) + $uI(this.features$1.children.length)) | 0);
-  var elem = this.features$1.children.item(lastElemId);
-  elem.setAttribute("style", (new $c_s_StringContext().init___sc_Seq(new $c_sjs_js_WrappedArray().init___sjs_js_Array(["margin-bottom: ", ""])).s__sc_Seq__T(new $c_sjs_js_WrappedArray().init___sjs_js_Array([height])) + "px"));
-  var jsx$18 = $g.mapboxgl.Map;
-  var s$4 = $as_T(this.canvas$1.id);
-  var jsx$17 = this.francoiscabrol$travelmap$components$MyTravelMap$$activePlace$1.latLng__sjs_js_Array();
-  var value = this.zoomLevel$1;
-  var value$1 = this.bearing$1;
-  var value$2 = this.pitch$1;
-  var jsx$16 = new jsx$18({
-    "container": s$4,
-    "style": "mapbox://styles/mapbox/streets-v9",
-    "center": jsx$17,
-    "zoom": value,
-    "bearing": value$1,
-    "pitch": value$2
-  });
-  this.map$1 = jsx$16;
-  this.features$1.onscroll = (function(f$1) {
-    return (function(arg1$3) {
-      return f$1.apply__O__O(arg1$3)
-    })
-  })(new $c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$4().init___Lfrancoiscabrol_travelmap_components_MyTravelMap(this));
-  this.cb$1 = (function(f$2) {
-    return (function() {
-      return f$2.apply__O()
-    })
-  })(new $c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$1().init___Lfrancoiscabrol_travelmap_components_MyTravelMap(this));
-  this.map$1.on("load", this.cb$1);
   return this
 });
 var $d_Lfrancoiscabrol_travelmap_components_MyTravelMap = new $TypeData().initClass({
@@ -10234,6 +10157,574 @@ $c_Lscalacss_internal_CanIUse$.prototype.intrinsicWidth__sci_Map = (function() {
   var jsx$1 = new $c_T2().init___O__O(self$14, y$14);
   var self$15 = $m_Lscalacss_internal_CanIUse$Agent$().Samsung$1;
   var array$15 = [$m_Lscalacss_internal_CanIUse$Support$FullX$()];
+  if (($uI(array$15.length) === 0)) {
+    var y$15 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$15 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$15 = 0;
+    var len$15 = $uI(array$15.length);
+    while ((i$15 < len$15)) {
+      var index$15 = i$15;
+      var arg1$15 = array$15[index$15];
+      b$15.$$plus$eq__O__scm_SetBuilder(arg1$15);
+      i$15 = ((1 + i$15) | 0)
+    };
+    var y$15 = b$15.elems$1
+  };
+  var array$16 = [jsx$15, jsx$14, jsx$13, jsx$12, jsx$11, jsx$10, jsx$9, jsx$8, jsx$7, jsx$6, jsx$5, jsx$4, jsx$3, jsx$2, jsx$1, new $c_T2().init___O__O(self$15, y$15)];
+  var this$50 = new $c_scm_MapBuilder().init___sc_GenMap($m_sci_Map$EmptyMap$());
+  var i$16 = 0;
+  var len$16 = $uI(array$16.length);
+  while ((i$16 < len$16)) {
+    var index$16 = i$16;
+    var arg1$16 = array$16[index$16];
+    this$50.$$plus$eq__T2__scm_MapBuilder($as_T2(arg1$16));
+    i$16 = ((1 + i$16) | 0)
+  };
+  return $as_sci_Map(this$50.elems$1)
+});
+$c_Lscalacss_internal_CanIUse$.prototype.textJustify__sci_Map = (function() {
+  var self = $m_Lscalacss_internal_CanIUse$Agent$().AndroidBrowser$1;
+  var array = [$m_Lscalacss_internal_CanIUse$Support$Unsupported$()];
+  if (($uI(array.length) === 0)) {
+    var y = $m_sci_Set$EmptySet$()
+  } else {
+    var b = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i = 0;
+    var len = $uI(array.length);
+    while ((i < len)) {
+      var index = i;
+      var arg1 = array[index];
+      b.$$plus$eq__O__scm_SetBuilder(arg1);
+      i = ((1 + i) | 0)
+    };
+    var y = b.elems$1
+  };
+  var jsx$15 = new $c_T2().init___O__O(self, y);
+  var self$1 = $m_Lscalacss_internal_CanIUse$Agent$().AndroidChrome$1;
+  var array$1 = [$m_Lscalacss_internal_CanIUse$Support$Unsupported$()];
+  if (($uI(array$1.length) === 0)) {
+    var y$1 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$1 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$1 = 0;
+    var len$1 = $uI(array$1.length);
+    while ((i$1 < len$1)) {
+      var index$1 = i$1;
+      var arg1$1 = array$1[index$1];
+      b$1.$$plus$eq__O__scm_SetBuilder(arg1$1);
+      i$1 = ((1 + i$1) | 0)
+    };
+    var y$1 = b$1.elems$1
+  };
+  var jsx$14 = new $c_T2().init___O__O(self$1, y$1);
+  var self$2 = $m_Lscalacss_internal_CanIUse$Agent$().AndroidFirefox$1;
+  var array$2 = [$m_Lscalacss_internal_CanIUse$Support$Unsupported$()];
+  if (($uI(array$2.length) === 0)) {
+    var y$2 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$2 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$2 = 0;
+    var len$2 = $uI(array$2.length);
+    while ((i$2 < len$2)) {
+      var index$2 = i$2;
+      var arg1$2 = array$2[index$2];
+      b$2.$$plus$eq__O__scm_SetBuilder(arg1$2);
+      i$2 = ((1 + i$2) | 0)
+    };
+    var y$2 = b$2.elems$1
+  };
+  var jsx$13 = new $c_T2().init___O__O(self$2, y$2);
+  var self$3 = $m_Lscalacss_internal_CanIUse$Agent$().AndroidUC$1;
+  var array$3 = [$m_Lscalacss_internal_CanIUse$Support$Unsupported$()];
+  if (($uI(array$3.length) === 0)) {
+    var y$3 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$3 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$3 = 0;
+    var len$3 = $uI(array$3.length);
+    while ((i$3 < len$3)) {
+      var index$3 = i$3;
+      var arg1$3 = array$3[index$3];
+      b$3.$$plus$eq__O__scm_SetBuilder(arg1$3);
+      i$3 = ((1 + i$3) | 0)
+    };
+    var y$3 = b$3.elems$1
+  };
+  var jsx$12 = new $c_T2().init___O__O(self$3, y$3);
+  var self$4 = $m_Lscalacss_internal_CanIUse$Agent$().BlackberryBrowser$1;
+  var array$4 = [$m_Lscalacss_internal_CanIUse$Support$Unsupported$()];
+  if (($uI(array$4.length) === 0)) {
+    var y$4 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$4 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$4 = 0;
+    var len$4 = $uI(array$4.length);
+    while ((i$4 < len$4)) {
+      var index$4 = i$4;
+      var arg1$4 = array$4[index$4];
+      b$4.$$plus$eq__O__scm_SetBuilder(arg1$4);
+      i$4 = ((1 + i$4) | 0)
+    };
+    var y$4 = b$4.elems$1
+  };
+  var jsx$11 = new $c_T2().init___O__O(self$4, y$4);
+  var self$5 = $m_Lscalacss_internal_CanIUse$Agent$().Chrome$1;
+  var array$5 = [$m_Lscalacss_internal_CanIUse$Support$Unsupported$()];
+  if (($uI(array$5.length) === 0)) {
+    var y$5 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$5 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$5 = 0;
+    var len$5 = $uI(array$5.length);
+    while ((i$5 < len$5)) {
+      var index$5 = i$5;
+      var arg1$5 = array$5[index$5];
+      b$5.$$plus$eq__O__scm_SetBuilder(arg1$5);
+      i$5 = ((1 + i$5) | 0)
+    };
+    var y$5 = b$5.elems$1
+  };
+  var jsx$10 = new $c_T2().init___O__O(self$5, y$5);
+  var self$6 = $m_Lscalacss_internal_CanIUse$Agent$().Edge$1;
+  var array$6 = [$m_Lscalacss_internal_CanIUse$Support$Partial$()];
+  if (($uI(array$6.length) === 0)) {
+    var y$6 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$6 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$6 = 0;
+    var len$6 = $uI(array$6.length);
+    while ((i$6 < len$6)) {
+      var index$6 = i$6;
+      var arg1$6 = array$6[index$6];
+      b$6.$$plus$eq__O__scm_SetBuilder(arg1$6);
+      i$6 = ((1 + i$6) | 0)
+    };
+    var y$6 = b$6.elems$1
+  };
+  var jsx$9 = new $c_T2().init___O__O(self$6, y$6);
+  var self$7 = $m_Lscalacss_internal_CanIUse$Agent$().Firefox$1;
+  var array$7 = [$m_Lscalacss_internal_CanIUse$Support$Unsupported$(), $m_Lscalacss_internal_CanIUse$Support$Unknown$()];
+  if (($uI(array$7.length) === 0)) {
+    var y$7 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$7 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$7 = 0;
+    var len$7 = $uI(array$7.length);
+    while ((i$7 < len$7)) {
+      var index$7 = i$7;
+      var arg1$7 = array$7[index$7];
+      b$7.$$plus$eq__O__scm_SetBuilder(arg1$7);
+      i$7 = ((1 + i$7) | 0)
+    };
+    var y$7 = b$7.elems$1
+  };
+  var jsx$8 = new $c_T2().init___O__O(self$7, y$7);
+  var self$8 = $m_Lscalacss_internal_CanIUse$Agent$().IE$1;
+  var array$8 = [$m_Lscalacss_internal_CanIUse$Support$Unknown$(), $m_Lscalacss_internal_CanIUse$Support$Partial$()];
+  if (($uI(array$8.length) === 0)) {
+    var y$8 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$8 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$8 = 0;
+    var len$8 = $uI(array$8.length);
+    while ((i$8 < len$8)) {
+      var index$8 = i$8;
+      var arg1$8 = array$8[index$8];
+      b$8.$$plus$eq__O__scm_SetBuilder(arg1$8);
+      i$8 = ((1 + i$8) | 0)
+    };
+    var y$8 = b$8.elems$1
+  };
+  var jsx$7 = new $c_T2().init___O__O(self$8, y$8);
+  var self$9 = $m_Lscalacss_internal_CanIUse$Agent$().IEMobile$1;
+  var array$9 = [$m_Lscalacss_internal_CanIUse$Support$Partial$()];
+  if (($uI(array$9.length) === 0)) {
+    var y$9 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$9 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$9 = 0;
+    var len$9 = $uI(array$9.length);
+    while ((i$9 < len$9)) {
+      var index$9 = i$9;
+      var arg1$9 = array$9[index$9];
+      b$9.$$plus$eq__O__scm_SetBuilder(arg1$9);
+      i$9 = ((1 + i$9) | 0)
+    };
+    var y$9 = b$9.elems$1
+  };
+  var jsx$6 = new $c_T2().init___O__O(self$9, y$9);
+  var self$10 = $m_Lscalacss_internal_CanIUse$Agent$().IOSSafari$1;
+  var array$10 = [$m_Lscalacss_internal_CanIUse$Support$Unsupported$()];
+  if (($uI(array$10.length) === 0)) {
+    var y$10 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$10 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$10 = 0;
+    var len$10 = $uI(array$10.length);
+    while ((i$10 < len$10)) {
+      var index$10 = i$10;
+      var arg1$10 = array$10[index$10];
+      b$10.$$plus$eq__O__scm_SetBuilder(arg1$10);
+      i$10 = ((1 + i$10) | 0)
+    };
+    var y$10 = b$10.elems$1
+  };
+  var jsx$5 = new $c_T2().init___O__O(self$10, y$10);
+  var self$11 = $m_Lscalacss_internal_CanIUse$Agent$().Opera$1;
+  var array$11 = [$m_Lscalacss_internal_CanIUse$Support$Unsupported$()];
+  if (($uI(array$11.length) === 0)) {
+    var y$11 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$11 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$11 = 0;
+    var len$11 = $uI(array$11.length);
+    while ((i$11 < len$11)) {
+      var index$11 = i$11;
+      var arg1$11 = array$11[index$11];
+      b$11.$$plus$eq__O__scm_SetBuilder(arg1$11);
+      i$11 = ((1 + i$11) | 0)
+    };
+    var y$11 = b$11.elems$1
+  };
+  var jsx$4 = new $c_T2().init___O__O(self$11, y$11);
+  var self$12 = $m_Lscalacss_internal_CanIUse$Agent$().OperaMini$1;
+  var array$12 = [$m_Lscalacss_internal_CanIUse$Support$Unsupported$()];
+  if (($uI(array$12.length) === 0)) {
+    var y$12 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$12 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$12 = 0;
+    var len$12 = $uI(array$12.length);
+    while ((i$12 < len$12)) {
+      var index$12 = i$12;
+      var arg1$12 = array$12[index$12];
+      b$12.$$plus$eq__O__scm_SetBuilder(arg1$12);
+      i$12 = ((1 + i$12) | 0)
+    };
+    var y$12 = b$12.elems$1
+  };
+  var jsx$3 = new $c_T2().init___O__O(self$12, y$12);
+  var self$13 = $m_Lscalacss_internal_CanIUse$Agent$().OperaMobile$1;
+  var array$13 = [$m_Lscalacss_internal_CanIUse$Support$Unsupported$()];
+  if (($uI(array$13.length) === 0)) {
+    var y$13 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$13 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$13 = 0;
+    var len$13 = $uI(array$13.length);
+    while ((i$13 < len$13)) {
+      var index$13 = i$13;
+      var arg1$13 = array$13[index$13];
+      b$13.$$plus$eq__O__scm_SetBuilder(arg1$13);
+      i$13 = ((1 + i$13) | 0)
+    };
+    var y$13 = b$13.elems$1
+  };
+  var jsx$2 = new $c_T2().init___O__O(self$13, y$13);
+  var self$14 = $m_Lscalacss_internal_CanIUse$Agent$().Safari$1;
+  var array$14 = [$m_Lscalacss_internal_CanIUse$Support$Unsupported$()];
+  if (($uI(array$14.length) === 0)) {
+    var y$14 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$14 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$14 = 0;
+    var len$14 = $uI(array$14.length);
+    while ((i$14 < len$14)) {
+      var index$14 = i$14;
+      var arg1$14 = array$14[index$14];
+      b$14.$$plus$eq__O__scm_SetBuilder(arg1$14);
+      i$14 = ((1 + i$14) | 0)
+    };
+    var y$14 = b$14.elems$1
+  };
+  var jsx$1 = new $c_T2().init___O__O(self$14, y$14);
+  var self$15 = $m_Lscalacss_internal_CanIUse$Agent$().Samsung$1;
+  var array$15 = [$m_Lscalacss_internal_CanIUse$Support$Unsupported$()];
+  if (($uI(array$15.length) === 0)) {
+    var y$15 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$15 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$15 = 0;
+    var len$15 = $uI(array$15.length);
+    while ((i$15 < len$15)) {
+      var index$15 = i$15;
+      var arg1$15 = array$15[index$15];
+      b$15.$$plus$eq__O__scm_SetBuilder(arg1$15);
+      i$15 = ((1 + i$15) | 0)
+    };
+    var y$15 = b$15.elems$1
+  };
+  var array$16 = [jsx$15, jsx$14, jsx$13, jsx$12, jsx$11, jsx$10, jsx$9, jsx$8, jsx$7, jsx$6, jsx$5, jsx$4, jsx$3, jsx$2, jsx$1, new $c_T2().init___O__O(self$15, y$15)];
+  var this$50 = new $c_scm_MapBuilder().init___sc_GenMap($m_sci_Map$EmptyMap$());
+  var i$16 = 0;
+  var len$16 = $uI(array$16.length);
+  while ((i$16 < len$16)) {
+    var index$16 = i$16;
+    var arg1$16 = array$16[index$16];
+    this$50.$$plus$eq__T2__scm_MapBuilder($as_T2(arg1$16));
+    i$16 = ((1 + i$16) | 0)
+  };
+  return $as_sci_Map(this$50.elems$1)
+});
+$c_Lscalacss_internal_CanIUse$.prototype.logicalProps__sci_Map = (function() {
+  var self = $m_Lscalacss_internal_CanIUse$Agent$().AndroidBrowser$1;
+  var array = [$m_Lscalacss_internal_CanIUse$Support$PartialX$()];
+  if (($uI(array.length) === 0)) {
+    var y = $m_sci_Set$EmptySet$()
+  } else {
+    var b = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i = 0;
+    var len = $uI(array.length);
+    while ((i < len)) {
+      var index = i;
+      var arg1 = array[index];
+      b.$$plus$eq__O__scm_SetBuilder(arg1);
+      i = ((1 + i) | 0)
+    };
+    var y = b.elems$1
+  };
+  var jsx$15 = new $c_T2().init___O__O(self, y);
+  var self$1 = $m_Lscalacss_internal_CanIUse$Agent$().AndroidChrome$1;
+  var array$1 = [$m_Lscalacss_internal_CanIUse$Support$PartialX$()];
+  if (($uI(array$1.length) === 0)) {
+    var y$1 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$1 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$1 = 0;
+    var len$1 = $uI(array$1.length);
+    while ((i$1 < len$1)) {
+      var index$1 = i$1;
+      var arg1$1 = array$1[index$1];
+      b$1.$$plus$eq__O__scm_SetBuilder(arg1$1);
+      i$1 = ((1 + i$1) | 0)
+    };
+    var y$1 = b$1.elems$1
+  };
+  var jsx$14 = new $c_T2().init___O__O(self$1, y$1);
+  var self$2 = $m_Lscalacss_internal_CanIUse$Agent$().AndroidFirefox$1;
+  var array$2 = [$m_Lscalacss_internal_CanIUse$Support$PartialX$()];
+  if (($uI(array$2.length) === 0)) {
+    var y$2 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$2 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$2 = 0;
+    var len$2 = $uI(array$2.length);
+    while ((i$2 < len$2)) {
+      var index$2 = i$2;
+      var arg1$2 = array$2[index$2];
+      b$2.$$plus$eq__O__scm_SetBuilder(arg1$2);
+      i$2 = ((1 + i$2) | 0)
+    };
+    var y$2 = b$2.elems$1
+  };
+  var jsx$13 = new $c_T2().init___O__O(self$2, y$2);
+  var self$3 = $m_Lscalacss_internal_CanIUse$Agent$().AndroidUC$1;
+  var array$3 = [$m_Lscalacss_internal_CanIUse$Support$PartialX$()];
+  if (($uI(array$3.length) === 0)) {
+    var y$3 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$3 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$3 = 0;
+    var len$3 = $uI(array$3.length);
+    while ((i$3 < len$3)) {
+      var index$3 = i$3;
+      var arg1$3 = array$3[index$3];
+      b$3.$$plus$eq__O__scm_SetBuilder(arg1$3);
+      i$3 = ((1 + i$3) | 0)
+    };
+    var y$3 = b$3.elems$1
+  };
+  var jsx$12 = new $c_T2().init___O__O(self$3, y$3);
+  var self$4 = $m_Lscalacss_internal_CanIUse$Agent$().BlackberryBrowser$1;
+  var array$4 = [$m_Lscalacss_internal_CanIUse$Support$PartialX$()];
+  if (($uI(array$4.length) === 0)) {
+    var y$4 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$4 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$4 = 0;
+    var len$4 = $uI(array$4.length);
+    while ((i$4 < len$4)) {
+      var index$4 = i$4;
+      var arg1$4 = array$4[index$4];
+      b$4.$$plus$eq__O__scm_SetBuilder(arg1$4);
+      i$4 = ((1 + i$4) | 0)
+    };
+    var y$4 = b$4.elems$1
+  };
+  var jsx$11 = new $c_T2().init___O__O(self$4, y$4);
+  var self$5 = $m_Lscalacss_internal_CanIUse$Agent$().Chrome$1;
+  var array$5 = [$m_Lscalacss_internal_CanIUse$Support$PartialX$()];
+  if (($uI(array$5.length) === 0)) {
+    var y$5 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$5 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$5 = 0;
+    var len$5 = $uI(array$5.length);
+    while ((i$5 < len$5)) {
+      var index$5 = i$5;
+      var arg1$5 = array$5[index$5];
+      b$5.$$plus$eq__O__scm_SetBuilder(arg1$5);
+      i$5 = ((1 + i$5) | 0)
+    };
+    var y$5 = b$5.elems$1
+  };
+  var jsx$10 = new $c_T2().init___O__O(self$5, y$5);
+  var self$6 = $m_Lscalacss_internal_CanIUse$Agent$().Edge$1;
+  var array$6 = [$m_Lscalacss_internal_CanIUse$Support$Unsupported$()];
+  if (($uI(array$6.length) === 0)) {
+    var y$6 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$6 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$6 = 0;
+    var len$6 = $uI(array$6.length);
+    while ((i$6 < len$6)) {
+      var index$6 = i$6;
+      var arg1$6 = array$6[index$6];
+      b$6.$$plus$eq__O__scm_SetBuilder(arg1$6);
+      i$6 = ((1 + i$6) | 0)
+    };
+    var y$6 = b$6.elems$1
+  };
+  var jsx$9 = new $c_T2().init___O__O(self$6, y$6);
+  var self$7 = $m_Lscalacss_internal_CanIUse$Agent$().Firefox$1;
+  var array$7 = [$m_Lscalacss_internal_CanIUse$Support$Unsupported$(), $m_Lscalacss_internal_CanIUse$Support$PartialX$()];
+  if (($uI(array$7.length) === 0)) {
+    var y$7 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$7 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$7 = 0;
+    var len$7 = $uI(array$7.length);
+    while ((i$7 < len$7)) {
+      var index$7 = i$7;
+      var arg1$7 = array$7[index$7];
+      b$7.$$plus$eq__O__scm_SetBuilder(arg1$7);
+      i$7 = ((1 + i$7) | 0)
+    };
+    var y$7 = b$7.elems$1
+  };
+  var jsx$8 = new $c_T2().init___O__O(self$7, y$7);
+  var self$8 = $m_Lscalacss_internal_CanIUse$Agent$().IE$1;
+  var array$8 = [$m_Lscalacss_internal_CanIUse$Support$Unsupported$()];
+  if (($uI(array$8.length) === 0)) {
+    var y$8 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$8 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$8 = 0;
+    var len$8 = $uI(array$8.length);
+    while ((i$8 < len$8)) {
+      var index$8 = i$8;
+      var arg1$8 = array$8[index$8];
+      b$8.$$plus$eq__O__scm_SetBuilder(arg1$8);
+      i$8 = ((1 + i$8) | 0)
+    };
+    var y$8 = b$8.elems$1
+  };
+  var jsx$7 = new $c_T2().init___O__O(self$8, y$8);
+  var self$9 = $m_Lscalacss_internal_CanIUse$Agent$().IEMobile$1;
+  var array$9 = [$m_Lscalacss_internal_CanIUse$Support$Unsupported$()];
+  if (($uI(array$9.length) === 0)) {
+    var y$9 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$9 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$9 = 0;
+    var len$9 = $uI(array$9.length);
+    while ((i$9 < len$9)) {
+      var index$9 = i$9;
+      var arg1$9 = array$9[index$9];
+      b$9.$$plus$eq__O__scm_SetBuilder(arg1$9);
+      i$9 = ((1 + i$9) | 0)
+    };
+    var y$9 = b$9.elems$1
+  };
+  var jsx$6 = new $c_T2().init___O__O(self$9, y$9);
+  var self$10 = $m_Lscalacss_internal_CanIUse$Agent$().IOSSafari$1;
+  var array$10 = [$m_Lscalacss_internal_CanIUse$Support$PartialX$()];
+  if (($uI(array$10.length) === 0)) {
+    var y$10 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$10 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$10 = 0;
+    var len$10 = $uI(array$10.length);
+    while ((i$10 < len$10)) {
+      var index$10 = i$10;
+      var arg1$10 = array$10[index$10];
+      b$10.$$plus$eq__O__scm_SetBuilder(arg1$10);
+      i$10 = ((1 + i$10) | 0)
+    };
+    var y$10 = b$10.elems$1
+  };
+  var jsx$5 = new $c_T2().init___O__O(self$10, y$10);
+  var self$11 = $m_Lscalacss_internal_CanIUse$Agent$().Opera$1;
+  var array$11 = [$m_Lscalacss_internal_CanIUse$Support$Unsupported$(), $m_Lscalacss_internal_CanIUse$Support$PartialX$()];
+  if (($uI(array$11.length) === 0)) {
+    var y$11 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$11 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$11 = 0;
+    var len$11 = $uI(array$11.length);
+    while ((i$11 < len$11)) {
+      var index$11 = i$11;
+      var arg1$11 = array$11[index$11];
+      b$11.$$plus$eq__O__scm_SetBuilder(arg1$11);
+      i$11 = ((1 + i$11) | 0)
+    };
+    var y$11 = b$11.elems$1
+  };
+  var jsx$4 = new $c_T2().init___O__O(self$11, y$11);
+  var self$12 = $m_Lscalacss_internal_CanIUse$Agent$().OperaMini$1;
+  var array$12 = [$m_Lscalacss_internal_CanIUse$Support$Unsupported$()];
+  if (($uI(array$12.length) === 0)) {
+    var y$12 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$12 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$12 = 0;
+    var len$12 = $uI(array$12.length);
+    while ((i$12 < len$12)) {
+      var index$12 = i$12;
+      var arg1$12 = array$12[index$12];
+      b$12.$$plus$eq__O__scm_SetBuilder(arg1$12);
+      i$12 = ((1 + i$12) | 0)
+    };
+    var y$12 = b$12.elems$1
+  };
+  var jsx$3 = new $c_T2().init___O__O(self$12, y$12);
+  var self$13 = $m_Lscalacss_internal_CanIUse$Agent$().OperaMobile$1;
+  var array$13 = [$m_Lscalacss_internal_CanIUse$Support$Unsupported$(), $m_Lscalacss_internal_CanIUse$Support$PartialX$()];
+  if (($uI(array$13.length) === 0)) {
+    var y$13 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$13 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$13 = 0;
+    var len$13 = $uI(array$13.length);
+    while ((i$13 < len$13)) {
+      var index$13 = i$13;
+      var arg1$13 = array$13[index$13];
+      b$13.$$plus$eq__O__scm_SetBuilder(arg1$13);
+      i$13 = ((1 + i$13) | 0)
+    };
+    var y$13 = b$13.elems$1
+  };
+  var jsx$2 = new $c_T2().init___O__O(self$13, y$13);
+  var self$14 = $m_Lscalacss_internal_CanIUse$Agent$().Safari$1;
+  var array$14 = [$m_Lscalacss_internal_CanIUse$Support$PartialX$()];
+  if (($uI(array$14.length) === 0)) {
+    var y$14 = $m_sci_Set$EmptySet$()
+  } else {
+    var b$14 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i$14 = 0;
+    var len$14 = $uI(array$14.length);
+    while ((i$14 < len$14)) {
+      var index$14 = i$14;
+      var arg1$14 = array$14[index$14];
+      b$14.$$plus$eq__O__scm_SetBuilder(arg1$14);
+      i$14 = ((1 + i$14) | 0)
+    };
+    var y$14 = b$14.elems$1
+  };
+  var jsx$1 = new $c_T2().init___O__O(self$14, y$14);
+  var self$15 = $m_Lscalacss_internal_CanIUse$Agent$().Samsung$1;
+  var array$15 = [$m_Lscalacss_internal_CanIUse$Support$PartialX$()];
   if (($uI(array$15.length) === 0)) {
     var y$15 = $m_sci_Set$EmptySet$()
   } else {
@@ -16929,11 +17420,15 @@ $h_Lfrancoiscabrol_travelmap_Application$.prototype = $c_Lfrancoiscabrol_travelm
 $c_Lfrancoiscabrol_travelmap_Application$.prototype.init___ = (function() {
   return this
 });
+$c_Lfrancoiscabrol_travelmap_Application$.prototype.init__V = (function() {
+  var dataLayer = new $c_Lfrancoiscabrol_travelmap_StaticJsonFile().init___T("https://dl.dropboxusercontent.com/u/66604788/places.json");
+  dataLayer.loadData__s_concurrent_Future().onComplete__F1__s_concurrent_ExecutionContext__V(new $c_Lfrancoiscabrol_travelmap_Application$$anonfun$init$1().init___(), $m_sjs_concurrent_JSExecutionContext$Implicits$().runNow$1)
+});
 $c_Lfrancoiscabrol_travelmap_Application$.prototype.$$js$exported$prop$init__O = (function() {
-  $m_Lfrancoiscabrol_travelmap_DataLayer$().loadData__s_concurrent_Future().onComplete__F1__s_concurrent_ExecutionContext__V(new $c_Lfrancoiscabrol_travelmap_Application$$anonfun$init$1().init___(), $m_sjs_concurrent_JSExecutionContext$Implicits$().runNow$1)
+  this.init__V()
 });
 $c_Lfrancoiscabrol_travelmap_Application$.prototype.$$js$exported$meth$main__O = (function() {
-  $m_Lfrancoiscabrol_travelmap_DataLayer$().loadData__s_concurrent_Future().onComplete__F1__s_concurrent_ExecutionContext__V(new $c_Lfrancoiscabrol_travelmap_Application$$anonfun$init$1().init___(), $m_sjs_concurrent_JSExecutionContext$Implicits$().runNow$1)
+  this.init__V()
 });
 $c_Lfrancoiscabrol_travelmap_Application$.prototype.main = (function() {
   return this.$$js$exported$meth$main__O()
@@ -16962,6 +17457,99 @@ function $m_Lfrancoiscabrol_travelmap_Application$() {
 $e.francoiscabrol = ($e.francoiscabrol || {});
 $e.francoiscabrol.travelmap = ($e.francoiscabrol.travelmap || {});
 $e.francoiscabrol.travelmap.Application = $m_Lfrancoiscabrol_travelmap_Application$;
+/** @constructor */
+function $c_Lfrancoiscabrol_travelmap_StaticJsonFile() {
+  $c_O.call(this);
+  this.francoiscabrol$travelmap$StaticJsonFile$$jsonFileUrl$f = null;
+  this.CoordinatesData$module$1 = null
+}
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile.prototype = new $h_O();
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile.prototype.constructor = $c_Lfrancoiscabrol_travelmap_StaticJsonFile;
+/** @constructor */
+function $h_Lfrancoiscabrol_travelmap_StaticJsonFile() {
+  /*<skip>*/
+}
+$h_Lfrancoiscabrol_travelmap_StaticJsonFile.prototype = $c_Lfrancoiscabrol_travelmap_StaticJsonFile.prototype;
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile.prototype.loadData__s_concurrent_Future = (function() {
+  var this$3 = $m_Lorg_scalajs_dom_ext_Ajax$();
+  var url = this.francoiscabrol$travelmap$StaticJsonFile$$jsonFileUrl$f;
+  var headers = $m_sci_Map$EmptyMap$();
+  var this$4 = this$3.apply__T__T__Lorg_scalajs_dom_ext_Ajax$InputData__I__sci_Map__Z__T__s_concurrent_Future("GET", url, null, 0, headers, false, "");
+  var f = new $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2().init___Lfrancoiscabrol_travelmap_StaticJsonFile(this);
+  var executor = $m_sjs_concurrent_JSExecutionContext$Implicits$().runNow$1;
+  var this$5 = $s_s_concurrent_Future$class__flatMap__s_concurrent_Future__F1__s_concurrent_ExecutionContext__s_concurrent_Future(this$4, f, executor);
+  var pf = new $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$1().init___Lfrancoiscabrol_travelmap_StaticJsonFile(this);
+  var executor$1 = $m_sjs_concurrent_JSExecutionContext$Implicits$().runNow$1;
+  return $s_s_concurrent_Future$class__andThen__s_concurrent_Future__s_PartialFunction__s_concurrent_ExecutionContext__s_concurrent_Future(this$5, pf, executor$1)
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile.prototype.francoiscabrol$travelmap$StaticJsonFile$$addCoordinatesTo__Lfrancoiscabrol_travelmap_Place__s_concurrent_Future = (function(place) {
+  var this$1 = this.getCoordinatesFromCache__p1__Lfrancoiscabrol_travelmap_Place__s_concurrent_Future(place);
+  var pf = new $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$francoiscabrol$travelmap$StaticJsonFile$$addCoordinatesTo$1().init___Lfrancoiscabrol_travelmap_StaticJsonFile__Lfrancoiscabrol_travelmap_Place(this, place);
+  var executor = $m_sjs_concurrent_JSExecutionContext$Implicits$().runNow$1;
+  var this$2 = $s_s_concurrent_Future$class__andThen__s_concurrent_Future__s_PartialFunction__s_concurrent_ExecutionContext__s_concurrent_Future(this$1, pf, executor);
+  var f = new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(place$2) {
+    return (function(coordinates$2) {
+      var coordinates = $as_Lfrancoiscabrol_travelmap_Coordinates(coordinates$2);
+      place$2.lat$1 = coordinates.lat$1;
+      place$2.lng$1 = coordinates.lng$1;
+      return place$2
+    })
+  })(place));
+  var executor$1 = $m_sjs_concurrent_JSExecutionContext$Implicits$().runNow$1;
+  return $s_s_concurrent_Future$class__map__s_concurrent_Future__F1__s_concurrent_ExecutionContext__s_concurrent_Future(this$2, f, executor$1)
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile.prototype.getCoordinates__p1__T__s_concurrent_Future = (function(address) {
+  var storageAddress = new $c_s_StringContext().init___sc_Seq(new $c_sjs_js_WrappedArray().init___sjs_js_Array(["http://nominatim.openstreetmap.org/search/?q=", "&format=json"])).s__sc_Seq__T(new $c_sjs_js_WrappedArray().init___sjs_js_Array([address]));
+  var this$3 = $m_Lorg_scalajs_dom_ext_Ajax$();
+  var headers = $m_sci_Map$EmptyMap$();
+  var this$4 = this$3.apply__T__T__Lorg_scalajs_dom_ext_Ajax$InputData__I__sci_Map__Z__T__s_concurrent_Future("GET", storageAddress, null, 0, headers, false, "");
+  var f = new $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1().init___Lfrancoiscabrol_travelmap_StaticJsonFile(this);
+  var executor = $m_sjs_concurrent_JSExecutionContext$Implicits$().runNow$1;
+  return $s_s_concurrent_Future$class__map__s_concurrent_Future__F1__s_concurrent_ExecutionContext__s_concurrent_Future(this$4, f, executor)
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile.prototype.getCoordinatesFromCache__p1__Lfrancoiscabrol_travelmap_Place__s_concurrent_Future = (function(place) {
+  var value = $as_T($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().localStorage.getItem(place.name$1));
+  var x = ("value => " + value);
+  var this$2 = $m_s_Console$();
+  var this$3 = $as_Ljava_io_PrintStream(this$2.outVar$2.v$1);
+  this$3.java$lang$JSConsoleBasedPrintStream$$printString__T__V((x + "\n"));
+  if ((value === null)) {
+    var jsx$1 = true
+  } else {
+    if ((value === null)) {
+      throw new $c_jl_NullPointerException().init___()
+    };
+    var jsx$1 = (value === "")
+  };
+  if (jsx$1) {
+    var x$1 = ("isEmpty => " + place);
+    var this$6 = $m_s_Console$();
+    var this$7 = $as_Ljava_io_PrintStream(this$6.outVar$2.v$1);
+    this$7.java$lang$JSConsoleBasedPrintStream$$printString__T__V((x$1 + "\n"));
+    var future = this.getCoordinates__p1__T__s_concurrent_Future(place.address$1);
+    var pf = new $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$1().init___Lfrancoiscabrol_travelmap_StaticJsonFile__Lfrancoiscabrol_travelmap_Place(this, place);
+    var executor = $m_sjs_concurrent_JSExecutionContext$Implicits$().runNow$1;
+    $s_s_concurrent_Future$class__onSuccess__s_concurrent_Future__s_PartialFunction__s_concurrent_ExecutionContext__V(future, pf, executor);
+    return future
+  } else {
+    $m_s_concurrent_Future$();
+    var body = new $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$2().init___Lfrancoiscabrol_travelmap_StaticJsonFile__T(this, value);
+    var executor$1 = $m_sjs_concurrent_JSExecutionContext$Implicits$().runNow$1;
+    return $m_s_concurrent_impl_Future$().apply__F0__s_concurrent_ExecutionContext__s_concurrent_Future(body, executor$1)
+  }
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile.prototype.init___T = (function(jsonFileUrl) {
+  this.francoiscabrol$travelmap$StaticJsonFile$$jsonFileUrl$f = jsonFileUrl;
+  return this
+});
+var $d_Lfrancoiscabrol_travelmap_StaticJsonFile = new $TypeData().initClass({
+  Lfrancoiscabrol_travelmap_StaticJsonFile: 0
+}, false, "francoiscabrol.travelmap.StaticJsonFile", {
+  Lfrancoiscabrol_travelmap_StaticJsonFile: 1,
+  O: 1,
+  Lfrancoiscabrol_travelmap_DataLayer: 1
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile.prototype.$classData = $d_Lfrancoiscabrol_travelmap_StaticJsonFile;
 /** @constructor */
 function $c_Ljapgolly_univeq_UnivEq$$anon$8() {
   $c_O.call(this)
@@ -17268,6 +17856,76 @@ function $m_Lscalacss_internal_Attrs$fontFamily$() {
   return $n_Lscalacss_internal_Attrs$fontFamily$
 }
 /** @constructor */
+function $c_Lscalacss_internal_Attrs$fontStyle$() {
+  $c_Lscalacss_internal_ValueT$TypedAttrBase.call(this);
+  this.attr$2 = null
+}
+$c_Lscalacss_internal_Attrs$fontStyle$.prototype = new $h_Lscalacss_internal_ValueT$TypedAttrBase();
+$c_Lscalacss_internal_Attrs$fontStyle$.prototype.constructor = $c_Lscalacss_internal_Attrs$fontStyle$;
+/** @constructor */
+function $h_Lscalacss_internal_Attrs$fontStyle$() {
+  /*<skip>*/
+}
+$h_Lscalacss_internal_Attrs$fontStyle$.prototype = $c_Lscalacss_internal_Attrs$fontStyle$.prototype;
+$c_Lscalacss_internal_Attrs$fontStyle$.prototype.init___ = (function() {
+  $n_Lscalacss_internal_Attrs$fontStyle$ = this;
+  this.attr$2 = $m_Lscalacss_internal_Attr$().real__T__Lscalacss_internal_Attr("font-style");
+  return this
+});
+$c_Lscalacss_internal_Attrs$fontStyle$.prototype.attr__Lscalacss_internal_Attr = (function() {
+  return this.attr$2
+});
+var $d_Lscalacss_internal_Attrs$fontStyle$ = new $TypeData().initClass({
+  Lscalacss_internal_Attrs$fontStyle$: 0
+}, false, "scalacss.internal.Attrs$fontStyle$", {
+  Lscalacss_internal_Attrs$fontStyle$: 1,
+  Lscalacss_internal_ValueT$TypedAttrBase: 1,
+  O: 1
+});
+$c_Lscalacss_internal_Attrs$fontStyle$.prototype.$classData = $d_Lscalacss_internal_Attrs$fontStyle$;
+var $n_Lscalacss_internal_Attrs$fontStyle$ = (void 0);
+function $m_Lscalacss_internal_Attrs$fontStyle$() {
+  if ((!$n_Lscalacss_internal_Attrs$fontStyle$)) {
+    $n_Lscalacss_internal_Attrs$fontStyle$ = new $c_Lscalacss_internal_Attrs$fontStyle$().init___()
+  };
+  return $n_Lscalacss_internal_Attrs$fontStyle$
+}
+/** @constructor */
+function $c_Lscalacss_internal_Attrs$fontWeight$() {
+  $c_Lscalacss_internal_ValueT$TypedAttrBase.call(this);
+  this.attr$2 = null
+}
+$c_Lscalacss_internal_Attrs$fontWeight$.prototype = new $h_Lscalacss_internal_ValueT$TypedAttrBase();
+$c_Lscalacss_internal_Attrs$fontWeight$.prototype.constructor = $c_Lscalacss_internal_Attrs$fontWeight$;
+/** @constructor */
+function $h_Lscalacss_internal_Attrs$fontWeight$() {
+  /*<skip>*/
+}
+$h_Lscalacss_internal_Attrs$fontWeight$.prototype = $c_Lscalacss_internal_Attrs$fontWeight$.prototype;
+$c_Lscalacss_internal_Attrs$fontWeight$.prototype.init___ = (function() {
+  $n_Lscalacss_internal_Attrs$fontWeight$ = this;
+  this.attr$2 = $m_Lscalacss_internal_Attr$().real__T__Lscalacss_internal_Attr("font-weight");
+  return this
+});
+$c_Lscalacss_internal_Attrs$fontWeight$.prototype.attr__Lscalacss_internal_Attr = (function() {
+  return this.attr$2
+});
+var $d_Lscalacss_internal_Attrs$fontWeight$ = new $TypeData().initClass({
+  Lscalacss_internal_Attrs$fontWeight$: 0
+}, false, "scalacss.internal.Attrs$fontWeight$", {
+  Lscalacss_internal_Attrs$fontWeight$: 1,
+  Lscalacss_internal_ValueT$TypedAttrBase: 1,
+  O: 1
+});
+$c_Lscalacss_internal_Attrs$fontWeight$.prototype.$classData = $d_Lscalacss_internal_Attrs$fontWeight$;
+var $n_Lscalacss_internal_Attrs$fontWeight$ = (void 0);
+function $m_Lscalacss_internal_Attrs$fontWeight$() {
+  if ((!$n_Lscalacss_internal_Attrs$fontWeight$)) {
+    $n_Lscalacss_internal_Attrs$fontWeight$ = new $c_Lscalacss_internal_Attrs$fontWeight$().init___()
+  };
+  return $n_Lscalacss_internal_Attrs$fontWeight$
+}
+/** @constructor */
 function $c_Lscalacss_internal_Attrs$overflowY$() {
   $c_Lscalacss_internal_ValueT$TypedAttrBase.call(this);
   this.attr$2 = null
@@ -17336,6 +17994,41 @@ function $m_Lscalacss_internal_Attrs$position$() {
     $n_Lscalacss_internal_Attrs$position$ = new $c_Lscalacss_internal_Attrs$position$().init___()
   };
   return $n_Lscalacss_internal_Attrs$position$
+}
+/** @constructor */
+function $c_Lscalacss_internal_Attrs$textAlign$() {
+  $c_Lscalacss_internal_ValueT$TypedAttrBase.call(this);
+  this.attr$2 = null
+}
+$c_Lscalacss_internal_Attrs$textAlign$.prototype = new $h_Lscalacss_internal_ValueT$TypedAttrBase();
+$c_Lscalacss_internal_Attrs$textAlign$.prototype.constructor = $c_Lscalacss_internal_Attrs$textAlign$;
+/** @constructor */
+function $h_Lscalacss_internal_Attrs$textAlign$() {
+  /*<skip>*/
+}
+$h_Lscalacss_internal_Attrs$textAlign$.prototype = $c_Lscalacss_internal_Attrs$textAlign$.prototype;
+$c_Lscalacss_internal_Attrs$textAlign$.prototype.init___ = (function() {
+  $n_Lscalacss_internal_Attrs$textAlign$ = this;
+  this.attr$2 = $m_Lscalacss_internal_Attr$().real__T__Lscalacss_internal_Transform__Lscalacss_internal_Attr("text-align", $m_Lscalacss_internal_Transform$().values__sci_Map__T__sc_Seq__Lscalacss_internal_Transform($m_Lscalacss_internal_CanIUse$().logicalProps__sci_Map(), $m_Lscalacss_internal_Literal$Typed$start$().value$1, $m_s_Predef$().wrapRefArray__AO__scm_WrappedArray($makeNativeArrayWrapper($d_T.getArrayOf(), [$m_Lscalacss_internal_Literal$Typed$end$().value$1]))).$$times__Lscalacss_internal_Transform__Lscalacss_internal_Transform($m_Lscalacss_internal_Transform$().values__sci_Map__T__sc_Seq__Lscalacss_internal_Transform($m_Lscalacss_internal_CanIUse$().textJustify__sci_Map(), "justify", $m_s_Predef$().wrapRefArray__AO__scm_WrappedArray($makeNativeArrayWrapper($d_T.getArrayOf(), [])))));
+  return this
+});
+$c_Lscalacss_internal_Attrs$textAlign$.prototype.attr__Lscalacss_internal_Attr = (function() {
+  return this.attr$2
+});
+var $d_Lscalacss_internal_Attrs$textAlign$ = new $TypeData().initClass({
+  Lscalacss_internal_Attrs$textAlign$: 0
+}, false, "scalacss.internal.Attrs$textAlign$", {
+  Lscalacss_internal_Attrs$textAlign$: 1,
+  Lscalacss_internal_ValueT$TypedAttrBase: 1,
+  O: 1
+});
+$c_Lscalacss_internal_Attrs$textAlign$.prototype.$classData = $d_Lscalacss_internal_Attrs$textAlign$;
+var $n_Lscalacss_internal_Attrs$textAlign$ = (void 0);
+function $m_Lscalacss_internal_Attrs$textAlign$() {
+  if ((!$n_Lscalacss_internal_Attrs$textAlign$)) {
+    $n_Lscalacss_internal_Attrs$textAlign$ = new $c_Lscalacss_internal_Attrs$textAlign$().init___()
+  };
+  return $n_Lscalacss_internal_Attrs$textAlign$
 }
 /** @constructor */
 function $c_Lscalacss_internal_Compose$Rules$$anon$1() {
@@ -18502,6 +19195,60 @@ function $isArrayOf_jl_Throwable(obj, depth) {
 function $asArrayOf_jl_Throwable(obj, depth) {
   return (($isArrayOf_jl_Throwable(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Ljava.lang.Throwable;", depth))
 }
+/** @constructor */
+function $c_ju_Random() {
+  $c_O.call(this);
+  this.seedHi$1 = 0;
+  this.seedLo$1 = 0;
+  this.nextNextGaussian$1 = 0.0;
+  this.haveNextNextGaussian$1 = false
+}
+$c_ju_Random.prototype = new $h_O();
+$c_ju_Random.prototype.constructor = $c_ju_Random;
+/** @constructor */
+function $h_ju_Random() {
+  /*<skip>*/
+}
+$h_ju_Random.prototype = $c_ju_Random.prototype;
+$c_ju_Random.prototype.init___ = (function() {
+  $c_ju_Random.prototype.init___J.call(this, $m_ju_Random$().java$util$Random$$randomSeed__J());
+  return this
+});
+$c_ju_Random.prototype.init___J = (function(seed_in) {
+  this.haveNextNextGaussian$1 = false;
+  this.setSeed__J__V(seed_in);
+  return this
+});
+$c_ju_Random.prototype.next__I__I = (function(bits) {
+  var oldSeedHi = this.seedHi$1;
+  var oldSeedLo = this.seedLo$1;
+  var loProd = (11 + (15525485 * oldSeedLo));
+  var hiProd = ((1502 * oldSeedLo) + (15525485 * oldSeedHi));
+  var x = (loProd / 16777216);
+  var newSeedHi = (16777215 & (($uI((x | 0)) + (16777215 & $uI((hiProd | 0)))) | 0));
+  var newSeedLo = (16777215 & $uI((loProd | 0)));
+  this.seedHi$1 = newSeedHi;
+  this.seedLo$1 = newSeedLo;
+  var result32 = ((newSeedHi << 8) | (newSeedLo >> 16));
+  return ((result32 >>> ((32 - bits) | 0)) | 0)
+});
+$c_ju_Random.prototype.setSeed__J__V = (function(seed_in) {
+  var lo = ((-554899859) ^ seed_in.lo$2);
+  var hi = (5 ^ seed_in.hi$2);
+  var hi$1 = (65535 & hi);
+  var lo$1 = (((lo >>> 24) | 0) | (hi$1 << 8));
+  this.seedHi$1 = lo$1;
+  this.seedLo$1 = (16777215 & lo);
+  this.haveNextNextGaussian$1 = false
+});
+var $d_ju_Random = new $TypeData().initClass({
+  ju_Random: 0
+}, false, "java.util.Random", {
+  ju_Random: 1,
+  O: 1,
+  Ljava_io_Serializable: 1
+});
+$c_ju_Random.prototype.$classData = $d_ju_Random;
 /** @constructor */
 function $c_ju_regex_Matcher() {
   $c_O.call(this);
@@ -20457,6 +21204,37 @@ function $m_Lscalacss_internal_Env$() {
   return $n_Lscalacss_internal_Env$
 }
 /** @constructor */
+function $c_Lscalacss_internal_Literal$Typed$end$() {
+  $c_Lscalacss_internal_Literal.call(this)
+}
+$c_Lscalacss_internal_Literal$Typed$end$.prototype = new $h_Lscalacss_internal_Literal();
+$c_Lscalacss_internal_Literal$Typed$end$.prototype.constructor = $c_Lscalacss_internal_Literal$Typed$end$;
+/** @constructor */
+function $h_Lscalacss_internal_Literal$Typed$end$() {
+  /*<skip>*/
+}
+$h_Lscalacss_internal_Literal$Typed$end$.prototype = $c_Lscalacss_internal_Literal$Typed$end$.prototype;
+$c_Lscalacss_internal_Literal$Typed$end$.prototype.init___ = (function() {
+  $c_Lscalacss_internal_Literal.prototype.init___T.call(this, "end");
+  return this
+});
+var $d_Lscalacss_internal_Literal$Typed$end$ = new $TypeData().initClass({
+  Lscalacss_internal_Literal$Typed$end$: 0
+}, false, "scalacss.internal.Literal$Typed$end$", {
+  Lscalacss_internal_Literal$Typed$end$: 1,
+  Lscalacss_internal_Literal: 1,
+  O: 1,
+  Lscalacss_internal_Literal$Typed$TimingFunctionDirection: 1
+});
+$c_Lscalacss_internal_Literal$Typed$end$.prototype.$classData = $d_Lscalacss_internal_Literal$Typed$end$;
+var $n_Lscalacss_internal_Literal$Typed$end$ = (void 0);
+function $m_Lscalacss_internal_Literal$Typed$end$() {
+  if ((!$n_Lscalacss_internal_Literal$Typed$end$)) {
+    $n_Lscalacss_internal_Literal$Typed$end$ = new $c_Lscalacss_internal_Literal$Typed$end$().init___()
+  };
+  return $n_Lscalacss_internal_Literal$Typed$end$
+}
+/** @constructor */
 function $c_Lscalacss_internal_Literal$Typed$none$() {
   $c_Lscalacss_internal_Literal.call(this)
 }
@@ -20517,6 +21295,37 @@ function $m_Lscalacss_internal_Literal$Typed$solid$() {
     $n_Lscalacss_internal_Literal$Typed$solid$ = new $c_Lscalacss_internal_Literal$Typed$solid$().init___()
   };
   return $n_Lscalacss_internal_Literal$Typed$solid$
+}
+/** @constructor */
+function $c_Lscalacss_internal_Literal$Typed$start$() {
+  $c_Lscalacss_internal_Literal.call(this)
+}
+$c_Lscalacss_internal_Literal$Typed$start$.prototype = new $h_Lscalacss_internal_Literal();
+$c_Lscalacss_internal_Literal$Typed$start$.prototype.constructor = $c_Lscalacss_internal_Literal$Typed$start$;
+/** @constructor */
+function $h_Lscalacss_internal_Literal$Typed$start$() {
+  /*<skip>*/
+}
+$h_Lscalacss_internal_Literal$Typed$start$.prototype = $c_Lscalacss_internal_Literal$Typed$start$.prototype;
+$c_Lscalacss_internal_Literal$Typed$start$.prototype.init___ = (function() {
+  $c_Lscalacss_internal_Literal.prototype.init___T.call(this, "start");
+  return this
+});
+var $d_Lscalacss_internal_Literal$Typed$start$ = new $TypeData().initClass({
+  Lscalacss_internal_Literal$Typed$start$: 0
+}, false, "scalacss.internal.Literal$Typed$start$", {
+  Lscalacss_internal_Literal$Typed$start$: 1,
+  Lscalacss_internal_Literal: 1,
+  O: 1,
+  Lscalacss_internal_Literal$Typed$TimingFunctionDirection: 1
+});
+$c_Lscalacss_internal_Literal$Typed$start$.prototype.$classData = $d_Lscalacss_internal_Literal$Typed$start$;
+var $n_Lscalacss_internal_Literal$Typed$start$ = (void 0);
+function $m_Lscalacss_internal_Literal$Typed$start$() {
+  if ((!$n_Lscalacss_internal_Literal$Typed$start$)) {
+    $n_Lscalacss_internal_Literal$Typed$start$ = new $c_Lscalacss_internal_Literal$Typed$start$().init___()
+  };
+  return $n_Lscalacss_internal_Literal$Typed$start$
 }
 /** @constructor */
 function $c_Lscalacss_internal_Pseudo$Single() {
@@ -22052,6 +22861,198 @@ var $d_ju_Formatter = new $TypeData().initClass({
   Ljava_io_Flushable: 1
 });
 $c_ju_Formatter.prototype.$classData = $d_ju_Formatter;
+/** @constructor */
+function $c_ju_Random$() {
+  $c_O.call(this)
+}
+$c_ju_Random$.prototype = new $h_O();
+$c_ju_Random$.prototype.constructor = $c_ju_Random$;
+/** @constructor */
+function $h_ju_Random$() {
+  /*<skip>*/
+}
+$h_ju_Random$.prototype = $c_ju_Random$.prototype;
+$c_ju_Random$.prototype.init___ = (function() {
+  return this
+});
+$c_ju_Random$.prototype.java$util$Random$$randomSeed__J = (function() {
+  var value = this.randomInt__p1__I();
+  var value$1 = this.randomInt__p1__I();
+  return new $c_sjsr_RuntimeLong().init___I__I(value$1, value)
+});
+$c_ju_Random$.prototype.randomInt__p1__I = (function() {
+  var a = (4.294967296E9 * $uD($g.Math.random()));
+  return $doubleToInt(((-2.147483648E9) + $uD($g.Math.floor(a))))
+});
+var $d_ju_Random$ = new $TypeData().initClass({
+  ju_Random$: 0
+}, false, "java.util.Random$", {
+  ju_Random$: 1,
+  O: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_ju_Random$.prototype.$classData = $d_ju_Random$;
+var $n_ju_Random$ = (void 0);
+function $m_ju_Random$() {
+  if ((!$n_ju_Random$)) {
+    $n_ju_Random$ = new $c_ju_Random$().init___()
+  };
+  return $n_ju_Random$
+}
+/** @constructor */
+function $c_ju_UUID() {
+  $c_O.call(this);
+  this.i1$1 = 0;
+  this.i2$1 = 0;
+  this.i3$1 = 0;
+  this.i4$1 = 0;
+  this.l1$1 = null;
+  this.l2$1 = null
+}
+$c_ju_UUID.prototype = new $h_O();
+$c_ju_UUID.prototype.constructor = $c_ju_UUID;
+/** @constructor */
+function $h_ju_UUID() {
+  /*<skip>*/
+}
+$h_ju_UUID.prototype = $c_ju_UUID.prototype;
+$c_ju_UUID.prototype.equals__O__Z = (function(that) {
+  if ($is_ju_UUID(that)) {
+    var x2 = $as_ju_UUID(that);
+    return ((((this.i1$1 === x2.i1$1) && (this.i2$1 === x2.i2$1)) && (this.i3$1 === x2.i3$1)) && (this.i4$1 === x2.i4$1))
+  } else {
+    return false
+  }
+});
+$c_ju_UUID.prototype.toString__T = (function() {
+  var i = this.i1$1;
+  var x = $uD((i >>> 0));
+  var jsx$10 = x.toString(16);
+  var s = $as_T(jsx$10);
+  var beginIndex = $uI(s.length);
+  var jsx$11 = $as_T("00000000".substring(beginIndex));
+  var i$1 = ((this.i2$1 >>> 16) | 0);
+  var x$1 = $uD((i$1 >>> 0));
+  var jsx$8 = x$1.toString(16);
+  var s$1 = $as_T(jsx$8);
+  var beginIndex$1 = $uI(s$1.length);
+  var jsx$9 = $as_T("0000".substring(beginIndex$1));
+  var i$2 = (65535 & this.i2$1);
+  var x$2 = $uD((i$2 >>> 0));
+  var jsx$6 = x$2.toString(16);
+  var s$2 = $as_T(jsx$6);
+  var beginIndex$2 = $uI(s$2.length);
+  var jsx$7 = $as_T("0000".substring(beginIndex$2));
+  var i$3 = ((this.i3$1 >>> 16) | 0);
+  var x$3 = $uD((i$3 >>> 0));
+  var jsx$4 = x$3.toString(16);
+  var s$3 = $as_T(jsx$4);
+  var beginIndex$3 = $uI(s$3.length);
+  var jsx$5 = $as_T("0000".substring(beginIndex$3));
+  var i$4 = (65535 & this.i3$1);
+  var x$4 = $uD((i$4 >>> 0));
+  var jsx$2 = x$4.toString(16);
+  var s$4 = $as_T(jsx$2);
+  var beginIndex$4 = $uI(s$4.length);
+  var jsx$3 = $as_T("0000".substring(beginIndex$4));
+  var i$5 = this.i4$1;
+  var x$5 = $uD((i$5 >>> 0));
+  var jsx$1 = x$5.toString(16);
+  var s$5 = $as_T(jsx$1);
+  var beginIndex$5 = $uI(s$5.length);
+  return ((((((((((("" + jsx$11) + s) + "-") + (("" + jsx$9) + s$1)) + "-") + (("" + jsx$7) + s$2)) + "-") + (("" + jsx$5) + s$3)) + "-") + (("" + jsx$3) + s$4)) + (("" + $as_T("00000000".substring(beginIndex$5))) + s$5))
+});
+$c_ju_UUID.prototype.init___I__I__I__I__jl_Long__jl_Long = (function(i1, i2, i3, i4, l1, l2) {
+  this.i1$1 = i1;
+  this.i2$1 = i2;
+  this.i3$1 = i3;
+  this.i4$1 = i4;
+  this.l1$1 = l1;
+  this.l2$1 = l2;
+  return this
+});
+$c_ju_UUID.prototype.hashCode__I = (function() {
+  return (((this.i1$1 ^ this.i2$1) ^ this.i3$1) ^ this.i4$1)
+});
+function $is_ju_UUID(obj) {
+  return (!(!((obj && obj.$classData) && obj.$classData.ancestors.ju_UUID)))
+}
+function $as_ju_UUID(obj) {
+  return (($is_ju_UUID(obj) || (obj === null)) ? obj : $throwClassCastException(obj, "java.util.UUID"))
+}
+function $isArrayOf_ju_UUID(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.ju_UUID)))
+}
+function $asArrayOf_ju_UUID(obj, depth) {
+  return (($isArrayOf_ju_UUID(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Ljava.util.UUID;", depth))
+}
+var $d_ju_UUID = new $TypeData().initClass({
+  ju_UUID: 0
+}, false, "java.util.UUID", {
+  ju_UUID: 1,
+  O: 1,
+  Ljava_io_Serializable: 1,
+  jl_Comparable: 1
+});
+$c_ju_UUID.prototype.$classData = $d_ju_UUID;
+/** @constructor */
+function $c_ju_UUID$() {
+  $c_O.call(this);
+  this.TimeBased$1 = 0;
+  this.DCESecurity$1 = 0;
+  this.NameBased$1 = 0;
+  this.Random$1 = 0;
+  this.rng$1 = null;
+  this.bitmap$0$1 = false
+}
+$c_ju_UUID$.prototype = new $h_O();
+$c_ju_UUID$.prototype.constructor = $c_ju_UUID$;
+/** @constructor */
+function $h_ju_UUID$() {
+  /*<skip>*/
+}
+$h_ju_UUID$.prototype = $c_ju_UUID$.prototype;
+$c_ju_UUID$.prototype.init___ = (function() {
+  return this
+});
+$c_ju_UUID$.prototype.rng$lzycompute__p1__ju_Random = (function() {
+  if ((!this.bitmap$0$1)) {
+    this.rng$1 = new $c_ju_Random().init___();
+    this.bitmap$0$1 = true
+  };
+  return this.rng$1
+});
+$c_ju_UUID$.prototype.rng__p1__ju_Random = (function() {
+  return ((!this.bitmap$0$1) ? this.rng$lzycompute__p1__ju_Random() : this.rng$1)
+});
+$c_ju_UUID$.prototype.randomUUID__ju_UUID = (function() {
+  var this$1 = this.rng__p1__ju_Random();
+  var i1 = this$1.next__I__I(32);
+  var this$2 = this.rng__p1__ju_Random();
+  var i2 = (16384 | ((-61441) & this$2.next__I__I(32)));
+  var this$3 = this.rng__p1__ju_Random();
+  var i3 = ((-2147483648) | (1073741823 & this$3.next__I__I(32)));
+  var this$4 = this.rng__p1__ju_Random();
+  var i4 = this$4.next__I__I(32);
+  return new $c_ju_UUID().init___I__I__I__I__jl_Long__jl_Long(i1, i2, i3, i4, null, null)
+});
+var $d_ju_UUID$ = new $TypeData().initClass({
+  ju_UUID$: 0
+}, false, "java.util.UUID$", {
+  ju_UUID$: 1,
+  O: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_ju_UUID$.prototype.$classData = $d_ju_UUID$;
+var $n_ju_UUID$ = (void 0);
+function $m_ju_UUID$() {
+  if ((!$n_ju_UUID$)) {
+    $n_ju_UUID$ = new $c_ju_UUID$().init___()
+  };
+  return $n_ju_UUID$
+}
 /** @constructor */
 function $c_ju_concurrent_TimeUnit$() {
   $c_O.call(this);
@@ -24676,6 +25677,8 @@ var $d_sr_Nothing$ = new $TypeData().initClass({
 /** @constructor */
 function $c_Lfrancoiscabrol_travelmap_components_Style$() {
   $c_Lscalacss_internal_mutable_StyleSheet$Inline.call(this);
+  this.activeBackground$3 = null;
+  this.inactiveBackground$3 = null;
   this.map$3 = null;
   this.marker$3 = null;
   this.activePoint$3 = null;
@@ -24694,18 +25697,20 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
   var this$3 = $m_Lscalacss_defaults_DefaultSettings$Dev$();
   $c_Lscalacss_internal_mutable_StyleSheet$Inline.prototype.init___Lscalacss_internal_mutable_Register.call(this, new $c_Lscalacss_internal_mutable_Register().init___Lscalacss_internal_mutable_Register$NameGen__Lscalacss_internal_mutable_Register$MacroName__Lscalacss_internal_mutable_Register$ErrorHandler__Lscalacss_internal_mutable_Mutex(this$3.cssRegisterNameGen$1, $m_Lscalacss_internal_mutable_Register$MacroName$Use$(), this$3.cssRegisterErrorHandler$1, $m_Lscalacss_internal_mutable_Mutex$().mutex$1));
   $n_Lfrancoiscabrol_travelmap_components_Style$ = this;
-  var this$22 = new $c_Lscalacss_internal_mutable_StyleSheet$Inline$MStyle().init___Lscalacss_internal_mutable_StyleSheet$Inline__T(this, "map");
+  this.activeBackground$3 = (this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$(), new $c_Lscalacss_internal_ValueT().init___T("red"));
+  this.inactiveBackground$3 = (this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$(), new $c_Lscalacss_internal_ValueT().init___T("orange"));
+  var this$26 = new $c_Lscalacss_internal_mutable_StyleSheet$Inline$MStyle().init___Lscalacss_internal_mutable_StyleSheet$Inline__T(this, "map");
   var jsx$7 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$5 = $m_Lscalacss_internal_Attrs$top$();
-  var jsx$6 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$7.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$5.attr$4, "0")));
+  var this$9 = $m_Lscalacss_internal_Attrs$top$();
+  var jsx$6 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$7.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$9.attr$4, "0")));
   var jsx$5 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$7 = $m_Lscalacss_internal_Attrs$bottom$();
-  var jsx$4 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$5.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$7.attr$4, "0")));
+  var this$11 = $m_Lscalacss_internal_Attrs$bottom$();
+  var jsx$4 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$5.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$11.attr$4, "0")));
   var jsx$3 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$16 = $m_Lscalacss_internal_Attrs$width$();
+  var this$20 = $m_Lscalacss_internal_Attrs$width$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   var $$this = 60;
@@ -24725,16 +25730,16 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
   var r = ab.$$greater$greater__Lscalacss_internal_ValueT$Rule__Lscalacss_internal_ValueT$Rule(bc);
   var v = r.apply__O__Lscalacss_internal_ValueT(f$1);
   var v$1 = v.value$1;
-  var jsx$2 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$3.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$16.attr$3, v$1)));
+  var jsx$2 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$3.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$20.attr$3, v$1)));
   var jsx$1 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$18 = $m_Lscalacss_internal_Attrs$position$();
-  var array = [jsx$6, jsx$4, jsx$2, new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$1.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$18.attr$2, "fixed")))];
+  var this$22 = $m_Lscalacss_internal_Attrs$position$();
+  var array = [jsx$6, jsx$4, jsx$2, new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$1.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$22.attr$2, "fixed")))];
   $m_Lscalacss_defaults_DefaultSettings$Dev$();
   var c = $m_Lscalacss_internal_Compose$().safe__Lscalacss_internal_Compose();
-  var this$23 = $m_Lscalacss_internal_Dsl$();
+  var this$27 = $m_Lscalacss_internal_Dsl$();
   if (($uI(array.length) === 0)) {
-    var s1 = this$23.StyleS$3.empty$1
+    var s1 = this$27.StyleS$3.empty$1
   } else {
     $m_sc_Seq$();
     $m_sjs_js_WrappedArray$();
@@ -24801,22 +25806,38 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
     };
     var s1 = $as_Lscalacss_internal_StyleS(jsx$8)
   };
-  var s2 = this$22.$$outer$f.cssRegister$2.applyMacroName__T__Lscalacss_internal_StyleS__Lscalacss_internal_ClassNameHint__Lscalacss_internal_StyleS(this$22.name$1, s1, this$22.$$outer$f.classNameHint$1);
-  this.map$3 = this$22.$$outer$f.cssRegister$2.registerS__Lscalacss_internal_StyleS__Lscalacss_internal_ClassNameHint__Lscalacss_internal_StyleA(s2, this$22.$$outer$f.classNameHint$1);
-  var this$94 = new $c_Lscalacss_internal_mutable_StyleSheet$Inline$MStyle().init___Lscalacss_internal_mutable_StyleSheet$Inline__T(this, "marker");
+  var s2 = this$26.$$outer$f.cssRegister$2.applyMacroName__T__Lscalacss_internal_StyleS__Lscalacss_internal_ClassNameHint__Lscalacss_internal_StyleS(this$26.name$1, s1, this$26.$$outer$f.classNameHint$1);
+  this.map$3 = this$26.$$outer$f.cssRegister$2.registerS__Lscalacss_internal_StyleS__Lscalacss_internal_ClassNameHint__Lscalacss_internal_StyleA(s2, this$26.$$outer$f.classNameHint$1);
+  var this$106 = new $c_Lscalacss_internal_mutable_StyleSheet$Inline$MStyle().init___Lscalacss_internal_mutable_StyleSheet$Inline__T(this, "marker");
+  var jsx$38 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var this$33 = $m_Lscalacss_internal_Attrs$display$();
+  var jsx$37 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$38.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$33.attr$2, "block")));
+  var jsx$36 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var this$35 = $m_Lscalacss_internal_Attrs$color$();
+  var jsx$35 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$36.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$35.attr$4, "white")));
+  var jsx$34 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var this$37 = $m_Lscalacss_internal_Attrs$textAlign$();
+  var jsx$33 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$34.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$37.attr$2, "center")));
+  var jsx$32 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var this$39 = $m_Lscalacss_internal_Attrs$fontStyle$();
+  var jsx$31 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$32.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$39.attr$2, "italic")));
   var jsx$30 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$29 = $m_Lscalacss_internal_Attrs$display$();
-  var jsx$29 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$30.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$29.attr$2, "block")));
+  var this$41 = $m_Lscalacss_internal_Attrs$fontWeight$();
+  var jsx$29 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$30.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$41.attr$2, "lighter")));
   var jsx$28 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$31 = $m_Lscalacss_internal_Attrs$borderStyle$();
+  var this$43 = $m_Lscalacss_internal_Attrs$borderStyle$();
   var v$2 = $m_Lscalacss_internal_Literal$Typed$solid$();
   var v$3 = v$2.value$1;
-  var jsx$27 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$28.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$31.attr$3, v$3)));
+  var jsx$27 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$28.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$43.attr$3, v$3)));
   var jsx$26 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$40 = $m_Lscalacss_internal_Attrs$borderWidth$();
+  var this$52 = $m_Lscalacss_internal_Attrs$borderWidth$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   var $$this$1 = 1;
@@ -24837,14 +25858,14 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
   var r$1 = ab$1.$$greater$greater__Lscalacss_internal_ValueT$Rule__Lscalacss_internal_ValueT$Rule(bc$1);
   var all = r$1.apply__O__Lscalacss_internal_ValueT(f$4);
   var v$4 = all.value$1;
-  var jsx$25 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$26.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$40.attr$3, v$4)));
+  var jsx$25 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$26.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$52.attr$3, v$4)));
   var jsx$24 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$42 = $m_Lscalacss_internal_Attrs$borderColor$();
-  var jsx$23 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$24.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$42.attr$3, "white")));
+  var this$54 = $m_Lscalacss_internal_Attrs$borderColor$();
+  var jsx$23 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$24.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$54.attr$3, "white")));
   var jsx$22 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$47 = $m_Lscalacss_internal_Attrs$opacity$();
+  var this$59 = $m_Lscalacss_internal_Attrs$opacity$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   var r$2 = $m_Lscalacss_internal_ValueT$Rule$().apply__F1__Lscalacss_internal_ValueT$Rule(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(x$6$2) {
@@ -24853,8 +25874,8 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
   })));
   var v$5 = r$2.apply__O__Lscalacss_internal_ValueT(1);
   var v$6 = v$5.value$1;
-  var jsx$21 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$22.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$47.attr$3, v$6)));
-  var this$57 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var jsx$21 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$22.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$59.attr$3, v$6)));
+  var this$69 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   $m_Lscalacss_internal_Attrs$borderRadius$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
@@ -24877,10 +25898,10 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
   var radius = r$3.apply__O__Lscalacss_internal_ValueT(f$6);
   var v$7 = radius.value$1;
   var x = new $c_Lscalacss_internal_Attrs$BorderRadiusNext().init___T(v$7);
-  var jsx$20 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(this$57.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(x.av__Lscalacss_internal_AV()));
+  var jsx$20 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(this$69.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(x.av__Lscalacss_internal_AV()));
   var jsx$19 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$66 = $m_Lscalacss_internal_Attrs$width$();
+  var this$78 = $m_Lscalacss_internal_Attrs$width$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   var $$this$3 = 20;
@@ -24901,10 +25922,10 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
   var r$4 = ab$3.$$greater$greater__Lscalacss_internal_ValueT$Rule__Lscalacss_internal_ValueT$Rule(bc$3);
   var v$8 = r$4.apply__O__Lscalacss_internal_ValueT(f$8);
   var v$9 = v$8.value$1;
-  var jsx$18 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$19.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$66.attr$3, v$9)));
+  var jsx$18 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$19.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$78.attr$3, v$9)));
   var jsx$17 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$75 = $m_Lscalacss_internal_Attrs$margin$();
+  var this$87 = $m_Lscalacss_internal_Attrs$margin$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   var $$this$4 = (-10);
@@ -24925,10 +25946,10 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
   var r$5 = ab$4.$$greater$greater__Lscalacss_internal_ValueT$Rule__Lscalacss_internal_ValueT$Rule(bc$4);
   var all$1 = r$5.apply__O__Lscalacss_internal_ValueT(f$10);
   var v$10 = all$1.value$1;
-  var jsx$16 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$17.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$75.attr$3, v$10)));
+  var jsx$16 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$17.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$87.attr$3, v$10)));
   var jsx$15 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$84 = $m_Lscalacss_internal_Attrs$height$();
+  var this$96 = $m_Lscalacss_internal_Attrs$height$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   var $$this$5 = 20;
@@ -24949,24 +25970,26 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
   var r$6 = ab$5.$$greater$greater__Lscalacss_internal_ValueT$Rule__Lscalacss_internal_ValueT$Rule(bc$5);
   var v$11 = r$6.apply__O__Lscalacss_internal_ValueT(f$12);
   var v$12 = v$11.value$1;
-  var jsx$14 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$15.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$84.attr$3, v$12)));
+  var jsx$14 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$15.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$96.attr$3, v$12)));
   var jsx$13 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$86 = $m_Lscalacss_internal_Attrs$cursor$();
-  var jsx$12 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$13.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$86.attr$2, "pointer")));
+  var this$98 = $m_Lscalacss_internal_Attrs$cursor$();
+  var jsx$12 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$13.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$98.attr$2, "pointer")));
   var jsx$11 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$88 = $m_Lscalacss_internal_Attrs$backgroundColor$();
-  var jsx$10 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$11.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$88.attr$4, "orange")));
+  var this$100 = $m_Lscalacss_internal_Attrs$backgroundColor$();
+  var v$13 = this.inactiveBackground$3;
+  var v$14 = v$13.value$1;
+  var jsx$10 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$11.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$100.attr$4, v$14)));
   var jsx$9 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$90 = $m_Lscalacss_internal_Attrs$padding$();
-  var array$2 = [jsx$29, jsx$27, jsx$25, jsx$23, jsx$21, jsx$20, jsx$18, jsx$16, jsx$14, jsx$12, jsx$10, new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$9.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$90.attr$3, "0")))];
+  var this$102 = $m_Lscalacss_internal_Attrs$padding$();
+  var array$2 = [jsx$37, jsx$35, jsx$33, jsx$31, jsx$29, jsx$27, jsx$25, jsx$23, jsx$21, jsx$20, jsx$18, jsx$16, jsx$14, jsx$12, jsx$10, new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$9.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$102.attr$3, "0")))];
   $m_Lscalacss_defaults_DefaultSettings$Dev$();
   var c$2 = $m_Lscalacss_internal_Compose$().safe__Lscalacss_internal_Compose();
-  var this$95 = $m_Lscalacss_internal_Dsl$();
+  var this$107 = $m_Lscalacss_internal_Dsl$();
   if (($uI(array$2.length) === 0)) {
-    var s1$1 = this$95.StyleS$3.empty$1
+    var s1$1 = this$107.StyleS$3.empty$1
   } else {
     $m_sc_Seq$();
     $m_sjs_js_WrappedArray$();
@@ -24992,7 +26015,7 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
       var start$1 = 1;
       var end$1 = $uI(array$3.length);
       var z$1 = array$3[0];
-      var jsx$31;
+      var jsx$39;
       _foldl$1: while (true) {
         if ((start$1 !== end$1)) {
           var temp$start$1 = ((1 + start$1) | 0);
@@ -25004,7 +26027,7 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
           z$1 = temp$z$1;
           continue _foldl$1
         };
-        var jsx$31 = z$1;
+        var jsx$39 = z$1;
         break
       }
     } else {
@@ -25029,22 +26052,24 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
         };
         i$3 = ((1 + i$3) | 0)
       };
-      var jsx$31 = elem$1$3
+      var jsx$39 = elem$1$3
     };
-    var s1$1 = $as_Lscalacss_internal_StyleS(jsx$31)
+    var s1$1 = $as_Lscalacss_internal_StyleS(jsx$39)
   };
-  var s2$1 = this$94.$$outer$f.cssRegister$2.applyMacroName__T__Lscalacss_internal_StyleS__Lscalacss_internal_ClassNameHint__Lscalacss_internal_StyleS(this$94.name$1, s1$1, this$94.$$outer$f.classNameHint$1);
-  this.marker$3 = this$94.$$outer$f.cssRegister$2.registerS__Lscalacss_internal_StyleS__Lscalacss_internal_ClassNameHint__Lscalacss_internal_StyleA(s2$1, this$94.$$outer$f.classNameHint$1);
-  var this$105 = new $c_Lscalacss_internal_mutable_StyleSheet$Inline$MStyle().init___Lscalacss_internal_mutable_StyleSheet$Inline__T(this, "activePoint");
-  var jsx$32 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var s2$1 = this$106.$$outer$f.cssRegister$2.applyMacroName__T__Lscalacss_internal_StyleS__Lscalacss_internal_ClassNameHint__Lscalacss_internal_StyleS(this$106.name$1, s1$1, this$106.$$outer$f.classNameHint$1);
+  this.marker$3 = this$106.$$outer$f.cssRegister$2.registerS__Lscalacss_internal_StyleS__Lscalacss_internal_ClassNameHint__Lscalacss_internal_StyleA(s2$1, this$106.$$outer$f.classNameHint$1);
+  var this$117 = new $c_Lscalacss_internal_mutable_StyleSheet$Inline$MStyle().init___Lscalacss_internal_mutable_StyleSheet$Inline__T(this, "activePoint");
+  var jsx$40 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$101 = $m_Lscalacss_internal_Attrs$backgroundColor$();
-  var array$4 = [new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$32.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$101.attr$4, "red")))];
+  var this$113 = $m_Lscalacss_internal_Attrs$backgroundColor$();
+  var v$15 = this.activeBackground$3;
+  var v$16 = v$15.value$1;
+  var array$4 = [new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$40.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$113.attr$4, v$16)))];
   $m_Lscalacss_defaults_DefaultSettings$Dev$();
   var c$3 = $m_Lscalacss_internal_Compose$().safe__Lscalacss_internal_Compose();
-  var this$106 = $m_Lscalacss_internal_Dsl$();
+  var this$118 = $m_Lscalacss_internal_Dsl$();
   if (($uI(array$4.length) === 0)) {
-    var s1$2 = this$106.StyleS$3.empty$1
+    var s1$2 = this$118.StyleS$3.empty$1
   } else {
     $m_sc_Seq$();
     $m_sjs_js_WrappedArray$();
@@ -25070,7 +26095,7 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
       var start$2 = 1;
       var end$2 = $uI(array$5.length);
       var z$2 = array$5[0];
-      var jsx$33;
+      var jsx$41;
       _foldl$2: while (true) {
         if ((start$2 !== end$2)) {
           var temp$start$2 = ((1 + start$2) | 0);
@@ -25082,7 +26107,7 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
           z$2 = temp$z$2;
           continue _foldl$2
         };
-        var jsx$33 = z$2;
+        var jsx$41 = z$2;
         break
       }
     } else {
@@ -25107,16 +26132,16 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
         };
         i$5 = ((1 + i$5) | 0)
       };
-      var jsx$33 = elem$1$5
+      var jsx$41 = elem$1$5
     };
-    var s1$2 = $as_Lscalacss_internal_StyleS(jsx$33)
+    var s1$2 = $as_Lscalacss_internal_StyleS(jsx$41)
   };
-  var s2$2 = this$105.$$outer$f.cssRegister$2.applyMacroName__T__Lscalacss_internal_StyleS__Lscalacss_internal_ClassNameHint__Lscalacss_internal_StyleS(this$105.name$1, s1$2, this$105.$$outer$f.classNameHint$1);
-  this.activePoint$3 = this$105.$$outer$f.cssRegister$2.registerS__Lscalacss_internal_StyleS__Lscalacss_internal_ClassNameHint__Lscalacss_internal_StyleA(s2$2, this$105.$$outer$f.classNameHint$1);
-  var this$150 = new $c_Lscalacss_internal_mutable_StyleSheet$Inline$MStyle().init___Lscalacss_internal_mutable_StyleSheet$Inline__T(this, "features");
-  var jsx$44 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var s2$2 = this$117.$$outer$f.cssRegister$2.applyMacroName__T__Lscalacss_internal_StyleS__Lscalacss_internal_ClassNameHint__Lscalacss_internal_StyleS(this$117.name$1, s1$2, this$117.$$outer$f.classNameHint$1);
+  this.activePoint$3 = this$117.$$outer$f.cssRegister$2.registerS__Lscalacss_internal_StyleS__Lscalacss_internal_ClassNameHint__Lscalacss_internal_StyleA(s2$2, this$117.$$outer$f.classNameHint$1);
+  var this$162 = new $c_Lscalacss_internal_mutable_StyleSheet$Inline$MStyle().init___Lscalacss_internal_mutable_StyleSheet$Inline__T(this, "features");
+  var jsx$52 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$119 = $m_Lscalacss_internal_Attrs$width$();
+  var this$131 = $m_Lscalacss_internal_Attrs$width$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   var $$this$6 = 40;
@@ -25134,12 +26159,12 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
   }));
   var bc$6 = new $c_Lscalacss_internal_ValueT$Rule$$anon$1().init___F1(f$15);
   var r$7 = ab$6.$$greater$greater__Lscalacss_internal_ValueT$Rule__Lscalacss_internal_ValueT$Rule(bc$6);
-  var v$13 = r$7.apply__O__Lscalacss_internal_ValueT(f$16);
-  var v$14 = v$13.value$1;
-  var jsx$43 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$44.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$119.attr$3, v$14)));
-  var jsx$42 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var v$17 = r$7.apply__O__Lscalacss_internal_ValueT(f$16);
+  var v$18 = v$17.value$1;
+  var jsx$51 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$52.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$131.attr$3, v$18)));
+  var jsx$50 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$128 = $m_Lscalacss_internal_Attrs$height$();
+  var this$140 = $m_Lscalacss_internal_Attrs$height$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   var $$this$7 = 1500;
@@ -25158,12 +26183,12 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
   }));
   var bc$7 = new $c_Lscalacss_internal_ValueT$Rule$$anon$1().init___F1(f$17);
   var r$8 = ab$7.$$greater$greater__Lscalacss_internal_ValueT$Rule__Lscalacss_internal_ValueT$Rule(bc$7);
-  var v$15 = r$8.apply__O__Lscalacss_internal_ValueT(f$18);
-  var v$16 = v$15.value$1;
-  var jsx$41 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$42.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$128.attr$3, v$16)));
-  var jsx$40 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var v$19 = r$8.apply__O__Lscalacss_internal_ValueT(f$18);
+  var v$20 = v$19.value$1;
+  var jsx$49 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$50.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$140.attr$3, v$20)));
+  var jsx$48 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$137 = $m_Lscalacss_internal_Attrs$marginLeft$();
+  var this$149 = $m_Lscalacss_internal_Attrs$marginLeft$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   var $$this$8 = 60;
@@ -25181,29 +26206,29 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
   }));
   var bc$8 = new $c_Lscalacss_internal_ValueT$Rule$$anon$1().init___F1(f$19);
   var r$9 = ab$8.$$greater$greater__Lscalacss_internal_ValueT$Rule__Lscalacss_internal_ValueT$Rule(bc$8);
-  var v$17 = r$9.apply__O__Lscalacss_internal_ValueT(f$20);
-  var v$18 = v$17.value$1;
-  var jsx$39 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$40.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$137.attr$4, v$18)));
-  var jsx$38 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var v$21 = r$9.apply__O__Lscalacss_internal_ValueT(f$20);
+  var v$22 = v$21.value$1;
+  var jsx$47 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$48.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$149.attr$4, v$22)));
+  var jsx$46 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   var a = $m_Lscalacss_internal_Attrs$fontFamily$();
-  var jsx$37 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$38.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(a.attr$2, "sans-serif")));
-  var jsx$36 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var jsx$45 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$46.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(a.attr$2, "sans-serif")));
+  var jsx$44 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$143 = $m_Lscalacss_internal_Attrs$overflowY$();
-  var jsx$35 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$36.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$143.attr$2, "scroll")));
-  var jsx$34 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var this$155 = $m_Lscalacss_internal_Attrs$overflowY$();
+  var jsx$43 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$44.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$155.attr$2, "scroll")));
+  var jsx$42 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$146 = $m_Lscalacss_internal_Attrs$backgroundColor$();
-  var v$19 = new $c_Lscalacss_internal_ValueT().init___T("#fafafa");
-  var v$20 = v$19.value$1;
-  var array$6 = [jsx$43, jsx$41, jsx$39, jsx$37, jsx$35, new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$34.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$146.attr$4, v$20)))];
+  var this$158 = $m_Lscalacss_internal_Attrs$backgroundColor$();
+  var v$23 = new $c_Lscalacss_internal_ValueT().init___T("#fafafa");
+  var v$24 = v$23.value$1;
+  var array$6 = [jsx$51, jsx$49, jsx$47, jsx$45, jsx$43, new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$42.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$158.attr$4, v$24)))];
   $m_Lscalacss_defaults_DefaultSettings$Dev$();
   var c$4 = $m_Lscalacss_internal_Compose$().safe__Lscalacss_internal_Compose();
-  var this$151 = $m_Lscalacss_internal_Dsl$();
+  var this$163 = $m_Lscalacss_internal_Dsl$();
   if (($uI(array$6.length) === 0)) {
-    var s1$3 = this$151.StyleS$3.empty$1
+    var s1$3 = this$163.StyleS$3.empty$1
   } else {
     $m_sc_Seq$();
     $m_sjs_js_WrappedArray$();
@@ -25229,7 +26254,7 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
       var start$3 = 1;
       var end$3 = $uI(array$7.length);
       var z$3 = array$7[0];
-      var jsx$45;
+      var jsx$53;
       _foldl$3: while (true) {
         if ((start$3 !== end$3)) {
           var temp$start$3 = ((1 + start$3) | 0);
@@ -25241,7 +26266,7 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
           z$3 = temp$z$3;
           continue _foldl$3
         };
-        var jsx$45 = z$3;
+        var jsx$53 = z$3;
         break
       }
     } else {
@@ -25266,19 +26291,19 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
         };
         i$7 = ((1 + i$7) | 0)
       };
-      var jsx$45 = elem$1$7
+      var jsx$53 = elem$1$7
     };
-    var s1$3 = $as_Lscalacss_internal_StyleS(jsx$45)
+    var s1$3 = $as_Lscalacss_internal_StyleS(jsx$53)
   };
-  var s2$3 = this$150.$$outer$f.cssRegister$2.applyMacroName__T__Lscalacss_internal_StyleS__Lscalacss_internal_ClassNameHint__Lscalacss_internal_StyleS(this$150.name$1, s1$3, this$150.$$outer$f.classNameHint$1);
-  this.features$3 = this$150.$$outer$f.cssRegister$2.registerS__Lscalacss_internal_StyleS__Lscalacss_internal_ClassNameHint__Lscalacss_internal_StyleA(s2$3, this$150.$$outer$f.classNameHint$1);
-  var this$228 = new $c_Lscalacss_internal_mutable_StyleSheet$Inline$MStyle().init___Lscalacss_internal_mutable_StyleSheet$Inline__T(this, "section");
-  var jsx$65 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var s2$3 = this$162.$$outer$f.cssRegister$2.applyMacroName__T__Lscalacss_internal_StyleS__Lscalacss_internal_ClassNameHint__Lscalacss_internal_StyleS(this$162.name$1, s1$3, this$162.$$outer$f.classNameHint$1);
+  this.features$3 = this$162.$$outer$f.cssRegister$2.registerS__Lscalacss_internal_StyleS__Lscalacss_internal_ClassNameHint__Lscalacss_internal_StyleA(s2$3, this$162.$$outer$f.classNameHint$1);
+  var this$253 = new $c_Lscalacss_internal_mutable_StyleSheet$Inline$MStyle().init___Lscalacss_internal_mutable_StyleSheet$Inline__T(this, "section");
+  var jsx$79 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var jsx$64 = $m_Lscalacss_internal_Attrs$padding$();
+  var jsx$78 = $m_Lscalacss_internal_Attrs$padding$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var $$this$9 = 25;
+  var $$this$9 = 20;
   var u$5 = $m_Lscalacss_internal_LengthUnit$px$();
   var f$23 = new $c_Lscalacss_internal_Length().init___O__Lscalacss_internal_LengthUnit($$this$9, u$5);
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
@@ -25294,10 +26319,10 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
   }));
   var bc$9 = new $c_Lscalacss_internal_ValueT$Rule$$anon$1().init___F1(f$22);
   var r$10 = ab$9.$$greater$greater__Lscalacss_internal_ValueT$Rule__Lscalacss_internal_ValueT$Rule(bc$9);
-  var jsx$63 = r$10.apply__O__Lscalacss_internal_ValueT(f$23);
+  var jsx$77 = r$10.apply__O__Lscalacss_internal_ValueT(f$23);
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var $$this$10 = 25;
+  var $$this$10 = 20;
   var u$6 = $m_Lscalacss_internal_LengthUnit$px$();
   var f$25 = new $c_Lscalacss_internal_Length().init___O__Lscalacss_internal_LengthUnit($$this$10, u$6);
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
@@ -25313,10 +26338,10 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
   }));
   var bc$10 = new $c_Lscalacss_internal_ValueT$Rule$$anon$1().init___F1(f$24);
   var r$11 = ab$10.$$greater$greater__Lscalacss_internal_ValueT$Rule__Lscalacss_internal_ValueT$Rule(bc$10);
-  var jsx$62 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$65.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(jsx$64.apply__Lscalacss_internal_ValueT__Lscalacss_internal_ValueT__Lscalacss_internal_AV(jsx$63, r$11.apply__O__Lscalacss_internal_ValueT(f$25))));
-  var jsx$61 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var jsx$76 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$79.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(jsx$78.apply__Lscalacss_internal_ValueT__Lscalacss_internal_ValueT__Lscalacss_internal_AV(jsx$77, r$11.apply__O__Lscalacss_internal_ValueT(f$25))));
+  var jsx$75 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$179 = $m_Lscalacss_internal_Attrs$lineHeight$();
+  var this$191 = $m_Lscalacss_internal_Attrs$lineHeight$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   var $$this$11 = 25;
@@ -25335,18 +26360,18 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
   }));
   var bc$11 = new $c_Lscalacss_internal_ValueT$Rule$$anon$1().init___F1(f$26);
   var r$12 = ab$11.$$greater$greater__Lscalacss_internal_ValueT$Rule__Lscalacss_internal_ValueT$Rule(bc$11);
-  var v$21 = r$12.apply__O__Lscalacss_internal_ValueT(f$27);
-  var v$22 = v$21.value$1;
-  var jsx$60 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$61.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$179.attr$3, v$22)));
-  var jsx$59 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var v$25 = r$12.apply__O__Lscalacss_internal_ValueT(f$27);
+  var v$26 = v$25.value$1;
+  var jsx$74 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$75.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$191.attr$3, v$26)));
+  var jsx$73 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$181 = $m_Lscalacss_internal_Attrs$borderBottom$();
-  var v$23 = $m_Lscalacss_internal_Literal$Typed$solid$();
-  var v$24 = v$23.value$1;
-  var jsx$58 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$59.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$181.attr$4, v$24)));
-  var jsx$57 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var this$193 = $m_Lscalacss_internal_Attrs$borderBottom$();
+  var v$27 = $m_Lscalacss_internal_Literal$Typed$solid$();
+  var v$28 = v$27.value$1;
+  var jsx$72 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$73.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$193.attr$4, v$28)));
+  var jsx$71 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$190 = $m_Lscalacss_internal_Attrs$borderBottomWidth$();
+  var this$202 = $m_Lscalacss_internal_Attrs$borderBottomWidth$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   var $$this$12 = 1;
@@ -25365,30 +26390,30 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
   }));
   var bc$12 = new $c_Lscalacss_internal_ValueT$Rule$$anon$1().init___F1(f$28);
   var r$13 = ab$12.$$greater$greater__Lscalacss_internal_ValueT$Rule__Lscalacss_internal_ValueT$Rule(bc$12);
-  var v$25 = r$13.apply__O__Lscalacss_internal_ValueT(f$29);
-  var v$26 = v$25.value$1;
-  var jsx$56 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$57.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$190.attr$4, v$26)));
-  var jsx$55 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var v$29 = r$13.apply__O__Lscalacss_internal_ValueT(f$29);
+  var v$30 = v$29.value$1;
+  var jsx$70 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$71.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$202.attr$4, v$30)));
+  var jsx$69 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$193 = $m_Lscalacss_internal_Attrs$borderBottomColor$();
-  var v$27 = new $c_Lscalacss_internal_ValueT().init___T("#ddd");
-  var v$28 = v$27.value$1;
-  var jsx$54 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$55.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$193.attr$4, v$28)));
-  var jsx$53 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var this$205 = $m_Lscalacss_internal_Attrs$borderBottomColor$();
+  var v$31 = new $c_Lscalacss_internal_ValueT().init___T("#ddd");
+  var v$32 = v$31.value$1;
+  var jsx$68 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$69.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$205.attr$4, v$32)));
+  var jsx$67 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$198 = $m_Lscalacss_internal_Attrs$opacity$();
+  var this$210 = $m_Lscalacss_internal_Attrs$opacity$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   var r$14 = $m_Lscalacss_internal_ValueT$Rule$().apply__F1__Lscalacss_internal_ValueT$Rule(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(x$7$2) {
     var x$7 = $uD(x$7$2);
     return ("" + x$7)
   })));
-  var v$29 = r$14.apply__O__Lscalacss_internal_ValueT(0.25);
-  var v$30 = v$29.value$1;
-  var jsx$52 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$53.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$198.attr$3, v$30)));
-  var jsx$51 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var v$33 = r$14.apply__O__Lscalacss_internal_ValueT(0.25);
+  var v$34 = v$33.value$1;
+  var jsx$66 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$67.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$210.attr$3, v$34)));
+  var jsx$65 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$207 = $m_Lscalacss_internal_Attrs$fontSize$();
+  var this$219 = $m_Lscalacss_internal_Attrs$fontSize$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   var $$this$13 = 13;
@@ -25407,27 +26432,21 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
   }));
   var bc$13 = new $c_Lscalacss_internal_ValueT$Rule$$anon$1().init___F1(f$30);
   var r$15 = ab$13.$$greater$greater__Lscalacss_internal_ValueT$Rule__Lscalacss_internal_ValueT$Rule(bc$13);
-  var v$31 = r$15.apply__O__Lscalacss_internal_ValueT(f$31);
-  var v$32 = v$31.value$1;
-  var jsx$50 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$51.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$207.attr$3, v$32)));
+  var v$35 = r$15.apply__O__Lscalacss_internal_ValueT(f$31);
+  var v$36 = v$35.value$1;
+  var jsx$64 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$65.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$219.attr$3, v$36)));
+  var jsx$63 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$209 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$208 = $m_Lscalacss_internal_Cond$().empty$1;
-  var p = $m_Lscalacss_internal_Pseudo$LastChild$();
-  var x$2 = this$208.addPseudo__Lscalacss_internal_Pseudo__Lscalacss_internal_Cond(p);
-  var jsx$49 = new $c_Lscalacss_internal_DslBase$DslCond().init___Lscalacss_internal_Cond__Lscalacss_internal_DslBase(x$2, this$209);
-  var jsx$48 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var this$221 = $m_Lscalacss_internal_Attrs$borderLeftStyle$();
+  var v$37 = $m_Lscalacss_internal_Literal$Typed$solid$();
+  var v$38 = v$37.value$1;
+  var jsx$62 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$63.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$221.attr$3, v$38)));
+  var jsx$61 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$211 = $m_Lscalacss_internal_Attrs$borderBottom$();
-  var v$33 = $m_Lscalacss_internal_Literal$Typed$none$();
-  var v$34 = v$33.value$1;
-  var jsx$47 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$48.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$211.attr$4, v$34)));
-  var jsx$46 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$220 = $m_Lscalacss_internal_Attrs$borderBottom$();
+  var this$230 = $m_Lscalacss_internal_Attrs$borderLeftWidth$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var $$this$14 = 200;
+  var $$this$14 = 4;
   var u$10 = $m_Lscalacss_internal_LengthUnit$px$();
   var f$33 = new $c_Lscalacss_internal_Length().init___O__Lscalacss_internal_LengthUnit($$this$14, u$10);
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
@@ -25443,15 +26462,57 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
   }));
   var bc$14 = new $c_Lscalacss_internal_ValueT$Rule$$anon$1().init___F1(f$32);
   var r$16 = ab$14.$$greater$greater__Lscalacss_internal_ValueT$Rule__Lscalacss_internal_ValueT$Rule(bc$14);
-  var a$1 = r$16.apply__O__Lscalacss_internal_ValueT(f$33);
-  var v$35 = a$1.value$1;
-  var x$5 = jsx$49.apply__sc_Seq__Lscalacss_internal_Compose__Lscalacss_internal_StyleS(new $c_sjs_js_WrappedArray().init___sjs_js_Array([jsx$47, new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$46.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$220.attr$4, v$35)))]), ($m_Lscalacss_defaults_DefaultSettings$Dev$(), $m_Lscalacss_internal_Compose$().safe__Lscalacss_internal_Compose()));
-  var array$8 = [jsx$62, jsx$60, jsx$58, jsx$56, jsx$54, jsx$52, jsx$50, new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(x$5)];
+  var v$39 = r$16.apply__O__Lscalacss_internal_ValueT(f$33);
+  var v$40 = v$39.value$1;
+  var jsx$60 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$61.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$230.attr$4, v$40)));
+  var jsx$59 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var this$232 = $m_Lscalacss_internal_Attrs$borderLeftColor$();
+  var v$41 = this.inactiveBackground$3;
+  var v$42 = v$41.value$1;
+  var jsx$58 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$59.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$232.attr$4, v$42)));
+  this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var this$234 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var this$233 = $m_Lscalacss_internal_Cond$().empty$1;
+  var p = $m_Lscalacss_internal_Pseudo$LastChild$();
+  var x$2 = this$233.addPseudo__Lscalacss_internal_Pseudo__Lscalacss_internal_Cond(p);
+  var jsx$57 = new $c_Lscalacss_internal_DslBase$DslCond().init___Lscalacss_internal_Cond__Lscalacss_internal_DslBase(x$2, this$234);
+  var jsx$56 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var this$236 = $m_Lscalacss_internal_Attrs$borderBottom$();
+  var v$43 = $m_Lscalacss_internal_Literal$Typed$none$();
+  var v$44 = v$43.value$1;
+  var jsx$55 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$56.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$236.attr$4, v$44)));
+  var jsx$54 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var this$245 = $m_Lscalacss_internal_Attrs$borderBottom$();
+  this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var $$this$15 = 200;
+  var u$11 = $m_Lscalacss_internal_LengthUnit$px$();
+  var f$35 = new $c_Lscalacss_internal_Length().init___O__Lscalacss_internal_LengthUnit($$this$15, u$11);
+  this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var ab$15 = $m_Lscalacss_internal_ValueT$Rule$().apply__F1__Lscalacss_internal_ValueT$Rule(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(x$3$2$11) {
+    var x$3$12 = $as_Lscalacss_internal_Length(x$3$2$11);
+    return x$3$12.value__T()
+  })));
+  this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var f$34 = new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(x$1$2$15) {
+    var x$1$16 = $as_Lscalacss_internal_ValueT(x$1$2$15);
+    return x$1$16
+  }));
+  var bc$15 = new $c_Lscalacss_internal_ValueT$Rule$$anon$1().init___F1(f$34);
+  var r$17 = ab$15.$$greater$greater__Lscalacss_internal_ValueT$Rule__Lscalacss_internal_ValueT$Rule(bc$15);
+  var a$1 = r$17.apply__O__Lscalacss_internal_ValueT(f$35);
+  var v$45 = a$1.value$1;
+  var x$5 = jsx$57.apply__sc_Seq__Lscalacss_internal_Compose__Lscalacss_internal_StyleS(new $c_sjs_js_WrappedArray().init___sjs_js_Array([jsx$55, new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$54.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$245.attr$4, v$45)))]), ($m_Lscalacss_defaults_DefaultSettings$Dev$(), $m_Lscalacss_internal_Compose$().safe__Lscalacss_internal_Compose()));
+  var array$8 = [jsx$76, jsx$74, jsx$72, jsx$70, jsx$68, jsx$66, jsx$64, jsx$62, jsx$60, jsx$58, new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(x$5)];
   $m_Lscalacss_defaults_DefaultSettings$Dev$();
   var c$5 = $m_Lscalacss_internal_Compose$().safe__Lscalacss_internal_Compose();
-  var this$229 = $m_Lscalacss_internal_Dsl$();
+  var this$254 = $m_Lscalacss_internal_Dsl$();
   if (($uI(array$8.length) === 0)) {
-    var s1$4 = this$229.StyleS$3.empty$1
+    var s1$4 = this$254.StyleS$3.empty$1
   } else {
     $m_sc_Seq$();
     $m_sjs_js_WrappedArray$();
@@ -25466,7 +26527,7 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
       array$9.push(x$9$4);
       i$8 = ((1 + i$8) | 0)
     };
-    var f$34 = (function(c$1$4) {
+    var f$36 = (function(c$1$4) {
       return (function(x$10$2$4, x$11$2$4) {
         var x$10$5 = $as_Lscalacss_internal_StyleS(x$10$2$4);
         var x$11$5 = $as_Lscalacss_internal_StyleS(x$11$2$4);
@@ -25477,19 +26538,19 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
       var start$4 = 1;
       var end$4 = $uI(array$9.length);
       var z$4 = array$9[0];
-      var jsx$66;
+      var jsx$80;
       _foldl$4: while (true) {
         if ((start$4 !== end$4)) {
           var temp$start$4 = ((1 + start$4) | 0);
           var arg1$17 = z$4;
           var index$13 = start$4;
           var arg2$4 = array$9[index$13];
-          var temp$z$4 = f$34(arg1$17, arg2$4);
+          var temp$z$4 = f$36(arg1$17, arg2$4);
           start$4 = temp$start$4;
           z$4 = temp$z$4;
           continue _foldl$4
         };
-        var jsx$66 = z$4;
+        var jsx$80 = z$4;
         break
       }
     } else {
@@ -25510,38 +26571,50 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
           elem$1$8 = false
         } else {
           var arg1$19 = elem$1$9;
-          elem$1$9 = f$34(arg1$19, arg1$18)
+          elem$1$9 = f$36(arg1$19, arg1$18)
         };
         i$9 = ((1 + i$9) | 0)
       };
-      var jsx$66 = elem$1$9
+      var jsx$80 = elem$1$9
     };
-    var s1$4 = $as_Lscalacss_internal_StyleS(jsx$66)
+    var s1$4 = $as_Lscalacss_internal_StyleS(jsx$80)
   };
-  var s2$4 = this$228.$$outer$f.cssRegister$2.applyMacroName__T__Lscalacss_internal_StyleS__Lscalacss_internal_ClassNameHint__Lscalacss_internal_StyleS(this$228.name$1, s1$4, this$228.$$outer$f.classNameHint$1);
-  this.section$3 = this$228.$$outer$f.cssRegister$2.registerS__Lscalacss_internal_StyleS__Lscalacss_internal_ClassNameHint__Lscalacss_internal_StyleA(s2$4, this$228.$$outer$f.classNameHint$1);
-  var this$244 = new $c_Lscalacss_internal_mutable_StyleSheet$Inline$MStyle().init___Lscalacss_internal_mutable_StyleSheet$Inline__T(this, "active");
-  var jsx$69 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var s2$4 = this$253.$$outer$f.cssRegister$2.applyMacroName__T__Lscalacss_internal_StyleS__Lscalacss_internal_ClassNameHint__Lscalacss_internal_StyleS(this$253.name$1, s1$4, this$253.$$outer$f.classNameHint$1);
+  this.section$3 = this$253.$$outer$f.cssRegister$2.registerS__Lscalacss_internal_StyleS__Lscalacss_internal_ClassNameHint__Lscalacss_internal_StyleA(s2$4, this$253.$$outer$f.classNameHint$1);
+  var this$274 = new $c_Lscalacss_internal_mutable_StyleSheet$Inline$MStyle().init___Lscalacss_internal_mutable_StyleSheet$Inline__T(this, "active");
+  var jsx$87 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$235 = $m_Lscalacss_internal_Attrs$backgroundColor$();
-  var jsx$68 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$69.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$235.attr$4, "lightblue")));
-  var jsx$67 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var this$261 = $m_Lscalacss_internal_Attrs$backgroundColor$();
+  var v$46 = new $c_Lscalacss_internal_ValueT().init___T("#75cff0");
+  var v$47 = v$46.value$1;
+  var jsx$86 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$87.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$261.attr$4, v$47)));
+  var jsx$85 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var this$240 = $m_Lscalacss_internal_Attrs$opacity$();
+  var this$263 = $m_Lscalacss_internal_Attrs$borderLeftColor$();
+  var v$48 = this.activeBackground$3;
+  var v$49 = v$48.value$1;
+  var jsx$84 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$85.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$263.attr$4, v$49)));
+  var jsx$83 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var this$265 = $m_Lscalacss_internal_Attrs$color$();
+  var jsx$82 = new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$83.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$265.attr$4, "white")));
+  var jsx$81 = this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
+  var this$270 = $m_Lscalacss_internal_Attrs$opacity$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
   this.dsl__Lscalacss_internal_mutable_StyleSheet$Base$dsl$();
-  var r$17 = $m_Lscalacss_internal_ValueT$Rule$().apply__F1__Lscalacss_internal_ValueT$Rule(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(x$6$2$1) {
+  var r$18 = $m_Lscalacss_internal_ValueT$Rule$().apply__F1__Lscalacss_internal_ValueT$Rule(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(x$6$2$1) {
     var x$6$1 = $uI(x$6$2$1);
     return ("" + x$6$1)
   })));
-  var v$36 = r$17.apply__O__Lscalacss_internal_ValueT(1);
-  var v$37 = v$36.value$1;
-  var array$10 = [jsx$68, new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$67.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$240.attr$3, v$37)))];
+  var v$50 = r$18.apply__O__Lscalacss_internal_ValueT(1);
+  var v$51 = v$50.value$1;
+  var array$10 = [jsx$86, jsx$84, jsx$82, new $c_Lscalacss_internal_DslBase$ToStyle().init___Lscalacss_internal_StyleS(jsx$81.ToStyleAV__Lscalacss_internal_AV__Lscalacss_internal_StyleS(new $c_Lscalacss_internal_AV().init___Lscalacss_internal_Attr__T(this$270.attr$3, v$51)))];
   $m_Lscalacss_defaults_DefaultSettings$Dev$();
   var c$6 = $m_Lscalacss_internal_Compose$().safe__Lscalacss_internal_Compose();
-  var this$245 = $m_Lscalacss_internal_Dsl$();
+  var this$275 = $m_Lscalacss_internal_Dsl$();
   if (($uI(array$10.length) === 0)) {
-    var s1$5 = this$245.StyleS$3.empty$1
+    var s1$5 = this$275.StyleS$3.empty$1
   } else {
     $m_sc_Seq$();
     $m_sjs_js_WrappedArray$();
@@ -25556,7 +26629,7 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
       array$11.push(x$9$5);
       i$10 = ((1 + i$10) | 0)
     };
-    var f$35 = (function(c$1$5) {
+    var f$37 = (function(c$1$5) {
       return (function(x$10$2$5, x$11$2$5) {
         var x$10$6 = $as_Lscalacss_internal_StyleS(x$10$2$5);
         var x$11$6 = $as_Lscalacss_internal_StyleS(x$11$2$5);
@@ -25567,19 +26640,19 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
       var start$5 = 1;
       var end$5 = $uI(array$11.length);
       var z$5 = array$11[0];
-      var jsx$70;
+      var jsx$88;
       _foldl$5: while (true) {
         if ((start$5 !== end$5)) {
           var temp$start$5 = ((1 + start$5) | 0);
           var arg1$21 = z$5;
           var index$16 = start$5;
           var arg2$5 = array$11[index$16];
-          var temp$z$5 = f$35(arg1$21, arg2$5);
+          var temp$z$5 = f$37(arg1$21, arg2$5);
           start$5 = temp$start$5;
           z$5 = temp$z$5;
           continue _foldl$5
         };
-        var jsx$70 = z$5;
+        var jsx$88 = z$5;
         break
       }
     } else {
@@ -25600,16 +26673,16 @@ $c_Lfrancoiscabrol_travelmap_components_Style$.prototype.init___ = (function() {
           elem$1$10 = false
         } else {
           var arg1$23 = elem$1$11;
-          elem$1$11 = f$35(arg1$23, arg1$22)
+          elem$1$11 = f$37(arg1$23, arg1$22)
         };
         i$11 = ((1 + i$11) | 0)
       };
-      var jsx$70 = elem$1$11
+      var jsx$88 = elem$1$11
     };
-    var s1$5 = $as_Lscalacss_internal_StyleS(jsx$70)
+    var s1$5 = $as_Lscalacss_internal_StyleS(jsx$88)
   };
-  var s2$5 = this$244.$$outer$f.cssRegister$2.applyMacroName__T__Lscalacss_internal_StyleS__Lscalacss_internal_ClassNameHint__Lscalacss_internal_StyleS(this$244.name$1, s1$5, this$244.$$outer$f.classNameHint$1);
-  this.active$3 = this$244.$$outer$f.cssRegister$2.registerS__Lscalacss_internal_StyleS__Lscalacss_internal_ClassNameHint__Lscalacss_internal_StyleA(s2$5, this$244.$$outer$f.classNameHint$1);
+  var s2$5 = this$274.$$outer$f.cssRegister$2.applyMacroName__T__Lscalacss_internal_StyleS__Lscalacss_internal_ClassNameHint__Lscalacss_internal_StyleS(this$274.name$1, s1$5, this$274.$$outer$f.classNameHint$1);
+  this.active$3 = this$274.$$outer$f.cssRegister$2.registerS__Lscalacss_internal_StyleS__Lscalacss_internal_ClassNameHint__Lscalacss_internal_StyleA(s2$5, this$274.$$outer$f.classNameHint$1);
   return this
 });
 var $d_Lfrancoiscabrol_travelmap_components_Style$ = new $TypeData().initClass({
@@ -30137,12 +31210,9 @@ $c_Lfrancoiscabrol_travelmap_Application$$anonfun$init$1.prototype.apply__s_util
   if ($is_s_util_Success(x0$1)) {
     var x2 = $as_s_util_Success(x0$1);
     var places = $as_sci_List(x2.value$2);
-    new $c_Lfrancoiscabrol_travelmap_components_MyTravelMap().init___sci_List(places);
+    var map = new $c_Lfrancoiscabrol_travelmap_components_MyTravelMap().init___sci_List(places);
     try {
-      var this$3 = $m_s_Console$();
-      var this$4 = $as_Ljava_io_PrintStream(this$3.outVar$2.v$1);
-      this$4.java$lang$JSConsoleBasedPrintStream$$printString__T__V("Init!\n");
-      var x1$2 = new $c_s_util_Success().init___O((void 0))
+      var x1$2 = new $c_s_util_Success().init___O((map.initialize__V(), (void 0)))
     } catch (e) {
       var e$2 = $m_sjsr_package$().wrapJavaScriptException__O__jl_Throwable(e);
       if ((e$2 !== null)) {
@@ -30162,9 +31232,9 @@ $c_Lfrancoiscabrol_travelmap_Application$$anonfun$init$1.prototype.apply__s_util
       }
     };
     if ($is_s_util_Success(x1$2)) {
-      var this$6 = $m_s_Console$();
-      var this$7 = $as_Ljava_io_PrintStream(this$6.outVar$2.v$1);
-      this$7.java$lang$JSConsoleBasedPrintStream$$printString__T__V("Map initialized with success\n")
+      var this$3 = $m_s_Console$();
+      var this$4 = $as_Ljava_io_PrintStream(this$3.outVar$2.v$1);
+      this$4.java$lang$JSConsoleBasedPrintStream$$printString__T__V("Map initialized with success\n")
     } else {
       if ((!$is_s_util_Failure(x1$2))) {
         throw new $c_s_MatchError().init___O(x1$2)
@@ -30172,9 +31242,9 @@ $c_Lfrancoiscabrol_travelmap_Application$$anonfun$init$1.prototype.apply__s_util
       var x4 = $as_s_util_Failure(x1$2);
       var err = x4.exception$2;
       var x = ("Map initialisation failure with error: " + err);
-      var this$9 = $m_s_Console$();
-      var this$10 = $as_Ljava_io_PrintStream(this$9.outVar$2.v$1);
-      this$10.java$lang$JSConsoleBasedPrintStream$$printString__T__V((x + "\n"))
+      var this$6 = $m_s_Console$();
+      var this$7 = $as_Ljava_io_PrintStream(this$6.outVar$2.v$1);
+      this$7.java$lang$JSConsoleBasedPrintStream$$printString__T__V((x + "\n"))
     };
     return (void 0)
   } else if ($is_s_util_Failure(x0$1)) {
@@ -30289,543 +31359,6 @@ var $d_Lfrancoiscabrol_travelmap_Coordinates = new $TypeData().initClass({
 });
 $c_Lfrancoiscabrol_travelmap_Coordinates.prototype.$classData = $d_Lfrancoiscabrol_travelmap_Coordinates;
 /** @constructor */
-function $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3() {
-  $c_sr_AbstractFunction1.call(this)
-}
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3.prototype = new $h_sr_AbstractFunction1();
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3.prototype.constructor = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3;
-/** @constructor */
-function $h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3() {
-  /*<skip>*/
-}
-$h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3.prototype = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3.prototype;
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3.prototype.init___ = (function() {
-  return this
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3.prototype.apply__O__O = (function(v1) {
-  return this.apply__Lfrancoiscabrol_travelmap_Place__s_concurrent_Future($as_Lfrancoiscabrol_travelmap_Place(v1))
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3.prototype.apply__Lfrancoiscabrol_travelmap_Place__s_concurrent_Future = (function(place) {
-  var this$1 = $m_Lfrancoiscabrol_travelmap_DataLayer$().francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache__Lfrancoiscabrol_travelmap_Place__s_concurrent_Future(place);
-  var pf = new $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3$$anonfun$apply$1().init___Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3__Lfrancoiscabrol_travelmap_Place(this, place);
-  var executor = $m_sjs_concurrent_JSExecutionContext$Implicits$().runNow$1;
-  var this$2 = $s_s_concurrent_Future$class__andThen__s_concurrent_Future__s_PartialFunction__s_concurrent_ExecutionContext__s_concurrent_Future(this$1, pf, executor);
-  var f = new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(place$2) {
-    return (function(coordinates$2) {
-      var coordinates = $as_Lfrancoiscabrol_travelmap_Coordinates(coordinates$2);
-      place$2.lat$1 = coordinates.lat$1;
-      place$2.lng$1 = coordinates.lng$1;
-      return place$2
-    })
-  })(place));
-  var executor$1 = $m_sjs_concurrent_JSExecutionContext$Implicits$().runNow$1;
-  return $s_s_concurrent_Future$class__map__s_concurrent_Future__F1__s_concurrent_ExecutionContext__s_concurrent_Future(this$2, f, executor$1)
-});
-var $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3 = new $TypeData().initClass({
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3: 0
-}, false, "francoiscabrol.travelmap.DataLayer$$anonfun$3", {
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3: 1,
-  sr_AbstractFunction1: 1,
-  O: 1,
-  F1: 1,
-  s_Serializable: 1,
-  Ljava_io_Serializable: 1
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3.prototype.$classData = $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3;
-/** @constructor */
-function $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$2() {
-  $c_sr_AbstractFunction0.call(this);
-  this.value$1$2 = null
-}
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$2.prototype = new $h_sr_AbstractFunction0();
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$2.prototype.constructor = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$2;
-/** @constructor */
-function $h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$2() {
-  /*<skip>*/
-}
-$h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$2.prototype = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$2.prototype;
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$2.prototype.init___T = (function(value$1) {
-  this.value$1$2 = value$1;
-  return this
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$2.prototype.apply__O = (function() {
-  return this.apply__Lfrancoiscabrol_travelmap_Coordinates()
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$2.prototype.apply__Lfrancoiscabrol_travelmap_Coordinates = (function() {
-  var thiz = this.value$1$2;
-  var xs = $m_sjsr_RuntimeString$().split__T__T__I__AT(thiz, ":", 0);
-  var elems$2 = [];
-  var i = 0;
-  var len = xs.u.length;
-  while ((i < len)) {
-    var index = i;
-    var arg1 = xs.u[index];
-    var x$1 = $as_T(arg1);
-    var this$12 = new $c_sci_StringOps().init___T(x$1);
-    var $$this = this$12.repr$1;
-    var elem = $fround($m_jl_Double$().parseDouble__T__D($$this));
-    elems$2.push(elem);
-    i = ((1 + i) | 0)
-  };
-  var res = $makeNativeArrayWrapper($d_F.getArrayOf(), elems$2);
-  return new $c_Lfrancoiscabrol_travelmap_Coordinates().init___F__F(res.u[0], res.u[1])
-});
-var $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$2 = new $TypeData().initClass({
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$2: 0
-}, false, "francoiscabrol.travelmap.DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$2", {
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$2: 1,
-  sr_AbstractFunction0: 1,
-  O: 1,
-  F0: 1,
-  s_Serializable: 1,
-  Ljava_io_Serializable: 1
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$2.prototype.$classData = $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$2;
-/** @constructor */
-function $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1() {
-  $c_sr_AbstractFunction1.call(this)
-}
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1.prototype = new $h_sr_AbstractFunction1();
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1.prototype.constructor = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1;
-/** @constructor */
-function $h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1() {
-  /*<skip>*/
-}
-$h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1.prototype = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1.prototype;
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1.prototype.init___ = (function() {
-  return this
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1.prototype.apply__O__O = (function(v1) {
-  return this.apply__Lorg_scalajs_dom_raw_XMLHttpRequest__Lfrancoiscabrol_travelmap_Coordinates(v1)
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1.prototype.apply__Lorg_scalajs_dom_raw_XMLHttpRequest__Lfrancoiscabrol_travelmap_Coordinates = (function(response) {
-  var this$4 = $m_Lupickle_default$();
-  var expr = $as_T(response.responseText);
-  var this$3 = $m_Lupickle_default$();
-  var this$1 = $m_sci_List$();
-  var cbf = this$1.ReusableCBFInstance$2;
-  var this$2 = $m_Lupickle_default$().Internal__Lupickle_Implicits$Internal$();
-  var r = new $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1().init___Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1(this);
-  var r$1 = new $c_Lupickle_Implicits$Internal$$anon$3().init___Lupickle_Implicits$Internal$__T__F0(this$2, "Tagged Object francoiscabrol.travelmap.DataLayer.CoordinatesData", r);
-  var evidence$3 = $s_Lupickle_Implicits$class__SeqishR__Lupickle_Implicits__scg_CanBuildFrom__Lupickle_Types$Reader__Lupickle_Types$Reader(this$3, cbf, r$1);
-  var coordinates = $as_sci_List($s_Lupickle_Types$class__read__Lupickle_Types__T__Lupickle_Types$Reader__O(this$4, expr, evidence$3));
-  var coordinate = $as_Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData($s_sc_LinearSeqOptimized$class__apply__sc_LinearSeqOptimized__I__O(coordinates, 0));
-  return new $c_Lfrancoiscabrol_travelmap_Coordinates().init___F__F(coordinate.lon$1, coordinate.lat$1)
-});
-var $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1 = new $TypeData().initClass({
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1: 0
-}, false, "francoiscabrol.travelmap.DataLayer$$anonfun$getCoordinates$1", {
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1: 1,
-  sr_AbstractFunction1: 1,
-  O: 1,
-  F1: 1,
-  s_Serializable: 1,
-  Ljava_io_Serializable: 1
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1.prototype.$classData = $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1;
-/** @constructor */
-function $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1() {
-  $c_sr_AbstractFunction0.call(this)
-}
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1.prototype = new $h_sr_AbstractFunction0();
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1.prototype.constructor = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1;
-/** @constructor */
-function $h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1() {
-  /*<skip>*/
-}
-$h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1.prototype = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1.prototype;
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1.prototype.apply__Lupickle_Types$Reader = (function() {
-  var this$1 = new $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1().init___Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1(this);
-  return this$1.derive$macro$1__Lupickle_Types$Reader()
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1.prototype.init___Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1 = (function($$outer) {
-  return this
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1.prototype.apply__O = (function() {
-  return this.apply__Lupickle_Types$Reader()
-});
-var $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1 = new $TypeData().initClass({
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1: 0
-}, false, "francoiscabrol.travelmap.DataLayer$$anonfun$getCoordinates$1$$anonfun$1", {
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1: 1,
-  sr_AbstractFunction0: 1,
-  O: 1,
-  F0: 1,
-  s_Serializable: 1,
-  Ljava_io_Serializable: 1
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1.prototype.$classData = $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1;
-/** @constructor */
-function $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1() {
-  $c_sr_AbstractFunction0.call(this)
-}
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1.prototype = new $h_sr_AbstractFunction0();
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1.prototype.constructor = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1;
-/** @constructor */
-function $h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1() {
-  /*<skip>*/
-}
-$h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1.prototype = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1.prototype;
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1.prototype.apply__Lupickle_Types$Reader = (function() {
-  var this$10 = $m_Lupickle_default$();
-  var f = new $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$2().init___Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1(this);
-  var xs = new $c_sjs_js_WrappedArray().init___sjs_js_Array(["lat", "lon"]);
-  var len = $uI(xs.array$6.length);
-  var array = $newArrayObject($d_T.getArrayOf(), [len]);
-  var elem$1 = 0;
-  elem$1 = 0;
-  var this$4 = new $c_sc_IndexedSeqLike$Elements().init___sc_IndexedSeqLike__I__I(xs, 0, $uI(xs.array$6.length));
-  while (this$4.hasNext__Z()) {
-    var arg1 = this$4.next__O();
-    array.u[elem$1] = arg1;
-    elem$1 = ((1 + elem$1) | 0)
-  };
-  var xs$1 = new $c_sjs_js_WrappedArray().init___sjs_js_Array([null, null]);
-  var len$1 = $uI(xs$1.array$6.length);
-  var array$1 = $newArrayObject($d_Lupickle_Js$Value.getArrayOf(), [len$1]);
-  var elem$1$1 = 0;
-  elem$1$1 = 0;
-  var this$8 = new $c_sc_IndexedSeqLike$Elements().init___sc_IndexedSeqLike__I__I(xs$1, 0, $uI(xs$1.array$6.length));
-  while (this$8.hasNext__Z()) {
-    var arg1$1 = this$8.next__O();
-    array$1.u[elem$1$1] = arg1$1;
-    elem$1$1 = ((1 + elem$1$1) | 0)
-  };
-  var this$9 = $m_Lupickle_default$();
-  var evidence$5 = $m_Lupickle_default$().FloatRW$1;
-  var evidence$6 = $m_Lupickle_default$().FloatRW$1;
-  var evidence$14 = $as_Lupickle_Types$Reader($s_Lupickle_Generated$class__Tuple2R__Lupickle_Generated__O__O__O(this$9, evidence$5, evidence$6));
-  return $s_Lupickle_Implicits$class__CaseR__Lupickle_Implicits__F1__AT__ALupickle_Js$Value__Lupickle_Types$Reader__Lupickle_Types$Reader(this$10, f, array, array$1, evidence$14)
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1.prototype.init___Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1 = (function($$outer) {
-  return this
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1.prototype.apply__O = (function() {
-  return this.apply__Lupickle_Types$Reader()
-});
-var $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1 = new $TypeData().initClass({
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1: 0
-}, false, "francoiscabrol.travelmap.DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1", {
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1: 1,
-  sr_AbstractFunction0: 1,
-  O: 1,
-  F0: 1,
-  s_Serializable: 1,
-  Ljava_io_Serializable: 1
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1.prototype.$classData = $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1;
-/** @constructor */
-function $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$2() {
-  $c_sr_AbstractFunction1.call(this)
-}
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$2.prototype = new $h_sr_AbstractFunction1();
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$2.prototype.constructor = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$2;
-/** @constructor */
-function $h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$2() {
-  /*<skip>*/
-}
-$h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$2.prototype = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$2.prototype;
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$2.prototype.apply__O__O = (function(v1) {
-  return this.apply__T2__Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData($as_T2(v1))
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$2.prototype.apply__T2__Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData = (function(derive$macro$8) {
-  var arg1 = derive$macro$8.$$und1__O();
-  var arg2 = derive$macro$8.$$und2__O();
-  var lat = $uF(arg1);
-  var lon = $uF(arg2);
-  return new $c_Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData().init___F__F(lat, lon)
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$2.prototype.init___Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1 = (function($$outer) {
-  return this
-});
-var $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$2 = new $TypeData().initClass({
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$2: 0
-}, false, "francoiscabrol.travelmap.DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$2", {
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$2: 1,
-  sr_AbstractFunction1: 1,
-  O: 1,
-  F1: 1,
-  s_Serializable: 1,
-  Ljava_io_Serializable: 1
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$2.prototype.$classData = $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$2;
-/** @constructor */
-function $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2() {
-  $c_sr_AbstractFunction1.call(this)
-}
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2.prototype = new $h_sr_AbstractFunction1();
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2.prototype.constructor = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2;
-/** @constructor */
-function $h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2() {
-  /*<skip>*/
-}
-$h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2.prototype = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2.prototype;
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2.prototype.init___ = (function() {
-  return this
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2.prototype.apply__O__O = (function(v1) {
-  return this.apply__Lorg_scalajs_dom_raw_XMLHttpRequest__s_concurrent_Future(v1)
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2.prototype.apply__Lorg_scalajs_dom_raw_XMLHttpRequest__s_concurrent_Future = (function(res) {
-  var this$4 = $m_Lupickle_default$();
-  var expr = $as_T(res.responseText);
-  var this$3 = $m_Lupickle_default$();
-  var this$1 = $m_sci_List$();
-  var cbf = this$1.ReusableCBFInstance$2;
-  var this$2 = $m_Lupickle_default$().Internal__Lupickle_Implicits$Internal$();
-  var r = new $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4().init___Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2(this);
-  var r$1 = new $c_Lupickle_Implicits$Internal$$anon$3().init___Lupickle_Implicits$Internal$__T__F0(this$2, "Tagged Object francoiscabrol.travelmap.Place", r);
-  var evidence$3 = $s_Lupickle_Implicits$class__SeqishR__Lupickle_Implicits__scg_CanBuildFrom__Lupickle_Types$Reader__Lupickle_Types$Reader(this$3, cbf, r$1);
-  var places = $as_sci_List($s_Lupickle_Types$class__read__Lupickle_Types__T__Lupickle_Types$Reader__O(this$4, expr, evidence$3));
-  return $m_Lfrancoiscabrol_travelmap_DataLayer$().addCoordinatesTo__sci_List__s_concurrent_Future(places)
-});
-var $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2 = new $TypeData().initClass({
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2: 0
-}, false, "francoiscabrol.travelmap.DataLayer$$anonfun$loadData$2", {
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2: 1,
-  sr_AbstractFunction1: 1,
-  O: 1,
-  F1: 1,
-  s_Serializable: 1,
-  Ljava_io_Serializable: 1
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2.prototype.$classData = $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2;
-/** @constructor */
-function $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4() {
-  $c_sr_AbstractFunction0.call(this)
-}
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4.prototype = new $h_sr_AbstractFunction0();
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4.prototype.constructor = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4;
-/** @constructor */
-function $h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4() {
-  /*<skip>*/
-}
-$h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4.prototype = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4.prototype;
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4.prototype.init___Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2 = (function($$outer) {
-  return this
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4.prototype.apply__Lupickle_Types$Reader = (function() {
-  var this$1 = new $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2().init___Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4(this);
-  return this$1.derive$macro$10__Lupickle_Types$Reader()
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4.prototype.apply__O = (function() {
-  return this.apply__Lupickle_Types$Reader()
-});
-var $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4 = new $TypeData().initClass({
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4: 0
-}, false, "francoiscabrol.travelmap.DataLayer$$anonfun$loadData$2$$anonfun$4", {
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4: 1,
-  sr_AbstractFunction0: 1,
-  O: 1,
-  F0: 1,
-  s_Serializable: 1,
-  Ljava_io_Serializable: 1
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4.prototype.$classData = $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4;
-/** @constructor */
-function $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1() {
-  $c_sr_AbstractFunction0.call(this)
-}
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1.prototype = new $h_sr_AbstractFunction0();
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1.prototype.constructor = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1;
-/** @constructor */
-function $h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1() {
-  /*<skip>*/
-}
-$h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1.prototype = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1.prototype;
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1.prototype.apply__Lupickle_Types$Reader = (function() {
-  var this$12 = $m_Lupickle_default$();
-  var f = new $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$5().init___Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1(this);
-  var xs = new $c_sjs_js_WrappedArray().init___sjs_js_Array(["name", "description", "address", "duration", "lat", "lng"]);
-  var len = $uI(xs.array$6.length);
-  var array = $newArrayObject($d_T.getArrayOf(), [len]);
-  var elem$1 = 0;
-  elem$1 = 0;
-  var this$4 = new $c_sc_IndexedSeqLike$Elements().init___sc_IndexedSeqLike__I__I(xs, 0, $uI(xs.array$6.length));
-  while (this$4.hasNext__Z()) {
-    var arg1 = this$4.next__O();
-    array.u[elem$1] = arg1;
-    elem$1 = ((1 + elem$1) | 0)
-  };
-  var this$5 = $m_Lupickle_default$();
-  var evidence$2 = $as_Lupickle_Types$Writer($m_Lupickle_default$().DoubleRW$1);
-  var jsx$1 = $s_Lupickle_Types$class__writeJs__Lupickle_Types__O__Lupickle_Types$Writer__Lupickle_Js$Value(this$5, 0.0, evidence$2);
-  var this$6 = $m_Lupickle_default$();
-  var evidence$2$1 = $as_Lupickle_Types$Writer($m_Lupickle_default$().DoubleRW$1);
-  var xs$1 = new $c_sjs_js_WrappedArray().init___sjs_js_Array([null, null, null, null, jsx$1, $s_Lupickle_Types$class__writeJs__Lupickle_Types__O__Lupickle_Types$Writer__Lupickle_Js$Value(this$6, 0.0, evidence$2$1)]);
-  var len$1 = $uI(xs$1.array$6.length);
-  var array$1 = $newArrayObject($d_Lupickle_Js$Value.getArrayOf(), [len$1]);
-  var elem$1$1 = 0;
-  elem$1$1 = 0;
-  var this$10 = new $c_sc_IndexedSeqLike$Elements().init___sc_IndexedSeqLike__I__I(xs$1, 0, $uI(xs$1.array$6.length));
-  while (this$10.hasNext__Z()) {
-    var arg1$1 = this$10.next__O();
-    array$1.u[elem$1$1] = arg1$1;
-    elem$1$1 = ((1 + elem$1$1) | 0)
-  };
-  var this$11 = $m_Lupickle_default$();
-  var evidence$37 = $m_Lupickle_default$().StringRW$1;
-  var evidence$38 = $m_Lupickle_default$().StringRW$1;
-  var evidence$39 = $m_Lupickle_default$().StringRW$1;
-  var evidence$40 = $m_Lupickle_default$().IntRW$1;
-  var evidence$41 = $m_Lupickle_default$().DoubleRW$1;
-  var evidence$42 = $m_Lupickle_default$().DoubleRW$1;
-  var evidence$14 = $as_Lupickle_Types$Reader($s_Lupickle_Generated$class__Tuple6R__Lupickle_Generated__O__O__O__O__O__O__O(this$11, evidence$37, evidence$38, evidence$39, evidence$40, evidence$41, evidence$42));
-  return $s_Lupickle_Implicits$class__CaseR__Lupickle_Implicits__F1__AT__ALupickle_Js$Value__Lupickle_Types$Reader__Lupickle_Types$Reader(this$12, f, array, array$1, evidence$14)
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1.prototype.apply__O = (function() {
-  return this.apply__Lupickle_Types$Reader()
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1.prototype.init___Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2 = (function($$outer) {
-  return this
-});
-var $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1 = new $TypeData().initClass({
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1: 0
-}, false, "francoiscabrol.travelmap.DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1", {
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1: 1,
-  sr_AbstractFunction0: 1,
-  O: 1,
-  F0: 1,
-  s_Serializable: 1,
-  Ljava_io_Serializable: 1
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1.prototype.$classData = $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1;
-/** @constructor */
-function $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$5() {
-  $c_sr_AbstractFunction1.call(this)
-}
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$5.prototype = new $h_sr_AbstractFunction1();
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$5.prototype.constructor = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$5;
-/** @constructor */
-function $h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$5() {
-  /*<skip>*/
-}
-$h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$5.prototype = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$5.prototype;
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$5.prototype.apply__O__O = (function(v1) {
-  return this.apply__T6__Lfrancoiscabrol_travelmap_Place($as_T6(v1))
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$5.prototype.apply__T6__Lfrancoiscabrol_travelmap_Place = (function(derive$macro$25) {
-  var arg1 = derive$macro$25.$$und1$1;
-  var arg2 = derive$macro$25.$$und2$1;
-  var arg3 = derive$macro$25.$$und3$1;
-  var arg4 = derive$macro$25.$$und4$1;
-  var arg5 = derive$macro$25.$$und5$1;
-  var arg6 = derive$macro$25.$$und6$1;
-  var name = $as_T(arg1);
-  var description = $as_T(arg2);
-  var address = $as_T(arg3);
-  var duration = $uI(arg4);
-  var lat = $uD(arg5);
-  var lng = $uD(arg6);
-  return new $c_Lfrancoiscabrol_travelmap_Place().init___T__T__T__I__D__D(name, description, address, duration, lat, lng)
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$5.prototype.init___Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1 = (function($$outer) {
-  return this
-});
-var $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$5 = new $TypeData().initClass({
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$5: 0
-}, false, "francoiscabrol.travelmap.DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$5", {
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$5: 1,
-  sr_AbstractFunction1: 1,
-  O: 1,
-  F1: 1,
-  s_Serializable: 1,
-  Ljava_io_Serializable: 1
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$5.prototype.$classData = $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$2$$anonfun$4$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$5;
-/** @constructor */
-function $c_Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData() {
-  $c_O.call(this);
-  this.lat$1 = 0.0;
-  this.lon$1 = 0.0
-}
-$c_Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData.prototype = new $h_O();
-$c_Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData.prototype.constructor = $c_Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData;
-/** @constructor */
-function $h_Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData() {
-  /*<skip>*/
-}
-$h_Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData.prototype = $c_Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData.prototype;
-$c_Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData.prototype.productPrefix__T = (function() {
-  return "CoordinatesData"
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData.prototype.productArity__I = (function() {
-  return 2
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData.prototype.equals__O__Z = (function(x$1) {
-  if ((this === x$1)) {
-    return true
-  } else if ($is_Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData(x$1)) {
-    var CoordinatesData$1 = $as_Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData(x$1);
-    return ((this.lat$1 === CoordinatesData$1.lat$1) && (this.lon$1 === CoordinatesData$1.lon$1))
-  } else {
-    return false
-  }
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData.prototype.productElement__I__O = (function(x$1) {
-  switch (x$1) {
-    case 0: {
-      return this.lat$1;
-      break
-    }
-    case 1: {
-      return this.lon$1;
-      break
-    }
-    default: {
-      throw new $c_jl_IndexOutOfBoundsException().init___T(("" + x$1))
-    }
-  }
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData.prototype.toString__T = (function() {
-  return $m_sr_ScalaRunTime$().$$undtoString__s_Product__T(this)
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData.prototype.init___F__F = (function(lat, lon) {
-  this.lat$1 = lat;
-  this.lon$1 = lon;
-  return this
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData.prototype.hashCode__I = (function() {
-  var acc = (-889275714);
-  var jsx$2 = $m_sr_Statics$();
-  var jsx$1 = acc;
-  var this$1 = $m_sr_Statics$();
-  var fv = this.lat$1;
-  acc = jsx$2.mix__I__I__I(jsx$1, this$1.doubleHash__D__I(fv));
-  var jsx$4 = $m_sr_Statics$();
-  var jsx$3 = acc;
-  var this$2 = $m_sr_Statics$();
-  var fv$1 = this.lon$1;
-  acc = jsx$4.mix__I__I__I(jsx$3, this$2.doubleHash__D__I(fv$1));
-  return $m_sr_Statics$().finalizeHash__I__I__I(acc, 2)
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData.prototype.productIterator__sc_Iterator = (function() {
-  return new $c_sr_ScalaRunTime$$anon$1().init___s_Product(this)
-});
-function $is_Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData(obj) {
-  return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData)))
-}
-function $as_Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData(obj) {
-  return (($is_Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData(obj) || (obj === null)) ? obj : $throwClassCastException(obj, "francoiscabrol.travelmap.DataLayer$CoordinatesData"))
-}
-function $isArrayOf_Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData(obj, depth) {
-  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData)))
-}
-function $asArrayOf_Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData(obj, depth) {
-  return (($isArrayOf_Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lfrancoiscabrol.travelmap.DataLayer$CoordinatesData;", depth))
-}
-var $d_Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData = new $TypeData().initClass({
-  Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData: 0
-}, false, "francoiscabrol.travelmap.DataLayer$CoordinatesData", {
-  Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData: 1,
-  O: 1,
-  s_Product: 1,
-  s_Equals: 1,
-  s_Serializable: 1,
-  Ljava_io_Serializable: 1
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData.prototype.$classData = $d_Lfrancoiscabrol_travelmap_DataLayer$CoordinatesData;
-/** @constructor */
 function $c_Lfrancoiscabrol_travelmap_Place() {
   $c_O.call(this);
   this.name$1 = null;
@@ -30833,7 +31366,8 @@ function $c_Lfrancoiscabrol_travelmap_Place() {
   this.address$1 = null;
   this.duration$1 = 0;
   this.lat$1 = 0.0;
-  this.lng$1 = 0.0
+  this.lng$1 = 0.0;
+  this.id$1 = null
 }
 $c_Lfrancoiscabrol_travelmap_Place.prototype = new $h_O();
 $c_Lfrancoiscabrol_travelmap_Place.prototype.constructor = $c_Lfrancoiscabrol_travelmap_Place;
@@ -30899,10 +31433,13 @@ $c_Lfrancoiscabrol_travelmap_Place.prototype.init___T__T__T__I__D__D = (function
   this.duration$1 = duration;
   this.lat$1 = lat;
   this.lng$1 = lng;
+  this.id$1 = $m_ju_UUID$().randomUUID__ju_UUID().toString__T();
   return this
 });
 $c_Lfrancoiscabrol_travelmap_Place.prototype.pointId__T = (function() {
-  return ("point" + this.name$1)
+  var thiz = this.address$1;
+  var thiz$1 = $as_T(thiz.split(",").join(" "));
+  return ("point" + $as_T(thiz$1.trim()))
 });
 $c_Lfrancoiscabrol_travelmap_Place.prototype.hashCode__I = (function() {
   var acc = (-889275714);
@@ -30944,21 +31481,35 @@ var $d_Lfrancoiscabrol_travelmap_Place = new $TypeData().initClass({
 });
 $c_Lfrancoiscabrol_travelmap_Place.prototype.$classData = $d_Lfrancoiscabrol_travelmap_Place;
 /** @constructor */
-function $c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$4() {
+function $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1() {
   $c_sr_AbstractFunction1.call(this);
   this.$$outer$2 = null
 }
-$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$4.prototype = new $h_sr_AbstractFunction1();
-$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$4.prototype.constructor = $c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$4;
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1.prototype = new $h_sr_AbstractFunction1();
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1.prototype.constructor = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1;
 /** @constructor */
-function $h_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$4() {
+function $h_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1() {
   /*<skip>*/
 }
-$h_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$4.prototype = $c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$4.prototype;
-$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$4.prototype.apply__O__O = (function(v1) {
-  this.apply__Lorg_scalajs_dom_raw_Event__V(v1)
+$h_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1.prototype = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1.prototype;
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1.prototype.apply__O__O = (function(v1) {
+  return this.apply__Lorg_scalajs_dom_raw_XMLHttpRequest__Lfrancoiscabrol_travelmap_Coordinates(v1)
 });
-$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$4.prototype.init___Lfrancoiscabrol_travelmap_components_MyTravelMap = (function($$outer) {
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1.prototype.apply__Lorg_scalajs_dom_raw_XMLHttpRequest__Lfrancoiscabrol_travelmap_Coordinates = (function(response) {
+  var this$4 = $m_Lupickle_default$();
+  var expr = $as_T(response.responseText);
+  var this$3 = $m_Lupickle_default$();
+  var this$1 = $m_sci_List$();
+  var cbf = this$1.ReusableCBFInstance$2;
+  var this$2 = $m_Lupickle_default$().Internal__Lupickle_Implicits$Internal$();
+  var r = new $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1().init___Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1(this);
+  var r$1 = new $c_Lupickle_Implicits$Internal$$anon$3().init___Lupickle_Implicits$Internal$__T__F0(this$2, "Tagged Object francoiscabrol.travelmap.StaticJsonFile.CoordinatesData", r);
+  var evidence$3 = $s_Lupickle_Implicits$class__SeqishR__Lupickle_Implicits__scg_CanBuildFrom__Lupickle_Types$Reader__Lupickle_Types$Reader(this$3, cbf, r$1);
+  var coordinates = $as_sci_List($s_Lupickle_Types$class__read__Lupickle_Types__T__Lupickle_Types$Reader__O(this$4, expr, evidence$3));
+  var coordinate = $as_Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData($s_sc_LinearSeqOptimized$class__apply__sc_LinearSeqOptimized__I__O(coordinates, 0));
+  return new $c_Lfrancoiscabrol_travelmap_Coordinates().init___F__F(coordinate.lon$1, coordinate.lat$1)
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1.prototype.init___Lfrancoiscabrol_travelmap_StaticJsonFile = (function($$outer) {
   if (($$outer === null)) {
     throw $m_sjsr_package$().unwrapJavaScriptException__jl_Throwable__O(null)
   } else {
@@ -30966,14 +31517,571 @@ $c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$4.prototype.init___
   };
   return this
 });
-$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$4.prototype.apply__Lorg_scalajs_dom_raw_Event__V = (function(e) {
+var $d_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1 = new $TypeData().initClass({
+  Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1: 0
+}, false, "francoiscabrol.travelmap.StaticJsonFile$$anonfun$getCoordinates$1", {
+  Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1: 1,
+  sr_AbstractFunction1: 1,
+  O: 1,
+  F1: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1.prototype.$classData = $d_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1;
+/** @constructor */
+function $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1() {
+  $c_sr_AbstractFunction0.call(this);
+  this.$$outer$2 = null
+}
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1.prototype = new $h_sr_AbstractFunction0();
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1.prototype.constructor = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1;
+/** @constructor */
+function $h_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1() {
+  /*<skip>*/
+}
+$h_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1.prototype = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1.prototype;
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1.prototype.apply__Lupickle_Types$Reader = (function() {
+  var this$1 = new $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1().init___Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1(this);
+  return this$1.derive$macro$1__Lupickle_Types$Reader()
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1.prototype.apply__O = (function() {
+  return this.apply__Lupickle_Types$Reader()
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1.prototype.init___Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1 = (function($$outer) {
+  if (($$outer === null)) {
+    throw $m_sjsr_package$().unwrapJavaScriptException__jl_Throwable__O(null)
+  } else {
+    this.$$outer$2 = $$outer
+  };
+  return this
+});
+var $d_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1 = new $TypeData().initClass({
+  Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1: 0
+}, false, "francoiscabrol.travelmap.StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1", {
+  Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1: 1,
+  sr_AbstractFunction0: 1,
+  O: 1,
+  F0: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1.prototype.$classData = $d_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1;
+/** @constructor */
+function $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1() {
+  $c_sr_AbstractFunction0.call(this);
+  this.$$outer$2 = null
+}
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1.prototype = new $h_sr_AbstractFunction0();
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1.prototype.constructor = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1;
+/** @constructor */
+function $h_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1() {
+  /*<skip>*/
+}
+$h_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1.prototype = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1.prototype;
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1.prototype.apply__Lupickle_Types$Reader = (function() {
+  var this$10 = $m_Lupickle_default$();
+  var f = new $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$1().init___Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1(this);
+  var xs = new $c_sjs_js_WrappedArray().init___sjs_js_Array(["lat", "lon"]);
+  var len = $uI(xs.array$6.length);
+  var array = $newArrayObject($d_T.getArrayOf(), [len]);
+  var elem$1 = 0;
+  elem$1 = 0;
+  var this$4 = new $c_sc_IndexedSeqLike$Elements().init___sc_IndexedSeqLike__I__I(xs, 0, $uI(xs.array$6.length));
+  while (this$4.hasNext__Z()) {
+    var arg1 = this$4.next__O();
+    array.u[elem$1] = arg1;
+    elem$1 = ((1 + elem$1) | 0)
+  };
+  var xs$1 = new $c_sjs_js_WrappedArray().init___sjs_js_Array([null, null]);
+  var len$1 = $uI(xs$1.array$6.length);
+  var array$1 = $newArrayObject($d_Lupickle_Js$Value.getArrayOf(), [len$1]);
+  var elem$1$1 = 0;
+  elem$1$1 = 0;
+  var this$8 = new $c_sc_IndexedSeqLike$Elements().init___sc_IndexedSeqLike__I__I(xs$1, 0, $uI(xs$1.array$6.length));
+  while (this$8.hasNext__Z()) {
+    var arg1$1 = this$8.next__O();
+    array$1.u[elem$1$1] = arg1$1;
+    elem$1$1 = ((1 + elem$1$1) | 0)
+  };
+  var this$9 = $m_Lupickle_default$();
+  var evidence$5 = $m_Lupickle_default$().FloatRW$1;
+  var evidence$6 = $m_Lupickle_default$().FloatRW$1;
+  var evidence$14 = $as_Lupickle_Types$Reader($s_Lupickle_Generated$class__Tuple2R__Lupickle_Generated__O__O__O(this$9, evidence$5, evidence$6));
+  return $s_Lupickle_Implicits$class__CaseR__Lupickle_Implicits__F1__AT__ALupickle_Js$Value__Lupickle_Types$Reader__Lupickle_Types$Reader(this$10, f, array, array$1, evidence$14)
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1.prototype.init___Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1 = (function($$outer) {
+  if (($$outer === null)) {
+    throw $m_sjsr_package$().unwrapJavaScriptException__jl_Throwable__O(null)
+  } else {
+    this.$$outer$2 = $$outer
+  };
+  return this
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1.prototype.apply__O = (function() {
+  return this.apply__Lupickle_Types$Reader()
+});
+var $d_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1 = new $TypeData().initClass({
+  Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1: 0
+}, false, "francoiscabrol.travelmap.StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1", {
+  Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1: 1,
+  sr_AbstractFunction0: 1,
+  O: 1,
+  F0: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1.prototype.$classData = $d_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1;
+/** @constructor */
+function $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$1() {
+  $c_sr_AbstractFunction1.call(this);
+  this.$$outer$2 = null
+}
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$1.prototype = new $h_sr_AbstractFunction1();
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$1.prototype.constructor = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$1;
+/** @constructor */
+function $h_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$1() {
+  /*<skip>*/
+}
+$h_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$1.prototype = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$1.prototype;
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$1.prototype.apply__O__O = (function(v1) {
+  return this.apply__T2__Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData($as_T2(v1))
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$1.prototype.apply__T2__Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData = (function(derive$macro$8) {
+  var arg1 = derive$macro$8.$$und1__O();
+  var arg2 = derive$macro$8.$$und2__O();
+  var lat = $uF(arg1);
+  var lon = $uF(arg2);
+  return new $c_Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData().init___Lfrancoiscabrol_travelmap_StaticJsonFile__F__F(this.$$outer$2.$$outer$2.$$outer$1.$$outer$2.$$outer$2, lat, lon)
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$1.prototype.init___Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1 = (function($$outer) {
+  if (($$outer === null)) {
+    throw $m_sjsr_package$().unwrapJavaScriptException__jl_Throwable__O(null)
+  } else {
+    this.$$outer$2 = $$outer
+  };
+  return this
+});
+var $d_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$1 = new $TypeData().initClass({
+  Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$1: 0
+}, false, "francoiscabrol.travelmap.StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$1", {
+  Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$1: 1,
+  sr_AbstractFunction1: 1,
+  O: 1,
+  F1: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$1.prototype.$classData = $d_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinates$1$$anonfun$1$$anon$1$$anonfun$derive$macro$1$1$$anonfun$apply$1;
+/** @constructor */
+function $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$2() {
+  $c_sr_AbstractFunction0.call(this);
+  this.value$1$2 = null
+}
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$2.prototype = new $h_sr_AbstractFunction0();
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$2.prototype.constructor = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$2;
+/** @constructor */
+function $h_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$2() {
+  /*<skip>*/
+}
+$h_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$2.prototype = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$2.prototype;
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$2.prototype.init___Lfrancoiscabrol_travelmap_StaticJsonFile__T = (function($$outer, value$1) {
+  this.value$1$2 = value$1;
+  return this
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$2.prototype.apply__O = (function() {
+  return this.apply__Lfrancoiscabrol_travelmap_Coordinates()
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$2.prototype.apply__Lfrancoiscabrol_travelmap_Coordinates = (function() {
+  var thiz = this.value$1$2;
+  var xs = $m_sjsr_RuntimeString$().split__T__T__I__AT(thiz, ":", 0);
+  var elems$2 = [];
+  var i = 0;
+  var len = xs.u.length;
+  while ((i < len)) {
+    var index = i;
+    var arg1 = xs.u[index];
+    var x$1 = $as_T(arg1);
+    var this$12 = new $c_sci_StringOps().init___T(x$1);
+    var $$this = this$12.repr$1;
+    var elem = $fround($m_jl_Double$().parseDouble__T__D($$this));
+    elems$2.push(elem);
+    i = ((1 + i) | 0)
+  };
+  var res = $makeNativeArrayWrapper($d_F.getArrayOf(), elems$2);
+  return new $c_Lfrancoiscabrol_travelmap_Coordinates().init___F__F(res.u[0], res.u[1])
+});
+var $d_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$2 = new $TypeData().initClass({
+  Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$2: 0
+}, false, "francoiscabrol.travelmap.StaticJsonFile$$anonfun$getCoordinatesFromCache$2", {
+  Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$2: 1,
+  sr_AbstractFunction0: 1,
+  O: 1,
+  F0: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$2.prototype.$classData = $d_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$2;
+/** @constructor */
+function $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2() {
+  $c_sr_AbstractFunction1.call(this);
+  this.$$outer$2 = null
+}
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2.prototype = new $h_sr_AbstractFunction1();
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2.prototype.constructor = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2;
+/** @constructor */
+function $h_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2() {
+  /*<skip>*/
+}
+$h_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2.prototype = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2.prototype;
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2.prototype.apply__O__O = (function(v1) {
+  return this.apply__Lorg_scalajs_dom_raw_XMLHttpRequest__s_concurrent_Future(v1)
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2.prototype.apply__Lorg_scalajs_dom_raw_XMLHttpRequest__s_concurrent_Future = (function(res) {
+  var this$4 = $m_Lupickle_default$();
+  var expr = $as_T(res.responseText);
+  var this$3 = $m_Lupickle_default$();
+  var this$1 = $m_sci_List$();
+  var cbf = this$1.ReusableCBFInstance$2;
+  var this$2 = $m_Lupickle_default$().Internal__Lupickle_Implicits$Internal$();
+  var r = new $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3().init___Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2(this);
+  var r$1 = new $c_Lupickle_Implicits$Internal$$anon$3().init___Lupickle_Implicits$Internal$__T__F0(this$2, "Tagged Object francoiscabrol.travelmap.Place", r);
+  var evidence$3 = $s_Lupickle_Implicits$class__SeqishR__Lupickle_Implicits__scg_CanBuildFrom__Lupickle_Types$Reader__Lupickle_Types$Reader(this$3, cbf, r$1);
+  var places = $as_sci_List($s_Lupickle_Types$class__read__Lupickle_Types__T__Lupickle_Types$Reader__O(this$4, expr, evidence$3));
+  var f = (function(arg$outer) {
+    return (function(place$2) {
+      var place = $as_Lfrancoiscabrol_travelmap_Place(place$2);
+      return arg$outer.$$outer$2.francoiscabrol$travelmap$StaticJsonFile$$addCoordinatesTo__Lfrancoiscabrol_travelmap_Place__s_concurrent_Future(place)
+    })
+  })(this);
+  var this$5 = $m_sci_List$();
+  var bf = this$5.ReusableCBFInstance$2;
+  if ((bf === $m_sci_List$().ReusableCBFInstance$2)) {
+    if ((places === $m_sci_Nil$())) {
+      var jsx$1 = $m_sci_Nil$()
+    } else {
+      var arg1 = places.head__O();
+      var h = new $c_sci_$colon$colon().init___O__sci_List(f(arg1), $m_sci_Nil$());
+      var t = h;
+      var rest = $as_sci_List(places.tail__O());
+      while ((rest !== $m_sci_Nil$())) {
+        var arg1$1 = rest.head__O();
+        var nx = new $c_sci_$colon$colon().init___O__sci_List(f(arg1$1), $m_sci_Nil$());
+        t.tl$5 = nx;
+        t = nx;
+        rest = $as_sci_List(rest.tail__O())
+      };
+      var jsx$1 = h
+    }
+  } else {
+    var b = $s_sc_TraversableLike$class__builder$1__p0__sc_TraversableLike__scg_CanBuildFrom__scm_Builder(places, bf);
+    var these = places;
+    while ((!these.isEmpty__Z())) {
+      var arg1$2 = these.head__O();
+      b.$$plus$eq__O__scm_Builder(f(arg1$2));
+      these = $as_sci_List(these.tail__O())
+    };
+    var jsx$1 = b.result__O()
+  };
+  var futures = $as_sci_List(jsx$1);
+  var jsx$2 = $m_s_concurrent_Future$();
+  var this$6 = $m_sci_List$();
+  return jsx$2.sequence__sc_TraversableOnce__scg_CanBuildFrom__s_concurrent_ExecutionContext__s_concurrent_Future(futures, this$6.ReusableCBFInstance$2, $m_sjs_concurrent_JSExecutionContext$Implicits$().runNow$1)
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2.prototype.init___Lfrancoiscabrol_travelmap_StaticJsonFile = (function($$outer) {
+  if (($$outer === null)) {
+    throw $m_sjsr_package$().unwrapJavaScriptException__jl_Throwable__O(null)
+  } else {
+    this.$$outer$2 = $$outer
+  };
+  return this
+});
+var $d_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2 = new $TypeData().initClass({
+  Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2: 0
+}, false, "francoiscabrol.travelmap.StaticJsonFile$$anonfun$loadData$2", {
+  Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2: 1,
+  sr_AbstractFunction1: 1,
+  O: 1,
+  F1: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2.prototype.$classData = $d_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2;
+/** @constructor */
+function $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3() {
+  $c_sr_AbstractFunction0.call(this)
+}
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3.prototype = new $h_sr_AbstractFunction0();
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3.prototype.constructor = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3;
+/** @constructor */
+function $h_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3() {
+  /*<skip>*/
+}
+$h_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3.prototype = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3.prototype;
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3.prototype.apply__Lupickle_Types$Reader = (function() {
+  var this$1 = new $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2().init___Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3(this);
+  return this$1.derive$macro$10__Lupickle_Types$Reader()
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3.prototype.init___Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2 = (function($$outer) {
+  return this
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3.prototype.apply__O = (function() {
+  return this.apply__Lupickle_Types$Reader()
+});
+var $d_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3 = new $TypeData().initClass({
+  Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3: 0
+}, false, "francoiscabrol.travelmap.StaticJsonFile$$anonfun$loadData$2$$anonfun$3", {
+  Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3: 1,
+  sr_AbstractFunction0: 1,
+  O: 1,
+  F0: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3.prototype.$classData = $d_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3;
+/** @constructor */
+function $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1() {
+  $c_sr_AbstractFunction0.call(this)
+}
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1.prototype = new $h_sr_AbstractFunction0();
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1.prototype.constructor = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1;
+/** @constructor */
+function $h_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1() {
+  /*<skip>*/
+}
+$h_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1.prototype = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1.prototype;
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1.prototype.apply__Lupickle_Types$Reader = (function() {
+  var this$12 = $m_Lupickle_default$();
+  var f = new $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$3().init___Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1(this);
+  var xs = new $c_sjs_js_WrappedArray().init___sjs_js_Array(["name", "description", "address", "duration", "lat", "lng"]);
+  var len = $uI(xs.array$6.length);
+  var array = $newArrayObject($d_T.getArrayOf(), [len]);
+  var elem$1 = 0;
+  elem$1 = 0;
+  var this$4 = new $c_sc_IndexedSeqLike$Elements().init___sc_IndexedSeqLike__I__I(xs, 0, $uI(xs.array$6.length));
+  while (this$4.hasNext__Z()) {
+    var arg1 = this$4.next__O();
+    array.u[elem$1] = arg1;
+    elem$1 = ((1 + elem$1) | 0)
+  };
+  var this$5 = $m_Lupickle_default$();
+  var evidence$2 = $as_Lupickle_Types$Writer($m_Lupickle_default$().DoubleRW$1);
+  var jsx$1 = $s_Lupickle_Types$class__writeJs__Lupickle_Types__O__Lupickle_Types$Writer__Lupickle_Js$Value(this$5, 0.0, evidence$2);
+  var this$6 = $m_Lupickle_default$();
+  var evidence$2$1 = $as_Lupickle_Types$Writer($m_Lupickle_default$().DoubleRW$1);
+  var xs$1 = new $c_sjs_js_WrappedArray().init___sjs_js_Array([null, null, null, null, jsx$1, $s_Lupickle_Types$class__writeJs__Lupickle_Types__O__Lupickle_Types$Writer__Lupickle_Js$Value(this$6, 0.0, evidence$2$1)]);
+  var len$1 = $uI(xs$1.array$6.length);
+  var array$1 = $newArrayObject($d_Lupickle_Js$Value.getArrayOf(), [len$1]);
+  var elem$1$1 = 0;
+  elem$1$1 = 0;
+  var this$10 = new $c_sc_IndexedSeqLike$Elements().init___sc_IndexedSeqLike__I__I(xs$1, 0, $uI(xs$1.array$6.length));
+  while (this$10.hasNext__Z()) {
+    var arg1$1 = this$10.next__O();
+    array$1.u[elem$1$1] = arg1$1;
+    elem$1$1 = ((1 + elem$1$1) | 0)
+  };
+  var this$11 = $m_Lupickle_default$();
+  var evidence$37 = $m_Lupickle_default$().StringRW$1;
+  var evidence$38 = $m_Lupickle_default$().StringRW$1;
+  var evidence$39 = $m_Lupickle_default$().StringRW$1;
+  var evidence$40 = $m_Lupickle_default$().IntRW$1;
+  var evidence$41 = $m_Lupickle_default$().DoubleRW$1;
+  var evidence$42 = $m_Lupickle_default$().DoubleRW$1;
+  var evidence$14 = $as_Lupickle_Types$Reader($s_Lupickle_Generated$class__Tuple6R__Lupickle_Generated__O__O__O__O__O__O__O(this$11, evidence$37, evidence$38, evidence$39, evidence$40, evidence$41, evidence$42));
+  return $s_Lupickle_Implicits$class__CaseR__Lupickle_Implicits__F1__AT__ALupickle_Js$Value__Lupickle_Types$Reader__Lupickle_Types$Reader(this$12, f, array, array$1, evidence$14)
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1.prototype.init___Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2 = (function($$outer) {
+  return this
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1.prototype.apply__O = (function() {
+  return this.apply__Lupickle_Types$Reader()
+});
+var $d_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1 = new $TypeData().initClass({
+  Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1: 0
+}, false, "francoiscabrol.travelmap.StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1", {
+  Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1: 1,
+  sr_AbstractFunction0: 1,
+  O: 1,
+  F0: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1.prototype.$classData = $d_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1;
+/** @constructor */
+function $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$3() {
+  $c_sr_AbstractFunction1.call(this)
+}
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$3.prototype = new $h_sr_AbstractFunction1();
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$3.prototype.constructor = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$3;
+/** @constructor */
+function $h_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$3() {
+  /*<skip>*/
+}
+$h_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$3.prototype = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$3.prototype;
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$3.prototype.apply__O__O = (function(v1) {
+  return this.apply__T6__Lfrancoiscabrol_travelmap_Place($as_T6(v1))
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$3.prototype.apply__T6__Lfrancoiscabrol_travelmap_Place = (function(derive$macro$25) {
+  var arg1 = derive$macro$25.$$und1$1;
+  var arg2 = derive$macro$25.$$und2$1;
+  var arg3 = derive$macro$25.$$und3$1;
+  var arg4 = derive$macro$25.$$und4$1;
+  var arg5 = derive$macro$25.$$und5$1;
+  var arg6 = derive$macro$25.$$und6$1;
+  var name = $as_T(arg1);
+  var description = $as_T(arg2);
+  var address = $as_T(arg3);
+  var duration = $uI(arg4);
+  var lat = $uD(arg5);
+  var lng = $uD(arg6);
+  return new $c_Lfrancoiscabrol_travelmap_Place().init___T__T__T__I__D__D(name, description, address, duration, lat, lng)
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$3.prototype.init___Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1 = (function($$outer) {
+  return this
+});
+var $d_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$3 = new $TypeData().initClass({
+  Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$3: 0
+}, false, "francoiscabrol.travelmap.StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$3", {
+  Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$3: 1,
+  sr_AbstractFunction1: 1,
+  O: 1,
+  F1: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$3.prototype.$classData = $d_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$2$$anonfun$3$$anon$2$$anonfun$derive$macro$10$1$$anonfun$apply$3;
+/** @constructor */
+function $c_Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData() {
+  $c_O.call(this);
+  this.lat$1 = 0.0;
+  this.lon$1 = 0.0;
+  this.$$outer$f = null
+}
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData.prototype = new $h_O();
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData.prototype.constructor = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData;
+/** @constructor */
+function $h_Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData() {
+  /*<skip>*/
+}
+$h_Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData.prototype = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData.prototype;
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData.prototype.productPrefix__T = (function() {
+  return "CoordinatesData"
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData.prototype.productArity__I = (function() {
+  return 2
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData.prototype.equals__O__Z = (function(x$1) {
+  if ((this === x$1)) {
+    return true
+  } else if (($is_Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData(x$1) && ($as_Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData(x$1).$$outer$f === this.$$outer$f))) {
+    var CoordinatesData$1 = $as_Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData(x$1);
+    return ((this.lat$1 === CoordinatesData$1.lat$1) && (this.lon$1 === CoordinatesData$1.lon$1))
+  } else {
+    return false
+  }
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData.prototype.productElement__I__O = (function(x$1) {
+  switch (x$1) {
+    case 0: {
+      return this.lat$1;
+      break
+    }
+    case 1: {
+      return this.lon$1;
+      break
+    }
+    default: {
+      throw new $c_jl_IndexOutOfBoundsException().init___T(("" + x$1))
+    }
+  }
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$().$$undtoString__s_Product__T(this)
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData.prototype.init___Lfrancoiscabrol_travelmap_StaticJsonFile__F__F = (function($$outer, lat, lon) {
+  this.lat$1 = lat;
+  this.lon$1 = lon;
+  if (($$outer === null)) {
+    throw $m_sjsr_package$().unwrapJavaScriptException__jl_Throwable__O(null)
+  } else {
+    this.$$outer$f = $$outer
+  };
+  return this
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData.prototype.hashCode__I = (function() {
+  var acc = (-889275714);
+  var jsx$2 = $m_sr_Statics$();
+  var jsx$1 = acc;
+  var this$1 = $m_sr_Statics$();
+  var fv = this.lat$1;
+  acc = jsx$2.mix__I__I__I(jsx$1, this$1.doubleHash__D__I(fv));
+  var jsx$4 = $m_sr_Statics$();
+  var jsx$3 = acc;
+  var this$2 = $m_sr_Statics$();
+  var fv$1 = this.lon$1;
+  acc = jsx$4.mix__I__I__I(jsx$3, this$2.doubleHash__D__I(fv$1));
+  return $m_sr_Statics$().finalizeHash__I__I__I(acc, 2)
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_sr_ScalaRunTime$$anon$1().init___s_Product(this)
+});
+function $is_Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData(obj) {
+  return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData)))
+}
+function $as_Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData(obj) {
+  return (($is_Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData(obj) || (obj === null)) ? obj : $throwClassCastException(obj, "francoiscabrol.travelmap.StaticJsonFile$CoordinatesData"))
+}
+function $isArrayOf_Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData)))
+}
+function $asArrayOf_Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData(obj, depth) {
+  return (($isArrayOf_Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lfrancoiscabrol.travelmap.StaticJsonFile$CoordinatesData;", depth))
+}
+var $d_Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData = new $TypeData().initClass({
+  Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData: 0
+}, false, "francoiscabrol.travelmap.StaticJsonFile$CoordinatesData", {
+  Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData: 1,
+  O: 1,
+  s_Product: 1,
+  s_Equals: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData.prototype.$classData = $d_Lfrancoiscabrol_travelmap_StaticJsonFile$CoordinatesData;
+/** @constructor */
+function $c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$initialize$2() {
+  $c_sr_AbstractFunction1.call(this);
+  this.$$outer$2 = null;
+  this.features$1$f = null;
+  this.map$1$f = null
+}
+$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$initialize$2.prototype = new $h_sr_AbstractFunction1();
+$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$initialize$2.prototype.constructor = $c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$initialize$2;
+/** @constructor */
+function $h_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$initialize$2() {
+  /*<skip>*/
+}
+$h_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$initialize$2.prototype = $c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$initialize$2.prototype;
+$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$initialize$2.prototype.apply__O__O = (function(v1) {
+  this.apply__Lorg_scalajs_dom_raw_Event__V(v1)
+});
+$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$initialize$2.prototype.init___Lfrancoiscabrol_travelmap_components_MyTravelMap__Lorg_scalajs_dom_raw_HTMLDivElement__Lfrancoiscabrol_mapboxgl$Map = (function($$outer, features$1, map$1) {
+  if (($$outer === null)) {
+    throw $m_sjsr_package$().unwrapJavaScriptException__jl_Throwable__O(null)
+  } else {
+    this.$$outer$2 = $$outer
+  };
+  this.features$1$f = features$1;
+  this.map$1$f = map$1;
+  return this
+});
+$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$initialize$2.prototype.apply__Lorg_scalajs_dom_raw_Event__V = (function(e) {
   var this$1 = this.$$outer$2.francoiscabrol$travelmap$components$MyTravelMap$$places$f;
   inlinereturn$1: {
     var these = this$1;
     while ((!these.isEmpty__Z())) {
       var arg1 = these.head__O();
       var x$1 = $as_Lfrancoiscabrol_travelmap_Place(arg1);
-      if (this.$$outer$2.francoiscabrol$travelmap$components$MyTravelMap$$isPlaceOnScreen__Lfrancoiscabrol_travelmap_Place__Z(x$1)) {
+      if (this.$$outer$2.francoiscabrol$travelmap$components$MyTravelMap$$isPlaceOnScreen__Lfrancoiscabrol_travelmap_Place__Lorg_scalajs_dom_raw_HTMLDivElement__Z(x$1, this.features$1$f)) {
         var place = new $c_s_Some().init___O(these.head__O());
         break inlinereturn$1
       };
@@ -30984,20 +32092,77 @@ $c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$4.prototype.apply__
   if ((!place.isEmpty__Z())) {
     var arg1$1 = place.get__O();
     var p = $as_Lfrancoiscabrol_travelmap_Place(arg1$1);
-    this.$$outer$2.francoiscabrol$travelmap$components$MyTravelMap$$setActivePlace__Lfrancoiscabrol_travelmap_Place__V(p)
+    this.$$outer$2.francoiscabrol$travelmap$components$MyTravelMap$$setActivePlace__Lfrancoiscabrol_travelmap_Place__Lfrancoiscabrol_mapboxgl$Map__V(p, this.map$1$f)
   }
 });
-var $d_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$4 = new $TypeData().initClass({
-  Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$4: 0
-}, false, "francoiscabrol.travelmap.components.MyTravelMap$$anonfun$4", {
-  Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$4: 1,
+var $d_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$initialize$2 = new $TypeData().initClass({
+  Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$initialize$2: 0
+}, false, "francoiscabrol.travelmap.components.MyTravelMap$$anonfun$initialize$2", {
+  Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$initialize$2: 1,
   sr_AbstractFunction1: 1,
   O: 1,
   F1: 1,
   s_Serializable: 1,
   Ljava_io_Serializable: 1
 });
-$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$4.prototype.$classData = $d_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$4;
+$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$initialize$2.prototype.$classData = $d_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$initialize$2;
+/** @constructor */
+function $c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1$$anonfun$apply$mcV$sp$1() {
+  $c_sr_AbstractFunction1.call(this);
+  this.$$outer$2 = null
+}
+$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1$$anonfun$apply$mcV$sp$1.prototype = new $h_sr_AbstractFunction1();
+$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1$$anonfun$apply$mcV$sp$1.prototype.constructor = $c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1$$anonfun$apply$mcV$sp$1;
+/** @constructor */
+function $h_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1$$anonfun$apply$mcV$sp$1() {
+  /*<skip>*/
+}
+$h_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1$$anonfun$apply$mcV$sp$1.prototype = $c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1$$anonfun$apply$mcV$sp$1.prototype;
+$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1$$anonfun$apply$mcV$sp$1.prototype.apply__Lfrancoiscabrol_travelmap_Place__V = (function(place) {
+  var elem = $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().getElementById(place.pointId__T());
+  var isExist = (elem !== null);
+  if ((!isExist)) {
+    var jsx$4 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag());
+    var jsx$3 = $m_Lscalatags_JsDom$all$().id__Lscalatags_generic_Attr().$$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair(place.pointId__T(), $m_Lscalatags_JsDom$all$().stringAttr$1);
+    var this$1 = $m_Lscalacss_ScalatagsCss$();
+    var s = $m_Lfrancoiscabrol_travelmap_components_Style$().marker$3;
+    var jsx$2 = new $c_Lscalacss_ScalatagsJsDomImplicits$$anon$1().init___Lscalacss_ScalatagsJsDomImplicits__Lscalacss_internal_StyleA(this$1, s);
+    var jsx$1 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag());
+    $m_Lscalatags_JsDom$all$();
+    var v = (place.duration$1 + "d");
+    var point = jsx$4.apply__sc_Seq__Lscalatags_JsDom$TypedTag(new $c_sjs_js_WrappedArray().init___sjs_js_Array([jsx$3, jsx$2, jsx$1.apply__sc_Seq__Lscalatags_JsDom$TypedTag(new $c_sjs_js_WrappedArray().init___sjs_js_Array([new $c_Lscalatags_JsDom$StringFrag().init___T(v)]))])).render__Lorg_scalajs_dom_raw_Element();
+    point.onclick = (function(arg$outer, place$1) {
+      return (function(e$2) {
+        var elem$1 = $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().getElementById(place$1.id$1);
+        elem$1.scrollIntoView();
+        arg$outer.$$outer$2.$$outer$3.francoiscabrol$travelmap$components$MyTravelMap$$setActivePlace__Lfrancoiscabrol_travelmap_Place__Lfrancoiscabrol_mapboxgl$Map__V(place$1, arg$outer.$$outer$2.map$2$f)
+      })
+    })(this, place);
+    new $g.mapboxgl.Marker(point).setLngLat(place.latLng__sjs_js_Array()).addTo(this.$$outer$2.map$2$f)
+  }
+});
+$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1$$anonfun$apply$mcV$sp$1.prototype.apply__O__O = (function(v1) {
+  this.apply__Lfrancoiscabrol_travelmap_Place__V($as_Lfrancoiscabrol_travelmap_Place(v1))
+});
+$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1$$anonfun$apply$mcV$sp$1.prototype.init___Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1 = (function($$outer) {
+  if (($$outer === null)) {
+    throw $m_sjsr_package$().unwrapJavaScriptException__jl_Throwable__O(null)
+  } else {
+    this.$$outer$2 = $$outer
+  };
+  return this
+});
+var $d_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1$$anonfun$apply$mcV$sp$1 = new $TypeData().initClass({
+  Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1$$anonfun$apply$mcV$sp$1: 0
+}, false, "francoiscabrol.travelmap.components.MyTravelMap$$anonfun$mapOnLoad$1$$anonfun$apply$mcV$sp$1", {
+  Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1$$anonfun$apply$mcV$sp$1: 1,
+  sr_AbstractFunction1: 1,
+  O: 1,
+  F1: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1$$anonfun$apply$mcV$sp$1.prototype.$classData = $d_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1$$anonfun$apply$mcV$sp$1;
 /** @constructor */
 function $c_Lscalacss_internal_AV() {
   $c_O.call(this);
@@ -37543,41 +38708,41 @@ var $d_sr_ScalaRunTime$$anon$1 = new $TypeData().initClass({
 });
 $c_sr_ScalaRunTime$$anon$1.prototype.$classData = $d_sr_ScalaRunTime$$anon$1;
 /** @constructor */
-function $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3$$anonfun$apply$1() {
+function $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$francoiscabrol$travelmap$StaticJsonFile$$addCoordinatesTo$1() {
   $c_sr_AbstractPartialFunction.call(this);
   this.place$2$2 = null
 }
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3$$anonfun$apply$1.prototype = new $h_sr_AbstractPartialFunction();
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3$$anonfun$apply$1.prototype.constructor = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3$$anonfun$apply$1;
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$francoiscabrol$travelmap$StaticJsonFile$$addCoordinatesTo$1.prototype = new $h_sr_AbstractPartialFunction();
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$francoiscabrol$travelmap$StaticJsonFile$$addCoordinatesTo$1.prototype.constructor = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$francoiscabrol$travelmap$StaticJsonFile$$addCoordinatesTo$1;
 /** @constructor */
-function $h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3$$anonfun$apply$1() {
+function $h_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$francoiscabrol$travelmap$StaticJsonFile$$addCoordinatesTo$1() {
   /*<skip>*/
 }
-$h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3$$anonfun$apply$1.prototype = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3$$anonfun$apply$1.prototype;
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3$$anonfun$apply$1.prototype.init___Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3__Lfrancoiscabrol_travelmap_Place = (function($$outer, place$2) {
-  this.place$2$2 = place$2;
-  return this
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3$$anonfun$apply$1.prototype.applyOrElse__s_util_Try__F1__O = (function(x2, $default) {
+$h_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$francoiscabrol$travelmap$StaticJsonFile$$addCoordinatesTo$1.prototype = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$francoiscabrol$travelmap$StaticJsonFile$$addCoordinatesTo$1.prototype;
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$francoiscabrol$travelmap$StaticJsonFile$$addCoordinatesTo$1.prototype.applyOrElse__s_util_Try__F1__O = (function(x2, $default) {
   if ($is_s_util_Failure(x2)) {
     throw new $c_jl_Error().init___T(("Impossible to get the address " + this.place$2$2.address$1))
   } else {
     return $default.apply__O__O(x2)
   }
 });
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3$$anonfun$apply$1.prototype.isDefinedAt__O__Z = (function(x) {
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$francoiscabrol$travelmap$StaticJsonFile$$addCoordinatesTo$1.prototype.init___Lfrancoiscabrol_travelmap_StaticJsonFile__Lfrancoiscabrol_travelmap_Place = (function($$outer, place$2) {
+  this.place$2$2 = place$2;
+  return this
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$francoiscabrol$travelmap$StaticJsonFile$$addCoordinatesTo$1.prototype.isDefinedAt__O__Z = (function(x) {
   return this.isDefinedAt__s_util_Try__Z($as_s_util_Try(x))
 });
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3$$anonfun$apply$1.prototype.applyOrElse__O__F1__O = (function(x, $default) {
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$francoiscabrol$travelmap$StaticJsonFile$$addCoordinatesTo$1.prototype.applyOrElse__O__F1__O = (function(x, $default) {
   return this.applyOrElse__s_util_Try__F1__O($as_s_util_Try(x), $default)
 });
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3$$anonfun$apply$1.prototype.isDefinedAt__s_util_Try__Z = (function(x2) {
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$francoiscabrol$travelmap$StaticJsonFile$$addCoordinatesTo$1.prototype.isDefinedAt__s_util_Try__Z = (function(x2) {
   return $is_s_util_Failure(x2)
 });
-var $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3$$anonfun$apply$1 = new $TypeData().initClass({
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3$$anonfun$apply$1: 0
-}, false, "francoiscabrol.travelmap.DataLayer$$anonfun$3$$anonfun$apply$1", {
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3$$anonfun$apply$1: 1,
+var $d_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$francoiscabrol$travelmap$StaticJsonFile$$addCoordinatesTo$1 = new $TypeData().initClass({
+  Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$francoiscabrol$travelmap$StaticJsonFile$$addCoordinatesTo$1: 0
+}, false, "francoiscabrol.travelmap.StaticJsonFile$$anonfun$francoiscabrol$travelmap$StaticJsonFile$$addCoordinatesTo$1", {
+  Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$francoiscabrol$travelmap$StaticJsonFile$$addCoordinatesTo$1: 1,
   sr_AbstractPartialFunction: 1,
   O: 1,
   F1: 1,
@@ -37585,43 +38750,43 @@ var $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3$$anonfun$apply$1 = new $Ty
   s_Serializable: 1,
   Ljava_io_Serializable: 1
 });
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3$$anonfun$apply$1.prototype.$classData = $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$3$$anonfun$apply$1;
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$francoiscabrol$travelmap$StaticJsonFile$$addCoordinatesTo$1.prototype.$classData = $d_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$francoiscabrol$travelmap$StaticJsonFile$$addCoordinatesTo$1;
 /** @constructor */
-function $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$1() {
+function $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$1() {
   $c_sr_AbstractPartialFunction.call(this);
   this.place$1$2 = null
 }
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$1.prototype = new $h_sr_AbstractPartialFunction();
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$1.prototype.constructor = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$1;
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$1.prototype = new $h_sr_AbstractPartialFunction();
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$1.prototype.constructor = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$1;
 /** @constructor */
-function $h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$1() {
+function $h_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$1() {
   /*<skip>*/
 }
-$h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$1.prototype = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$1.prototype;
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$1.prototype.init___Lfrancoiscabrol_travelmap_Place = (function(place$1) {
+$h_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$1.prototype = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$1.prototype;
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$1.prototype.isDefinedAt__Lfrancoiscabrol_travelmap_Coordinates__Z = (function(x1) {
+  return true
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$1.prototype.init___Lfrancoiscabrol_travelmap_StaticJsonFile__Lfrancoiscabrol_travelmap_Place = (function($$outer, place$1) {
   this.place$1$2 = place$1;
   return this
 });
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$1.prototype.isDefinedAt__Lfrancoiscabrol_travelmap_Coordinates__Z = (function(x1) {
-  return true
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$1.prototype.isDefinedAt__O__Z = (function(x) {
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$1.prototype.isDefinedAt__O__Z = (function(x) {
   return this.isDefinedAt__Lfrancoiscabrol_travelmap_Coordinates__Z($as_Lfrancoiscabrol_travelmap_Coordinates(x))
 });
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$1.prototype.applyOrElse__O__F1__O = (function(x, $default) {
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$1.prototype.applyOrElse__O__F1__O = (function(x, $default) {
   return this.applyOrElse__Lfrancoiscabrol_travelmap_Coordinates__F1__O($as_Lfrancoiscabrol_travelmap_Coordinates(x), $default)
 });
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$1.prototype.applyOrElse__Lfrancoiscabrol_travelmap_Coordinates__F1__O = (function(x1, $default) {
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$1.prototype.applyOrElse__Lfrancoiscabrol_travelmap_Coordinates__F1__O = (function(x1, $default) {
   var x = ((("Caching => " + this.place$1$2.name$1) + ":") + x1);
   var this$2 = $m_s_Console$();
   var this$3 = $as_Ljava_io_PrintStream(this$2.outVar$2.v$1);
   this$3.java$lang$JSConsoleBasedPrintStream$$printString__T__V((x + "\n"));
   $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().localStorage.setItem(this.place$1$2.name$1, ((x1.lat$1 + ":") + x1.lng$1))
 });
-var $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$1 = new $TypeData().initClass({
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$1: 0
-}, false, "francoiscabrol.travelmap.DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$1", {
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$1: 1,
+var $d_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$1 = new $TypeData().initClass({
+  Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$1: 0
+}, false, "francoiscabrol.travelmap.StaticJsonFile$$anonfun$getCoordinatesFromCache$1", {
+  Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$1: 1,
   sr_AbstractPartialFunction: 1,
   O: 1,
   F1: 1,
@@ -37629,46 +38794,52 @@ var $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$Dat
   s_Serializable: 1,
   Ljava_io_Serializable: 1
 });
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$1.prototype.$classData = $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$francoiscabrol$travelmap$DataLayer$$getCoordinatesFromCache$1;
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$1.prototype.$classData = $d_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$getCoordinatesFromCache$1;
 /** @constructor */
-function $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$1() {
-  $c_sr_AbstractPartialFunction.call(this)
+function $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$1() {
+  $c_sr_AbstractPartialFunction.call(this);
+  this.$$outer$2 = null
 }
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$1.prototype = new $h_sr_AbstractPartialFunction();
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$1.prototype.constructor = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$1;
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$1.prototype = new $h_sr_AbstractPartialFunction();
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$1.prototype.constructor = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$1;
 /** @constructor */
-function $h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$1() {
+function $h_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$1() {
   /*<skip>*/
 }
-$h_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$1.prototype = $c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$1.prototype;
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$1.prototype.init___ = (function() {
-  return this
-});
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$1.prototype.applyOrElse__s_util_Try__F1__O = (function(x3, $default) {
+$h_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$1.prototype = $c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$1.prototype;
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$1.prototype.applyOrElse__s_util_Try__F1__O = (function(x3, $default) {
   if ($is_s_util_Failure(x3)) {
     var x2 = $as_s_util_Failure(x3);
     var err = x2.exception$2;
     var this$2 = $m_s_Console$();
     var this$3 = $as_Ljava_io_PrintStream(this$2.outVar$2.v$1);
     this$3.java$lang$JSConsoleBasedPrintStream$$printString__T__V((err + "\n"));
-    return $m_Lfrancoiscabrol_travelmap_Debug$().error__T__Lorg_scalajs_dom_raw_Node(new $c_s_StringContext().init___sc_Seq(new $c_sjs_js_WrappedArray().init___sjs_js_Array(["Impossible to get the data from ", ""])).s__sc_Seq__T(new $c_sjs_js_WrappedArray().init___sjs_js_Array([$m_Lfrancoiscabrol_travelmap_DataLayer$().jsonFileUrl$1])))
+    return $m_Lfrancoiscabrol_travelmap_Debug$().error__T__Lorg_scalajs_dom_raw_Node(new $c_s_StringContext().init___sc_Seq(new $c_sjs_js_WrappedArray().init___sjs_js_Array(["Impossible to get the data from ", ""])).s__sc_Seq__T(new $c_sjs_js_WrappedArray().init___sjs_js_Array([this.$$outer$2.francoiscabrol$travelmap$StaticJsonFile$$jsonFileUrl$f])))
   } else {
     return $default.apply__O__O(x3)
   }
 });
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$1.prototype.isDefinedAt__O__Z = (function(x) {
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$1.prototype.init___Lfrancoiscabrol_travelmap_StaticJsonFile = (function($$outer) {
+  if (($$outer === null)) {
+    throw $m_sjsr_package$().unwrapJavaScriptException__jl_Throwable__O(null)
+  } else {
+    this.$$outer$2 = $$outer
+  };
+  return this
+});
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$1.prototype.isDefinedAt__O__Z = (function(x) {
   return this.isDefinedAt__s_util_Try__Z($as_s_util_Try(x))
 });
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$1.prototype.applyOrElse__O__F1__O = (function(x, $default) {
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$1.prototype.applyOrElse__O__F1__O = (function(x, $default) {
   return this.applyOrElse__s_util_Try__F1__O($as_s_util_Try(x), $default)
 });
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$1.prototype.isDefinedAt__s_util_Try__Z = (function(x3) {
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$1.prototype.isDefinedAt__s_util_Try__Z = (function(x3) {
   return $is_s_util_Failure(x3)
 });
-var $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$1 = new $TypeData().initClass({
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$1: 0
-}, false, "francoiscabrol.travelmap.DataLayer$$anonfun$loadData$1", {
-  Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$1: 1,
+var $d_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$1 = new $TypeData().initClass({
+  Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$1: 0
+}, false, "francoiscabrol.travelmap.StaticJsonFile$$anonfun$loadData$1", {
+  Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$1: 1,
   sr_AbstractPartialFunction: 1,
   O: 1,
   F1: 1,
@@ -37676,7 +38847,7 @@ var $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$1 = new $TypeData()
   s_Serializable: 1,
   Ljava_io_Serializable: 1
 });
-$c_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$1.prototype.$classData = $d_Lfrancoiscabrol_travelmap_DataLayer$$anonfun$loadData$1;
+$c_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$1.prototype.$classData = $d_Lfrancoiscabrol_travelmap_StaticJsonFile$$anonfun$loadData$1;
 /** @constructor */
 function $c_Ljava_io_PrintStream() {
   $c_Ljava_io_FilterOutputStream.call(this);
@@ -38141,6 +39312,45 @@ function $m_Lscalacss_internal_Attrs$borderTopWidth$() {
     $n_Lscalacss_internal_Attrs$borderTopWidth$ = new $c_Lscalacss_internal_Attrs$borderTopWidth$().init___()
   };
   return $n_Lscalacss_internal_Attrs$borderTopWidth$
+}
+/** @constructor */
+function $c_Lscalacss_internal_Attrs$color$() {
+  $c_Lscalacss_internal_ValueT$TypedAttr$undColor.call(this);
+  this.attr$4 = null
+}
+$c_Lscalacss_internal_Attrs$color$.prototype = new $h_Lscalacss_internal_ValueT$TypedAttr$undColor();
+$c_Lscalacss_internal_Attrs$color$.prototype.constructor = $c_Lscalacss_internal_Attrs$color$;
+/** @constructor */
+function $h_Lscalacss_internal_Attrs$color$() {
+  /*<skip>*/
+}
+$h_Lscalacss_internal_Attrs$color$.prototype = $c_Lscalacss_internal_Attrs$color$.prototype;
+$c_Lscalacss_internal_Attrs$color$.prototype.init___ = (function() {
+  $n_Lscalacss_internal_Attrs$color$ = this;
+  this.attr$4 = $m_Lscalacss_internal_Attr$().real__T__Lscalacss_internal_Attr("color");
+  return this
+});
+$c_Lscalacss_internal_Attrs$color$.prototype.attr__Lscalacss_internal_Attr = (function() {
+  return this.attr$4
+});
+var $d_Lscalacss_internal_Attrs$color$ = new $TypeData().initClass({
+  Lscalacss_internal_Attrs$color$: 0
+}, false, "scalacss.internal.Attrs$color$", {
+  Lscalacss_internal_Attrs$color$: 1,
+  Lscalacss_internal_ValueT$TypedAttr$undColor: 1,
+  Lscalacss_internal_ValueT$TypedAttrT1: 1,
+  Lscalacss_internal_ValueT$TypedAttrBase: 1,
+  O: 1,
+  Lscalacss_internal_ValueT$ColourOps: 1,
+  Lscalacss_internal_ColorOps: 1
+});
+$c_Lscalacss_internal_Attrs$color$.prototype.$classData = $d_Lscalacss_internal_Attrs$color$;
+var $n_Lscalacss_internal_Attrs$color$ = (void 0);
+function $m_Lscalacss_internal_Attrs$color$() {
+  if ((!$n_Lscalacss_internal_Attrs$color$)) {
+    $n_Lscalacss_internal_Attrs$color$ = new $c_Lscalacss_internal_Attrs$color$().init___()
+  };
+  return $n_Lscalacss_internal_Attrs$color$
 }
 /** @constructor */
 function $c_Lscalacss_internal_CanIUse$Prefix$moz$() {
@@ -42429,61 +43639,45 @@ var $d_sjsr_UndefinedBehaviorError = new $TypeData().initClass({
 });
 $c_sjsr_UndefinedBehaviorError.prototype.$classData = $d_sjsr_UndefinedBehaviorError;
 /** @constructor */
-function $c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$1() {
+function $c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1() {
   $c_sr_AbstractFunction0$mcV$sp.call(this);
-  this.$$outer$3 = null
+  this.$$outer$3 = null;
+  this.map$2$f = null
 }
-$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$1.prototype = new $h_sr_AbstractFunction0$mcV$sp();
-$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$1.prototype.constructor = $c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$1;
+$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1.prototype = new $h_sr_AbstractFunction0$mcV$sp();
+$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1.prototype.constructor = $c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1;
 /** @constructor */
-function $h_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$1() {
+function $h_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1() {
   /*<skip>*/
 }
-$h_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$1.prototype = $c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$1.prototype;
-$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$1.prototype.init___Lfrancoiscabrol_travelmap_components_MyTravelMap = (function($$outer) {
+$h_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1.prototype = $c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1.prototype;
+$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1.prototype.init___Lfrancoiscabrol_travelmap_components_MyTravelMap__Lfrancoiscabrol_mapboxgl$Map = (function($$outer, map$2) {
   if (($$outer === null)) {
     throw $m_sjsr_package$().unwrapJavaScriptException__jl_Throwable__O(null)
   } else {
     this.$$outer$3 = $$outer
   };
+  this.map$2$f = map$2;
   return this
 });
-$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$1.prototype.apply$mcV$sp__V = (function() {
-  var elem = $m_s_None$();
-  var elem$1 = null;
-  elem$1 = elem;
-  var this$2 = this.$$outer$3.francoiscabrol$travelmap$components$MyTravelMap$$places$f;
-  var these = this$2;
+$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1.prototype.apply$mcV$sp__V = (function() {
+  var this$1 = this.$$outer$3.francoiscabrol$travelmap$components$MyTravelMap$$places$f;
+  var f = new $c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1$$anonfun$apply$mcV$sp$1().init___Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1(this);
+  var these = this$1;
   while ((!these.isEmpty__Z())) {
     var v1 = these.head__O();
-    var place = $as_Lfrancoiscabrol_travelmap_Place(v1);
-    var jsx$2 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag());
-    var jsx$1 = $m_Lscalatags_JsDom$all$().id__Lscalatags_generic_Attr().$$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair(place.pointId__T(), $m_Lscalatags_JsDom$all$().stringAttr$1);
-    var this$3 = $m_Lscalacss_ScalatagsCss$();
-    var s = $m_Lfrancoiscabrol_travelmap_components_Style$().marker$3;
-    var el = jsx$2.apply__sc_Seq__Lscalatags_JsDom$TypedTag(new $c_sjs_js_WrappedArray().init___sjs_js_Array([jsx$1, new $c_Lscalacss_ScalatagsJsDomImplicits$$anon$1().init___Lscalacss_ScalatagsJsDomImplicits__Lscalacss_internal_StyleA(this$3, s)])).render__Lorg_scalajs_dom_raw_Element();
-    el.onclick = (function(place$1) {
-      return (function(e$2) {
-        var elem$2 = $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().getElementById(place$1.name$1);
-        var this$5 = $m_s_Console$();
-        var this$6 = $as_Ljava_io_PrintStream(this$5.outVar$2.v$1);
-        this$6.java$lang$JSConsoleBasedPrintStream$$printString__T__V((elem$2 + "\n"));
-        elem$2.scrollIntoView()
-      })
-    })(place);
-    new $g.mapboxgl.Marker(el).setLngLat(place.latLng__sjs_js_Array()).addTo(this.$$outer$3.map$1);
-    elem$1 = new $c_s_Some().init___O(place);
+    f.apply__Lfrancoiscabrol_travelmap_Place__V($as_Lfrancoiscabrol_travelmap_Place(v1));
     these = $as_sci_List(these.tail__O())
   };
   this.$$outer$3.francoiscabrol$travelmap$components$MyTravelMap$$initActivePlace__Lfrancoiscabrol_travelmap_Place__V(this.$$outer$3.francoiscabrol$travelmap$components$MyTravelMap$$activePlace$1)
 });
-$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$1.prototype.apply__O = (function() {
+$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1.prototype.apply__O = (function() {
   this.apply$mcV$sp__V()
 });
-var $d_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$1 = new $TypeData().initClass({
-  Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$1: 0
-}, false, "francoiscabrol.travelmap.components.MyTravelMap$$anonfun$1", {
-  Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$1: 1,
+var $d_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1 = new $TypeData().initClass({
+  Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1: 0
+}, false, "francoiscabrol.travelmap.components.MyTravelMap$$anonfun$mapOnLoad$1", {
+  Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1: 1,
   sr_AbstractFunction0$mcV$sp: 1,
   sr_AbstractFunction0: 1,
   O: 1,
@@ -42492,7 +43686,7 @@ var $d_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$1 = new $TypeDa
   s_Serializable: 1,
   Ljava_io_Serializable: 1
 });
-$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$1.prototype.$classData = $d_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$1;
+$c_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1.prototype.$classData = $d_Lfrancoiscabrol_travelmap_components_MyTravelMap$$anonfun$mapOnLoad$1;
 /** @constructor */
 function $c_Lorg_scalajs_dom_ext_AjaxException() {
   $c_jl_Exception.call(this);
@@ -47606,15 +48800,6 @@ $c_Lscalatags_JsDom$all$.prototype.type$lzycompute__p1__Lscalatags_generic_Attr 
   };
   return this.type$1
 });
-$c_Lscalatags_JsDom$all$.prototype.h3__Lscalatags_generic_TypedTag = (function() {
-  var b = this.bitmap$0$1;
-  var lo = (512 & b.lo$2);
-  if ((lo === 0)) {
-    return this.h3$lzycompute__p1__Lscalatags_generic_TypedTag()
-  } else {
-    return this.h3$1
-  }
-});
 $c_Lscalatags_JsDom$all$.prototype.id$lzycompute__p1__Lscalatags_generic_Attr = (function() {
   var b = this.bitmap$4$1;
   var lo = ((-2147483648) & b.lo$2);
@@ -47626,6 +48811,15 @@ $c_Lscalatags_JsDom$all$.prototype.id$lzycompute__p1__Lscalatags_generic_Attr = 
     this.bitmap$4$1 = new $c_sjsr_RuntimeLong().init___I__I(lo$1, hi)
   };
   return this.id$1
+});
+$c_Lscalatags_JsDom$all$.prototype.h3__Lscalatags_generic_TypedTag = (function() {
+  var b = this.bitmap$0$1;
+  var lo = (512 & b.lo$2);
+  if ((lo === 0)) {
+    return this.h3$lzycompute__p1__Lscalatags_generic_TypedTag()
+  } else {
+    return this.h3$1
+  }
 });
 $c_Lscalatags_JsDom$all$.prototype.h3$lzycompute__p1__Lscalatags_generic_TypedTag = (function() {
   var b = this.bitmap$0$1;
@@ -47639,6 +48833,15 @@ $c_Lscalatags_JsDom$all$.prototype.h3$lzycompute__p1__Lscalatags_generic_TypedTa
     this.bitmap$0$1 = new $c_sjsr_RuntimeLong().init___I__I(lo$1, hi)
   };
   return this.h3$1
+});
+$c_Lscalatags_JsDom$all$.prototype.small__Lscalatags_generic_TypedTag = (function() {
+  var b = this.bitmap$0$1;
+  var lo = ((-2147483648) & b.lo$2);
+  if ((lo === 0)) {
+    return this.small$lzycompute__p1__Lscalatags_generic_TypedTag()
+  } else {
+    return this.small$1
+  }
 });
 $c_Lscalatags_JsDom$all$.prototype.p__Lscalatags_generic_TypedTag = (function() {
   var b = this.bitmap$0$1;
@@ -47670,6 +48873,19 @@ $c_Lscalatags_JsDom$all$.prototype.div$lzycompute__p1__Lscalatags_generic_TypedT
     this.bitmap$0$1 = new $c_sjsr_RuntimeLong().init___I__I(lo$1, hi)
   };
   return this.div$1
+});
+$c_Lscalatags_JsDom$all$.prototype.small$lzycompute__p1__Lscalatags_generic_TypedTag = (function() {
+  var b = this.bitmap$0$1;
+  var lo = ((-2147483648) & b.lo$2);
+  if ((lo === 0)) {
+    var ns = $m_Lscalatags_generic_Namespace$().htmlNamespaceConfig$1;
+    this.small$1 = $s_Lscalatags_jsdom_TagFactory$class__typedTag__Lscalatags_jsdom_TagFactory__T__Z__Lscalatags_generic_Namespace__Lscalatags_generic_TypedTag(this, "small", false, ns);
+    var b$1 = this.bitmap$0$1;
+    var lo$1 = ((-2147483648) | b$1.lo$2);
+    var hi = b$1.hi$2;
+    this.bitmap$0$1 = new $c_sjsr_RuntimeLong().init___I__I(lo$1, hi)
+  };
+  return this.small$1
 });
 $c_Lscalatags_JsDom$all$.prototype.id__Lscalatags_generic_Attr = (function() {
   var b = this.bitmap$4$1;
