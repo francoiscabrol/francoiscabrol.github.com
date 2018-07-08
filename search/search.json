@@ -85,9 +85,23 @@
 ,
   
     {
+  "title"    : "Ranger.vim",
+  "category" : "project",
+  "tags"     : ["vim","plugin","opensource","interface", null],
+  "description": "Ranger integration in vim/neovim as file explorer",
+  "href"     : "/project/ranger.html",
+  "date"     : {
+    "day"   : "09",
+    "month" : "March",
+    "year"  : "2014"
+  }
+}
+,
+  
+    {
   "title"    : "LoCALISM",
   "category" : "project",
-  "tags"     : ["open","leap","java", null],
+  "tags"     : ["open","leap","java","interface", null],
   "description": "A java library for leap motion calibration",
   "href"     : "/project/localism.html",
   "date"     : {
