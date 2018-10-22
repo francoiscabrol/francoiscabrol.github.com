@@ -1,6 +1,20 @@
 [
   
     {
+  "title"    : "GitMaster",
+  "category" : "project",
+  "tags"     : ["git","scala","tool", null],
+  "description": "command line tool for managing a set of git repositories",
+  "href"     : "/project/gmaster.html",
+  "date"     : {
+    "day"   : "09",
+    "month" : "October",
+    "year"  : "2016"
+  }
+}
+,
+  
+    {
   "title"    : "Meteor, a fast way to make reactive web apps",
   "category" : "blog",
   "tags"     : ["javascript","meteor","node.js", null],

@@ -3,9 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta content="IE=edge,chrome=1">
-        <title>Blog</title>
+        <title>GitMaster</title>
         <meta name="viewport" content="width=device-width">
-        
+        <meta name="description" content="command line tool for managing a set of git repositories">
         <!-- Basic Bootstrap CSS -->
         <link href="/assets/css/bootstrap_journal.min.css" rel="stylesheet">
         <link href="/assets/css/bootstrap-social.css" rel="stylesheet">
@@ -35,7 +35,7 @@
               
               
               
-              <li class="active">
+              <li >
                 <a href="/blog/">Blog</a>
               </li>
               
@@ -43,7 +43,7 @@
               
               
               
-              <li >
+              <li class="active">
                 <a href="/project/">Projects</a>
               </li>
               
@@ -91,89 +91,61 @@
           </ul>
           
           
+          <ul class="nav-network">
+            <li>
+              <a href="/project/">
+                <button type="button" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-th-list"></span> Back to projects list
+                </button>
+              </a>
+            </li>
+          </ul>
+          
         </div><!--/.nav-collapse -->
       </div>
     </div>
     <div class="container-fluid theme-showcase wrap" role="main">
-          
-
-
-
-<section class="post">
-  <header class="entry-header">
-    <h2 class="entry-title"><a href="/blog/i-tried-meteor.html">Meteor, a fast way to make reactive web apps</a></h2>
-     <p>
-          <!-- Date/Time -->
-          <span class="glyphicon glyphicon-time"></span> Posted on 30 Aug 2014
-      </p>
-  </header>
-  <div class="entry-description">
-    <p>
-      <p>Meteor is very impressive. It is the first web framework that I’ve seen that is both a <strong>client-side and server-side</strong> technology. The first goal of meteor is to provide a solution for <strong>developing reactive (also called real-time) web app</strong>. The version 1.0 is comming so it is the right time to pay attention to it.</p>
-
-
+          <div class="project container">
+    <h1>GitMaster <small>- A tool for managing a set of git repositories</small>
+        </h1>
+    
+    <p class="lead">
+        command line tool for managing a set of git repositories
     </p>
-  </div>
-</section>
+    
+    
+    <ul class="list-inline">
+        
+        
+        <li><a href="https://github.com/francoiscabrol/gitmaster" class="btn btn-sm btn-social btn-github"> <i class="fa fa-github"></i>GitMaster on GitHub</a></li>
+        
+    </ul>
+    
+    
+    <!-- <span class="label label-info ng-scope">git</span> -->
+    
+    <!-- <span class="label label-info ng-scope">scala</span> -->
+    
+    <!-- <span class="label label-info ng-scope">tool</span> -->
+    
+   <div class="post">
+    <p>With GitMaster you can get in your terminal:</p>
+<ul>
+  <li>
+    <p>An overview of all your git repositories in any directory like your $HOME/WORKSPACE. For example by runing the command <code>gmaster status</code>.</p>
+  </li>
+  <li>
+    <p>The possibility to manage a set of git repositories within a third git “master repo”. For example, you have a project with several services or subprojects, Each project is store in a different repository. You want to allows any developer to clone the master repository and then clone all repositories. Then you want to allow the developer to check or pull every repositories at the same time. This tool do that.</p>
+  </li>
+</ul>
 
+<div class="thumbnail picture">
+            <img class="img-rounded" src="/assets/images/gitmaster_1.png" />
+            <div class="caption">Example of gmaster --group output.</div>
+        </div>
 
-
-
-
-<section class="post">
-  <header class="entry-header">
-    <h2 class="entry-title"><a href="/blog/javafx8-with-sbt.html">Build a JavaFX 8 app with sbt</a></h2>
-     <p>
-          <!-- Date/Time -->
-          <span class="glyphicon glyphicon-time"></span> Posted on 08 Jul 2014
-      </p>
-  </header>
-  <div class="entry-description">
-    <p>
-      <p><a href="http://www.scala-sbt.org">Sbt is a simple build tool</a> from the scala community. It is a great tool to build java and scala project.</p>
-
-
-    </p>
-  </div>
-</section>
-
-
-
-<section class="post">
-  <header class="entry-header">
-    <h2 class="entry-title"><a href="/blog/start-with-sublime.html">Start with Sublime</a></h2>
-     <p>
-          <!-- Date/Time -->
-          <span class="glyphicon glyphicon-time"></span> Posted on 18 Jun 2014
-      </p>
-  </header>
-  <div class="entry-description">
-    <p>
-      <p>I use Sublime Text since few months ago to do some web development and I’d like to share useful tips from my little experience.</p>
-
-
-    </p>
-  </div>
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   </div>
+</div>
 
     </div>
     <!-- Bootstrap core JavaScript
